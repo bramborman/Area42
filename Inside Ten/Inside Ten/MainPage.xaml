@@ -1,0 +1,65 @@
+﻿<Page x:Class="InsideTen.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:InsideTen"
+      xmlns:ui="using:UWPHelper.UI"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      >
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+              Padding="{StaticResource PageContentMargin}"
+              Grid.Row="0"
+              >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Inside Ten"
+                           Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}"
+                           Style="{StaticResource SubheaderTextBlockStyle}"
+                           Margin="{StaticResource TitleGapBottomMargin}"
+                           />
+
+                <TextBlock TextWrapping="WrapWholeWords"
+                           Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}"
+                           Visibility="{x:Bind AppData.ShowAbout, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"
+                           >
+                    Inside Ten lets you get the info about the latest builds that get released to the Windows Insider program. You can get info about Insider Fast, Slow, and more Insider rings here!
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Button x:Name="Bt_About"
+                Content="&#xE713;"
+                Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}"
+                FontSize="16"
+                FontFamily="Segoe MDL2 Assets"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Style="{StaticResource TransparentButton}"
+                Grid.Row="0"
+                Click="ToggleAbout"
+                />
+
+        <ui:ColoredPivot HeaderBackground="{ThemeResource SystemControlBackgroundAccentBrush}"
+                         SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
+                         Grid.Row="1"
+                         >
+            <PivotItem Header="PC">
+                
+            </PivotItem>
+            <PivotItem Header="Mobile">
+                
+            </PivotItem>
+        </ui:ColoredPivot>
+    </Grid>
+</Page>

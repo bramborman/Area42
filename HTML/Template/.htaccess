@@ -1,0 +1,48 @@
+##########HTACCESS for LoremIpsum##########
+
+##### Error pages
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+
+##### Gzip compression
+<ifModule mod_deflate.c>
+    SetOutputFilter DEFLATE
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|gif)$ no-gzip dont-vary
+    Header append Vary User-Agent env=!dont-vary
+</ifModule>
+
+##### Files caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault A600
+    ExpiresByType text/javascript A31536000
+    ExpiresByType application/javascript A31536000
+    ExpiresByType text/css A1209600
+    ExpiresByType image/gif A1209600
+    ExpiresByType image/png A1209600
+    ExpiresByType image/jpeg A1209600
+    ExpiresByType image/x-icon A1209600
+    ExpiresByType text/html A1
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    ##### Redirect from example.com to www.example.com
+    RewriteCond %{HTTP_HOST} ^example\.com [nc]
+    RewriteRule (.*) http://www.example.com/$1 [R=301,L]
+
+    ##### Manual redirect from www.example.com/page to www.example.com/page.html
+    ###RewriteRule kategorie1/stranka1 kategorie1/stranka1.html
+    ###RewriteRule kategorie2/stranka2 kategorie2/stranka2.html
+    ###RewriteRule kategorie3/stranka3 kategorie3/stranka3.html
+    ###RewriteRule hledat hledat.html
+    
+    ##### Remove .html from URL
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)\.html$ /$1 [L,R=301] 
+</IfModule>

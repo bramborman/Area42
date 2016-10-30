@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="Content-Language" content="cs"/>
+		<link rel="stylesheet" href="style.css"/>
+		<link rel="shortcut icon" href="img/favicon.ico"/>
+		<meta name="date" content="2015-12-30T20:54:17+0100"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<script type="text/javascript">
+            // Switching classes http://jecas.cz/prepinani-trid
+            function switchClass(element, elementClass)
+            {
+                if (element.className.match(elementClass))
+                {
+                    element.className = element.className.replace(elementClass, "");
+                }
+                else
+                {
+                    element.className += " " + elementClass;
+                }
+            }
+		</script>
+		<title>Hledat | LoremIpsum</title>
+	</head>
+	<body>
+		<aside class="hamburger" style="padding-top: 11px;">
+            <nav>
+                <a href="kategorie1/">Kategorie 1</a>
+                <a href="kategorie2/">Kategorie 2</a>
+                <a href="kategorie3/">Kategorie 3</a>
+            </nav>
+		</aside>
+		<header class="mainHeader">
+			<button onclick="switchClass(document.body, 'showHamburger')">≡</button>
+			<a href="" class="logo"></a>
+			<nav>
+				<a href="kategorie1/" class="category1">Kategorie 1</a>&nbsp;
+				<a href="kategorie2/" class="category2">Kategorie 2</a>&nbsp;
+				<a href="kategorie3/" class="category3">Kategorie 3</a>
+			</nav>
+            <a href="hledat" class="searchLink"></a>
+		</header>
+		<div class="center">
+			<article class="mainContent">
+                <header>
+                    <br>
+                    <p class="path">
+                        <a href="">LoremIpsum</a>
+                        >
+                        <a href="hledat">Hledat</a>
+				    </p>
+				    <h1>Hledat na LoremIpsum</h1>
+                </header>
+				<center>
+					<form action="hledat" id="cse-search-box">
+						<input type="hidden" name="cx" value="ID_vyhledavace">	
+						<input type="hidden" name="cof" value="FORID:10" />
+						<input type="hidden" name="ie" value="utf-8">
+						<input type="search" name="q" placeholder="Hledat na LoremIpsum" class="text" autocomplete="off" size="50">
+						<input type="submit" name="sa" class="tlacitko" value="Hledat">
+					</form>
+					<div id="cse-search-results"></div>
+					<script type="text/javascript">
+						var googleSearchIframeName = "cse-search-results";
+						var googleSearchFormName = "cse-search-box";
+						var googleSearchFrameWidth = window.innerWidth || document.body.offsetWidth;
+						//var googleSearchFrameWidth = 1000;
+						var googleSearchDomain = "www.google.cz";
+						var googleSearchPath = "/cse";
+					</script>
+					<script type="text/javascript" src="http://www.google.com/afsonline/show_afs_search.js"></script>
+				</center>
+			</article>
+		</div>
+        <footer class="mainFooter">
+            © 2015 LoremIpsum
+        </footer>
+	</body>
+</html>

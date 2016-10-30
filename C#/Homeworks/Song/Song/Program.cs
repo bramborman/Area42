@@ -11,35 +11,35 @@ namespace Song
         #region Constants
         const int I1 = 580;
         const int I2 = I1 / 2;
-        const int I4 = I1 / 6;
+        const int I4 = I1 / 4;
 
-        const int C4 = 262;
+        const int C4  = 262;
         const int Cx4 = 277;
-        const int D4 = 294;
+        const int D4  = 294;
         const int Dx4 = 311;
-        const int E4 = 330;
-        const int F4 = 349;
+        const int E4  = 330;
+        const int F4  = 349;
         const int Fx4 = 370;
-        const int G4 = 392;
+        const int G4  = 392;
         const int Gx4 = 415;
-        const int A4 = 440;
+        const int A4  = 440;
         const int Ax4 = 466;
-        const int H4 = 494;
+        const int H4  = 494;
 
-        const int C5 = 523;
+        const int C5  = 523;
         const int Cx5 = 554;
-        const int D5 = 587;
+        const int D5  = 587;
         const int Dx5 = 622;
-        const int E5 = 659;
-        const int F5 = 698;
+        const int E5  = 659;
+        const int F5  = 698;
         const int Fx5 = 740;
-        const int G5 = 784;
+        const int G5  = 784;
         const int Gx5 = 831;
-        const int A5 = 880;
+        const int A5  = 880;
         const int Ax5 = 932;
-        const int H5 = 988;
+        const int H5  = 988;
 
-        const int C6 = 1109;
+        const int C6  = 1109;
         #endregion
 
         static void Main(string[] args)
@@ -47,11 +47,11 @@ namespace Song
             Console.Title = "All star - Mouth Smash";
             Console.CursorVisible = false;
             Stopwatch stopwatch = new Stopwatch();
-            SoundPlayer accompaniment = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("Song.Song.wav"));
+            SoundPlayer accompaniment = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("Song.Accompaniment.wav"));
 
             while (true)
             {
-                Thread.Sleep(60);
+                //Thread.Sleep(60);
                 Console.Clear();
                 stopwatch.Restart();
                 accompaniment.Play();
@@ -63,7 +63,7 @@ namespace Song
                 WriteNBeep(Gx4, I2, "told ");
                 WriteNBeep(Fx4, I2, "me ");
                 WriteNBeep(Fx4, I2, "the ");
-                WriteNBeep(H4, I1, "world ");
+                WriteNBeep( H4, I1, "world ");
                 WriteNBeep(Ax4, I2, "is ");
                 WriteNBeep(Ax4, I2, "go");
                 WriteNBeep(Gx4, I2, "nna ");
@@ -94,7 +94,7 @@ namespace Song
                 WriteNBeep(Gx4, I2, "dumb ");
                 WriteNBeep(Fx4, I2, "with ");
                 WriteNBeep(Fx4, I2, "her ");
-                WriteNBeep(H4, I1, "fin");
+                WriteNBeep( H4, I1, "fin");
                 WriteNBeep(Ax4, I2, "ger ");
                 WriteNBeep(Ax4, I2, "and ");
                 WriteNBeep(Gx4, I2, "her ");
@@ -108,9 +108,9 @@ namespace Song
                 WriteNBeep(Fx4, I2, "on ");
                 WriteNBeep(Fx4, I2, "her ");
                 WriteNBeep(Gx4, I1, "fore");
-                WriteNBeep(Dx4, I1 + 300, "head\n\n");
+                WriteNBeep(Dx4, I1 + 100, "head\n\n");
 
-                Thread.Sleep(I1 + 50);
+                Thread.Sleep(I1 + 100);
 
                 WriteNBeep(Fx4, I1, "Well ");
                 WriteNBeep(Fx4, I4, "the ");
@@ -145,8 +145,8 @@ namespace Song
                 WriteNBeep(Dx5, I4, "make ");
                 WriteNBeep(Dx5, I2, "sense ");
                 WriteNBeep(Dx5, I2, "not ");
-                WriteNBeep(H4, I4, "to ");
-                WriteNBeep(H4, I4, "live ");
+                WriteNBeep( H4, I4, "to ");
+                WriteNBeep( H4, I4, "live ");
                 WriteNBeep(Ax4, I2, "for ");
                 WriteNBeep(Ax4, I2, "fun");
                 WriteNBeep(Ax4, I2);

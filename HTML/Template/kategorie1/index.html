@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="cs">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="Content-Language" content="cs"/>
+		<link rel="stylesheet" href="../style.css"/>
+		<link rel="shortcut icon" href="../img/favicon.ico"/>
+		<meta name="date" content="2015-12-30T21:00:23+0100"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<script type="text/javascript">
+            // Switching classes http://jecas.cz/prepinani-trid
+            function switchClass(element, elementClass)
+            {
+                if (element.className.match(elementClass))
+                {
+                    element.className = element.className.replace(elementClass, "");
+                }
+                else
+                {
+                    element.className += " " + elementClass;
+                }
+            }
+		</script>
+		<title>Kategorie 1 | LoremIpsum</title>
+	</head>
+	<body class="category1">
+		<aside class="hamburger">
+            <nav>
+                <a href="">Kategorie 1</a>
+                <a href="../kategorie2/">Kategorie 2</a>
+                <a href="../kategorie3/">Kategorie 3</a>
+            </nav>
+		</aside>
+		<header class="mainHeader">
+			<button onclick="switchClass(document.body, 'showHamburger')">≡</button>
+			<a href="../" class="logo"></a>
+			<nav>
+				<a href="" class="category1">Kategorie 1</a>&nbsp;
+				<a href="../kategorie2/" class="category2">Kategorie 2</a>&nbsp;
+				<a href="../kategorie3/" class="category3">Kategorie 3</a>
+			</nav>
+            <a href="../hledat" class="searchLink"></a>
+		</header>
+        <form action="../hledat" id="cse-search-box" class="searchForm">
+            <input type="hidden" name="cx" value="ID_vyhledavace">
+            <input type="hidden" name="cof" value="FORID:10">
+            <input type="hidden" name="ie" value="utf-8">
+            <input type="text" name="q" autocomplete="off" placeholder="Hledat na LoremIpsum">
+            <input type="submit" name="sa" value=" ">
+        </form>
+		<div class="center">
+			<article class="mainContent">
+                <header>
+                    <br>
+                    <p class="path">
+                        <a href="../">LoremIpsum</a>
+                        >
+                        <a href="">Kategorie 1</a>
+                    </p>
+                    <h1>Kategorie 1</h1>
+                </header>
+				<a href="stranka1">Stránka 1</a>
+			</article>
+		</div>
+        <footer class="mainFooter">
+            © 2015 LoremIpsum
+        </footer>
+	</body>
+</html>

@@ -1,0 +1,411 @@
+/*Stylesheet by LoremIpsum*/
+
+
+/* HTML tags */
+* {
+    transition-property: background, border-color, color;
+    transition-duration: 0.25s;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+	background-color: white;
+	color: #333;
+    font-family: 'Trebuchet MS', sans-serif;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+a {
+    color: #116bb3;
+    text-decoration: underline;
+}
+
+a:hover, a:focus, a:active {
+    color: #0c4b7f;
+    text-decoration: none;
+}
+
+h1 {
+	color: #0c4b7f;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+h3, h4, h5, h6 {
+    text-align: left;
+	color: #333;
+}
+
+img {
+    border: none;
+}
+
+fieldset {
+    border: 1px solid #333;
+	border-radius: 3px;
+	padding-top: 15px;
+}
+
+button,
+input[type = button],
+input[type = reset],
+input[type = submit],
+select {
+    border: 1px solid #333;
+	border-radius: 3px;
+	height: 25px;
+	background-color: white;
+	cursor: pointer;
+}
+
+button:hover, button:focus,
+input[type = button]:hover, input[type = button]:focus,
+input[type = reset]:hover, input[type = reset]:focus,
+input[type = submit]:hover, input[type = submit]:focus,
+select:hover, select:focus {
+    border: 1px solid #116bb3;
+}
+
+button:active,
+input[type = button]:active,
+input[type = reset]:active,
+input[type = submit]:active {
+    background-color: #0c4b7f;
+	border-color: #0c4b7f;
+	color: white;
+}
+
+input[type = email],
+input[type = password],
+input[type = search],
+input[type = text] {
+	height: 25px;
+}
+
+input[type = email],
+input[type = password],
+input[type = search],
+input[type = text],
+textarea {
+    border: 1px solid #333;
+	padding-left: 5px;
+	border-radius: 3px;
+}
+
+input[type = email]:focus,
+input[type = password]:focus,
+input[type = search]:focus,
+input[type = text]:focus,
+textarea:focus {
+    border: 1px solid #116bb3;
+}
+
+input[type = email]:invalid {
+    color: red;
+}
+
+legend {
+    color: #0c4b7f;
+}
+
+::selection {
+    background-color: #116bb3;
+    color: white;
+}
+
+table {
+    width: 50%;
+    border: 1px solid #116bb3;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table th {
+    background-color: #116bb3;
+	color: white;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0d5289;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #0f5c9a;
+}
+
+::-webkit-scrollbar-thumb:focus {
+    background-color: #0f5c9a;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #116bb3;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+/* Classes */
+.category1 .category1, .category2 .category2, .category3 .category3 {
+	color: #116bb3;
+    border-top: 3px solid #116bb3;
+}
+
+.center {
+    width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 49px;
+}
+
+.hamburger {
+    display: none;
+    text-align: center;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    top: 49px;
+    padding-top: 49px;
+    padding-bottom: 5px;
+	box-shadow: 0px 0px 5px 0px #333;
+}
+
+.hamburger nav a {
+	display: block;
+    padding: 10px;
+	margin-bottom: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.logo {
+    height: 49px;
+	width: 317px;
+	background: url(img/logo.png) no-repeat center center;
+	position: absolute;
+	left: 40px;
+}
+
+.mainContent {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.mainFooter {
+    clear: both;
+    width: 100%;
+    height: 50px;
+    background-color: #0c4b7f;
+	color: #f0f0f0;
+    text-align: center;
+    line-height: 50px;
+}
+
+.mainHeader {
+    font-family: Tahoma, sans-serif;
+    background-color: rgba(255, 255, 255, 0.9);
+	box-shadow: 0px 0px 5px 0px #333;
+	height: 49px;
+	width: 100%;
+	position: fixed;
+}
+
+.mainHeader button {
+	display: none;
+    height: 49px;
+	width: 40px;
+	border: 0;
+	color: #333;
+	font-size: 36px;
+	background-color: transparent;
+	line-height: 46px;
+	border: none;
+	border-radius: 0px;
+	border-top: 3px solid transparent;
+}
+
+.mainHeader button:hover,.mainHeader button:focus, .mainHeader button:active {
+    background-color: white;
+	color: #333;
+	border: none;
+	border-top: 3px solid transparent;
+}
+
+.mainHeader nav {
+    display: inline-block;
+	padding-left: 40px;
+	position: absolute;
+	left: 327px;
+}
+
+.mainHeader nav a {
+    height: 49px;
+	width: 160px;
+	display: inline-block;
+	line-height: 46px;
+	text-align: center;
+	border-top: 3px solid transparent;
+	color: #333;
+	text-decoration: none;
+}
+
+.mainHeader nav a:hover, .mainHeader nav a:focus, .mainHeader nav a:active {
+    border-top: 3px solid #116bb3;
+}
+
+.path, .path a {
+    color: #333;
+	text-align: left;
+	text-decoration: none;
+}
+
+.path a:hover, .path a:focus, .path a:active {
+	text-decoration: underline;
+}
+
+.readable {
+	text-align: justify;
+	line-height: 150%;
+}
+
+.readable a {
+    text-decoration: underline;
+}
+
+.readable a:hover, .readable a:focus, .readable a:active {
+    text-decoration: none;
+}
+
+.searchForm {
+    border-radius: 13px;
+	width: 180px;
+	height: 26px;
+	background-color: #333;
+	padding-left: 10px;
+    position: fixed;
+    top: 12px;
+    right: 40px;
+}
+
+.searchForm input[type = text] {
+    border: none;
+	background: none;
+	width: 140px;
+	height: 24px;
+	color: white;
+	padding-left: 0px;
+	border-radius: 0px;
+}
+
+.searchForm input[type = text]:focus, .searchForm input[type = text]:active {
+    border: none;
+}
+
+.searchForm input[type = submit] {
+    background: url(img/search.png) no-repeat center center;
+	border: none;
+	height: 20px;
+	width: 20px;
+	background-color: #333;
+}
+
+.searchForm input[type = submit]:hover, .searchForm input[type = submit]:focus, .searchForm input[type = submit]:active {
+    border: none;
+    background: url(img/search2.png) no-repeat center center;
+}
+
+.searchLink {
+    display: none;
+    border-top: 3px solid transparent;
+    background: url(img/searchLink.png) no-repeat center 42%;
+    float: right;
+    margin-right: 43px;
+    width: 40px;
+    height: 49px;
+}
+
+.searchLink:hover, .searchLink:focus, .searchLink:active {
+    border-top: 3px solid #116bb3;
+}
+
+.serif {
+    font-family: Cambria, Georgia, Times, Times New Roman, serif;
+	font-size: 18px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 1200px) {
+    .searchForm {
+        display: none;
+    }
+    
+    .searchLink {
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .center {
+        width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 970px) {
+    .mainHeader nav a {
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    table {
+        width: 95%;
+    }
+    
+    .logo {
+        left: 50%;
+        margin-left: -148px;
+	}
+    
+    .mainHeader button {
+        display: inline-block;
+    }
+	
+	.mainHeader nav, .searchLink {
+        display: none;
+    }
+
+    .showHamburger .hamburger {
+        display: block;
+    }
+    
+    .showHamburger .mainHeader button {
+        color: #116bb3;
+    }
+    
+    .showHamburger .searchForm {
+        display: inline-block;
+        top: 61px;
+        right: 50%;
+        margin-right: -90px;
+        margin-bottom: 10px;
+    }
+}

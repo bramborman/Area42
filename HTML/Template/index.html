@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="Content-Language" content="cs"/>
+		<link rel="stylesheet" href="style.css"/>
+		<link rel="shortcut icon" href="img/favicon.ico"/>
+		<meta name="date" content="2015-12-30T20:30:53+0100"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<script type="text/javascript">
+            // Switching classes http://jecas.cz/prepinani-trid
+            function switchClass(element, elementClass)
+            {
+                if (element.className.match(elementClass))
+                {
+                    element.className = element.className.replace(elementClass, "");
+                }
+                else
+                {
+                    element.className += " " + elementClass;
+                }
+            }
+		</script>
+		<title>LoremIpsum</title>
+	</head>
+	<body>
+		<aside class="hamburger">
+            <nav>
+                <a href="kategorie1/">Kategorie 1</a>
+                <a href="kategorie2/">Kategorie 2</a>
+                <a href="kategorie3/">Kategorie 3</a>
+            </nav>
+		</aside>
+		<header class="mainHeader">
+			<button onclick="switchClass(document.body, 'showHamburger')">≡</button>
+			<a href="" class="logo"></a>
+			<nav>
+				<a href="kategorie1/" class="category1">Kategorie 1</a>&nbsp;
+				<a href="kategorie2/" class="category2">Kategorie 2</a>&nbsp;
+				<a href="kategorie3/" class="category3">Kategorie 3</a>
+			</nav>
+            <a href="hledat" class="searchLink"></a>
+		</header>
+        <form action="hledat" id="cse-search-box" class="searchForm">
+            <input type="hidden" name="cx" value="ID_vyhledavace">
+            <input type="hidden" name="cof" value="FORID:10">
+            <input type="hidden" name="ie" value="utf-8">
+            <input type="text" name="q" autocomplete="off" placeholder="Hledat na LoremIpsum">
+            <input type="submit" name="sa" value=" ">
+        </form>
+		<div class="center">
+			<article class="mainContent">
+                <header>
+                    <br><br>
+                    <!--<p class="path">
+                        <a href="">LoremIpsum</a>
+                    </p>-->
+                    <h1>LoremIpsum</h1>
+                </header>
+				<hr><br>
+					<h1>Nadpis H1</h1>
+					<h2>Nadpis H2</h2>
+					<h3>Nadpis H3</h3>
+					<h4>Nadpis H4</h4>
+					<h5>Nadpis H5</h5>
+					<h6>Nadpis H6</h6>
+				<br><hr><br>
+					<section class="readable">
+                        <header>
+                            <h2>Lorem Ipsum</h2>
+                        </header>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, odio id facilisis ultricies, lectus enim mollis sem, sed pharetra tellus magna quis velit. Duis ac faucibus elit. Vestibulum ut est malesuada, faucibus justo sit amet, convallis diam. Donec volutpat pulvinar tellus sed tempor. Morbi lobortis dolor nunc, non rhoncus augue finibus vulputate. Nullam a ipsum lectus. Proin hendrerit, sem vel facilisis blandit, metus turpis suscipit urna, et ullamcorper odio erat ut nisl. Ut risus dui, porttitor a ante sit amet, viverra dignissim mi.
+					</section>
+				<br><hr><br>
+					<section class="readable serif">
+                        <header>
+                            <h2>Lorem Ipsum</h2>
+                        </header>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, odio id facilisis ultricies, lectus enim mollis sem, sed pharetra tellus magna quis velit. Duis ac faucibus elit. Vestibulum ut est malesuada, faucibus justo sit amet, convallis diam. Donec volutpat pulvinar tellus sed tempor. Morbi lobortis dolor nunc, non rhoncus augue finibus vulputate. Nullam a ipsum lectus. Proin hendrerit, sem vel facilisis blandit, metus turpis suscipit urna, et ullamcorper odio erat ut nisl. Ut risus dui, porttitor a ante sit amet, viverra dignissim mi.
+					</section>
+				<br><hr><br>
+					<a href="">Odkaz 1</a>
+					<br><a href="">Odkaz 2</a>
+					<br><a href="">Odkaz 3</a>
+					<br><a href="">Odkaz 4</a>
+				<br><hr><br>
+					<table summary="Tabulka" cellSpacing="0" cellPadding="0" rules="all" align="center">
+						<tr height="35px">
+							<th>Sloupec 1</th>
+							<th>Sloupec 2</th>
+							<th>Sloupec 3</th>
+							<th>Sloupec 4</th>
+						</tr>
+						<tr height="30px">
+							<td>Obsah 1</td>
+							<td>Obsah 2</td>
+							<td>Obsah 3</td>
+							<td>Obsah 4</td>
+						</tr>
+						<tr height="30px">
+							<td>Obsah 1</td>
+							<td>Obsah 2</td>
+							<td>Obsah 3</td>
+							<td>Obsah 4</td>
+						</tr>
+						<tr height="30px">
+							<td>Obsah 1</td>
+							<td>Obsah 2</td>
+							<td>Obsah 3</td>
+							<td>Obsah 4</td>
+						</tr>
+					</table>
+				<br><hr><br>
+					<fieldset>
+						<legend>Formulářové prvky</legend>
+						<input type="text" placeholder="Text">
+						<br><br>
+						<input type="text" placeholder="Text" list="datalist">
+						<datalist id="datalist">
+							<option value="Možnost 1">
+							<option value="Možnost 2">
+							<option value="Možnost 3">
+						</datalist>
+						<br><br>
+						<input type="password" placeholder="Heslo">
+						<br><br>
+						<input type="search" placeholder="Hledat">
+						<br><br>
+						<input type="email" placeholder="E-mail">
+						<br><br>
+						<input type="radio" id="moznost1" name="radio"> <label for="moznost1">Možnost 1</label>
+						<input type="radio" id="moznost2" name="radio"> <label for="moznost2">Možnost 2</label>
+						<br><br>
+						<input type="checkbox" id="zaskrt"> <label for="zaskrt">Zaškrtávací políčko</label>
+						<br><br>
+						<input type="submit">
+						<br><br>
+						<input type="reset">
+						<br><br>
+						<input type="image" src="img/logo.png">
+						<br><br>
+						<input type="file">
+						<br><br>
+						<input type="button" value="Tlačítko - input">
+						<br><br>
+						<button>Tlačítko - button</button>
+						<br><br>
+						<select name="vyber">
+							<option value="vyber1">Možnost 1</option>
+							<option value="vyber2">Možnost 2</option>
+						</select>
+						<br><br>
+						<textarea></textarea>
+					</fieldset>
+				<br><br><br>
+			</article>
+		</div>
+        <footer class="mainFooter">
+            © 2015 LoremIpsum
+        </footer>
+	</body>
+</html>

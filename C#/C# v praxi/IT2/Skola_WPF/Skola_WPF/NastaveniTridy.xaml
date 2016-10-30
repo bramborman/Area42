@@ -1,0 +1,44 @@
+﻿<Window x:Class="Skola_WPF.NastaveniTridy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Skola_WPF"
+        mc:Ignorable="d"
+        Title="Nastavení třídy" Height="374.79" Width="700">
+    <Grid>
+        <Label Content="Jméno třídy:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <TextBox x:Name="tx_jmenoTridy" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="114,14,0,0"/>
+
+        <Label Content="Max. kapacita:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,41,0,0"/>
+        <TextBox x:Name="tx_kapacita" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="114,44,0,0"/>
+
+        <Label Content="Umístění:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,72,0,0"/>
+        <TextBox x:Name="tx_umisteni" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="114,75,0,0"/>
+
+        <Label Content="Třídní učitel:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="282,10,0,0"/>
+        <Label Content="Jméno:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="308,41,0,0"/>
+        <TextBox x:Name="tx_jmeno" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="418,44,0,0"/>
+
+        <Label Content="Příjmení:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="308,72,0,0"/>
+        <TextBox x:Name="tx_prijmeni" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="418,75,0,0"/>
+
+        <CheckBox x:Name="cb_muz" Content="Muž" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,103,0,0"/>
+
+        <Label Content="Datum narození:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="308,121,0,0"/>
+        <DatePicker x:Name="dt_narozeni" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,123,0,0"/>
+
+        <Label Content="Kabinet:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="308,152,0,0"/>
+        <TextBox x:Name="tx_kabinet" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="418,155,0,0"/>
+
+        <Label Content="Titul:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="308,183,0,0"/>
+        <TextBox x:Name="tx_titul" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="418,186,0,0"/>
+
+        <Label Content="Plat:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="308,214,0,0"/>
+        <TextBox x:Name="tx_plat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="418,217,0,0"/>
+
+        <Button Content="Přidat třídu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Margin="522,314,0,0" Click="PridatTridu"/>
+
+        <DataGrid x:Name="dg_seznamTrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,144,0,0" Height="190" Width="272" CanUserAddRows="False"/>
+    </Grid>
+</Window>

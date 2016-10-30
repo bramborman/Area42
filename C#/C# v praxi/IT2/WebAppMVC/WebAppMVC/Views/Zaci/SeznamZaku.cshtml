@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebAppMVC.Models.ZaciModel>
+
+@{
+    ViewBag.Title = "Seznam žáků";
+}
+
+<h2>Seznam žáku školy</h2>
+
+<p>
+    @Html.ActionLink("Zadat nového žáka", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Jmeno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prijmeni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JeMuz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trida)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jmeno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prijmeni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JeMuz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trida)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

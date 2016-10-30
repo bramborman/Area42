@@ -1,0 +1,66 @@
+﻿<Application x:Class="Messenger.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Messenger"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             StartupUri="MainWindow.xaml"
+             >
+    <Application.Resources>
+        <sys:Int32 x:Key="MaxMessageLength">1000</sys:Int32>
+
+        <SolidColorBrush x:Key="SystemAltHighBrush" Color="#FF000000"/>
+        <SolidColorBrush x:Key="SystemAltLowBrush" Color="#33000000"/>
+        <SolidColorBrush x:Key="SystemAltMediumBrush" Color="#99000000"/>
+        <SolidColorBrush x:Key="SystemAltMediumHighBrush" Color="#CC000000"/>
+        <SolidColorBrush x:Key="SystemAltMediumLowBrush" Color="#66000000"/>
+        <SolidColorBrush x:Key="SystemBaseHighBrush" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="SystemBaseLowBrush" Color="#33FFFFFF"/>
+        <SolidColorBrush x:Key="SystemBaseMediumBrush" Color="#99FFFFFF"/>
+        <SolidColorBrush x:Key="SystemBaseMediumHighBrush" Color="#CCFFFFFF"/>
+        <SolidColorBrush x:Key="SystemBaseMediumLowBrush" Color="#66FFFFFF"/>
+        <SolidColorBrush x:Key="SystemChromeAltLowBrush" Color="#FFF2F2F2"/>
+        <SolidColorBrush x:Key="SystemChromeBlackHighBrush" Color="#FF000000"/>
+        <SolidColorBrush x:Key="SystemChromeBlackLowBrush" Color="#33000000"/>
+        <SolidColorBrush x:Key="SystemChromeBlackMediumLowBrush" Color="#66000000"/>
+        <SolidColorBrush x:Key="SystemChromeBlackMediumBrush" Color="#CC000000"/>
+        <SolidColorBrush x:Key="SystemChromeDisabledHighBrush" Color="#FF333333"/>
+        <SolidColorBrush x:Key="SystemChromeDisabledLowBrush" Color="#FF858585"/>
+        <SolidColorBrush x:Key="SystemChromeHighBrush" Color="#FF767676"/>
+        <SolidColorBrush x:Key="SystemChromeLowBrush" Color="#FF171717"/>
+        <SolidColorBrush x:Key="SystemChromeMediumBrush" Color="#FF1F1F1F"/>
+        <SolidColorBrush x:Key="SystemChromeMediumLowBrush" Color="#FF2B2B2B"/>
+        <SolidColorBrush x:Key="SystemChromeWhiteBrush" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="SystemListLowBrush" Color="#19FFFFFF"/>
+        <SolidColorBrush x:Key="SystemListMediumBrush" Color="#33FFFFFF"/>
+
+        <Style x:Key="TitleBarButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="45"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentControl BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Content="{TemplateBinding Content}"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            Padding="{TemplateBinding Padding}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>

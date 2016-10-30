@@ -1,0 +1,133 @@
+﻿<Page
+    x:Class="Modern_Calculator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Modern_Calculator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    SizeChanged="Responsive">
+
+    <Grid Background="#1d1d1d">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition x:Name="cd_maincenter" Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="cd_systembig" Width="8*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="tb_dec" Text="DEC" Foreground="#58b6ff" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" PointerReleased="Conversion"/>
+            <TextBlock x:Name="tb_bin" Text="BIN" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" PointerReleased="Conversion"/>
+            <TextBlock x:Name="tb_oct" Text="OCT" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="3" PointerReleased="Conversion"/>
+            <TextBlock x:Name="tb_hex" Text="HEX" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="4" PointerReleased="Conversion"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="tx_output" TextAlignment="Right" Style="{StaticResource TextBox}" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="0" TextChanged="ClearButton"/>
+
+            <Button x:Name="bt_7" Content="7" Style="{StaticResource Button}" Grid.Column="0" Grid.Row="1" Click="Add"/>
+            <Button x:Name="bt_8" Content="8" Style="{StaticResource Button}" Grid.Column="1" Grid.Row="1" Click="Add"/>
+            <Button x:Name="bt_9" Content="9" Style="{StaticResource Button}" Grid.Column="2" Grid.Row="1" Click="Add"/>
+            <Button x:Name="bt_clear" Content="AC" Style="{StaticResource Button}" Grid.Column="3" Grid.Row="1" Click="Clear"/>
+            <Button Content="←" Style="{StaticResource Button}" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="1" Click="Clear"/>
+
+            <Button x:Name="bt_4" Content="4" Style="{StaticResource Button}" Grid.Column="0" Grid.Row="2" Click="Add"/>
+            <Button x:Name="bt_5" Content="5" Style="{StaticResource Button}" Grid.Column="1" Grid.Row="2" Click="Add"/>
+            <Button x:Name="bt_6" Content="6" Style="{StaticResource Button}" Grid.Column="2" Grid.Row="2" Click="Add"/>
+            <Button Content="xⁿ" FontSize="40" Style="{StaticResource Button}" Grid.Column="3" Grid.Row="2" Click="Operation"/>
+            <Button Content="√x" FontSize="40" Style="{StaticResource Button}" Grid.Column="4" Grid.Row="2" Click="Maths"/>
+            <Button Content="x²" FontSize="40" Style="{StaticResource Button}" Grid.Column="5" Grid.Row="2" Click="Maths"/>
+
+            <Button Content="1" Style="{StaticResource Button}" Grid.Column="0" Grid.Row="3" Click="Add"/>
+            <Button x:Name="bt_2" Content="2" Style="{StaticResource Button}" Grid.Column="1" Grid.Row="3" Click="Add"/>
+            <Button x:Name="bt_3" Content="3" Style="{StaticResource Button}" Grid.Column="2" Grid.Row="3" Click="Add"/>
+            <Button Content="/" Style="{StaticResource Button}" Grid.Column="3" Grid.Row="3" Click="Operation"/>
+            <Button Content="-" Style="{StaticResource Button}" Grid.Column="4" Grid.Row="3" Click="Operation"/>
+
+            <Button Content="0" Style="{StaticResource Button}" Grid.Column="0" Grid.Row="4" Click="Add"/>
+            <Button x:Name="bt_comma" Content="." Style="{StaticResource Button}"  Grid.Column="1" Grid.Row="4" Click="Comma"/>
+            <Button Content="±" Style="{StaticResource Button}" Grid.Column="2" Grid.Row="4" Click="PlusMinus"/>
+            <Button Content="*" Style="{StaticResource Button}" Grid.Column="3" Grid.Row="4" Click="Operation"/>
+            <Button Content="+" Style="{StaticResource Button}" Grid.Column="4" Grid.Row="4" Click="Operation"/>
+
+            <Button Content="=" Style="{StaticResource Button}" Grid.Column="5" Grid.Row="3" Grid.RowSpan="2" Click="Result"/>
+        </Grid>
+
+        <Grid x:Name="gr_chars" Visibility="Collapsed" Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="bt_a" IsEnabled="True" Content="a" FontSize="40" Style="{StaticResource Button}" Grid.Column="0" Click="Add"/>
+            <Button x:Name="bt_b" IsEnabled="True" Content="b" FontSize="40" Style="{StaticResource Button}" Grid.Column="1" Click="Add"/>
+
+            <Button x:Name="bt_c" IsEnabled="True" Content="c" FontSize="40" Style="{StaticResource Button}" Grid.Column="2" Click="Add"/>
+            <Button x:Name="bt_d" IsEnabled="True" Content="d" FontSize="40" Style="{StaticResource Button}" Grid.Column="3" Click="Add"/>
+
+            <Button x:Name="bt_e" IsEnabled="True" Content="e" FontSize="40" Style="{StaticResource Button}" Grid.Column="4" Click="Add"/>
+            <Button x:Name="bt_f" IsEnabled="True" Content="f" FontSize="40" Style="{StaticResource Button}" Grid.Column="5" Click="Add"/>
+        </Grid>
+
+        <Grid x:Name="gr_menu" Style="{StaticResource HamburgeMenu}">
+            <Button Content="Calculator" Style="{StaticResource HamburgerGoto}" Background="#0c4b7e" Margin="-3,150,-3,0"/>
+            <Button Content="Pythagorean theorem" Style="{StaticResource HamburgerGoto}" Margin="-3,197,-3,0" Click="Goto"/>
+            <Button Content="Conversions" Style="{StaticResource HamburgerGoto}" Margin="-3,244,-3,0" Click="Goto"/>
+            
+            <Grid x:Name="gr_conv" Margin="20,0,0,0">
+                <Button Content="Length" Style="{StaticResource HamburgerGoto}" Margin="-3,291,-3,0" Click="Goto"/>
+                <Button Content="Plocha" Style="{StaticResource HamburgerGoto}" Margin="-3,338,-3,0" Click="Goto"/>
+                <Button Content="Objem" Style="{StaticResource HamburgerGoto}" Margin="-3,385,-3,0" Click="Goto"/>
+                <Button Content="Weight" Style="{StaticResource HamburgerGoto}" Margin="-3,432,-3,0" Click="Goto"/>
+                <Button Content="Temperature" Style="{StaticResource HamburgerGoto}" Margin="-3,479,-3,0" Click="Goto"/>
+            </Grid>
+
+            <TextBox x:Name="tx_memory" IsReadOnly="True" Text="" FontSize="20" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Height="50" Margin="0,0,0,147" Padding="10,8,10,0"/>
+
+            <Button Content="M+" FontSize="20" Background="#116bb3" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="66" Margin="0,0,120,100" Click="MemAdd"/>
+            <Button Content="MR" FontSize="20" Background="#116bb3" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="66" Margin="0,0,0,100" Click="MemRead"/>
+            <Button Content="M-" FontSize="20" Background="#116bb3" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="66" Margin="120,0,0,100" Click="MemDel"/>
+
+            <CheckBox x:Name="ch_menuhold" Content="Hold this menu open" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="MenuHold"/>
+        </Grid>
+        <Button Style="{StaticResource HamburgerButton}" Click="Hamburger" />
+    </Grid>
+</Page>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebAppMVC_2.Models.ImageModel>
+
+@{
+    ViewBag.Title = "Galerie";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileLocationDisc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileLocationWeb)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileLocationDisc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileLocationWeb)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+</table>
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("ShowImage", "Gallery", new {id = item.ID})">
+        <img src="@item.FileLocationWeb" alt="image" class="image" width="320" height="240"/>
+    </a>
+}

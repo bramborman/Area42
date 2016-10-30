@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="Kalkulačka.Prevody"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Kalkulačka"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#1d1d1d">
+        <TextBox Name="tx_vstup" IsReadOnly="True" Text="" FontSize="50" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center" Width="619" Height="100" HorizontalContentAlignment="Left" Margin="0,0,100,400" Padding="10,11,10,0" GotFocus="Focus"/>
+
+        <ComboBox FontSize="30" Width="100" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="619,0,0,400" DropDownClosed="KeyFilter">
+            <ComboBoxItem Name="ci_dec1" FontSize="30" IsSelected="True">dec</ComboBoxItem>
+            <ComboBoxItem Name="ci_bin1" FontSize="30">bin</ComboBoxItem>
+            <ComboBoxItem Name="ci_oct1" FontSize="30">oct</ComboBoxItem>
+            <ComboBoxItem Name="ci_hex1" FontSize="30">hex</ComboBoxItem>
+        </ComboBox>
+
+        <TextBox Name="tx_vypis" IsReadOnly="True" Text="" FontSize="50" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center" Width="619" Height="100" HorizontalContentAlignment="Left" Margin="0,0,100,0" Padding="10,11,10,0" GotFocus="Focus"/>
+
+        <ComboBox FontSize="30" Width="100" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="619,0,0,0">
+            <ComboBoxItem Name="ci_dec2" FontSize="30">dec</ComboBoxItem>
+            <ComboBoxItem Name="ci_bin2" FontSize="30" IsSelected="True">bin</ComboBoxItem>
+            <ComboBoxItem Name="ci_oct2" FontSize="30">oct</ComboBoxItem>
+            <ComboBoxItem Name="ci_hex2" FontSize="30">hex</ComboBoxItem>
+        </ComboBox>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,425,0,0">
+            <Button Name="bt_7" Content="7" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,0,625,225" Click="Add"/>
+            <Button Name="bt_8" Content="8" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,0,375,225" Click="Add"/>
+            <Button Name="bt_9" Content="9" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,0,125,225" Click="Add"/>
+            <Button Content="CE" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="125,0,0,225" Click="Clear"/>
+            <Button Content="←" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="375,0,0,225" Click="Clear"/>
+
+            <Button Name="bt_4" Content="4" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,0,625,75" Click="Add"/>
+            <Button Name="bt_5" Content="5" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,0,375,75" Click="Add"/>
+            <Button Name="bt_6" Content="6" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,0,125,75" Click="Add"/>
+            <Button Name="bt_a" IsEnabled="False" Content="a" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="125,0,0,75" Click="Add"/>
+            <Button Name="bt_b" IsEnabled="False" Content="b" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="375,0,0,75" Click="Add"/>
+
+            <Button Content="1" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,75,625,0" Click="Add"/>
+            <Button Name="bt_2" Content="2" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,75,375,0" Click="Add"/>
+            <Button Name="bt_3" Content="3" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,75,125,0" Click="Add"/>
+            <Button Name="bt_c" IsEnabled="False" Content="c" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="125,75,0,0" Click="Add"/>
+            <Button Name="bt_d" IsEnabled="False" Content="d" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="375,75,0,0" Click="Add"/>
+
+            <Button Content="0" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,225,625,0" Click="Add"/>
+            <Button Name="bt_pm" Content="±" FontSize="50" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,225,375,0" Click="PlusMinus"/>
+            <Button Content="prohodit" FontSize="20" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="0,225,125,0" Click="Change"/>
+            <Button Name="bt_e" IsEnabled="False" Content="e" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="125,225,0,0" Click="Add"/>
+            <Button Name="bt_f" IsEnabled="False" Content="f" FontSize="40" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="75" Margin="375,225,0,0" Click="Add"/>
+            
+            <Button Content="=" FontSize="60" BorderThickness="0" Background="#116bb3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="300" Margin="625,0,0,0" Click="Calc"/>
+        </Grid>
+
+        <Grid Name="gr_menu" Visibility="Collapsed" Background="#116bb3" Width="300" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Button Content="Kalkulačka" BorderThickness="0" FontSize="20" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Top" Width="306" Margin="-3,150,-3,0" Padding="45,10,0,10" Click="GotoMain"/>
+            <Button Content="Převody" Background="#0c4b7e" BorderThickness="0" FontSize="20" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Top" Width="306" Margin="-3,197,-3,0" Padding="45,10,0,10"/>
+            <Button Content="Pythagorova věta" BorderThickness="0" FontSize="20" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Top" Width="306" Margin="-3,244,-3,0" Padding="45,10,0,10" Click="GotoPythg"/>
+
+            <TextBox Name="tx_memory" IsReadOnly="True" Text="" FontSize="20" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Height="50" Margin="0,0,0,147" Padding="10,8,10,0"/>
+
+            <Button Content="M+" FontSize="20" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="66" Margin="0,0,120,100" Click="MemAdd"/>
+            <Button Content="MR" FontSize="20" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="66" Margin="0,0,0,100" Click="MemRead"/>
+            <Button Content="M-" FontSize="20" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="66" Margin="120,0,0,100" Click="MemDel"/>
+
+            <CheckBox Name="ch_menuhold" Content="Nechat postranní menu otevřené" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="MenuHold"/>
+        </Grid>
+        <Button Content="≡" FontSize="50" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30" Click="Hamburger"/>
+    </Grid>
+</Page>

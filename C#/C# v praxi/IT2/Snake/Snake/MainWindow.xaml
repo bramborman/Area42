@@ -1,0 +1,129 @@
+﻿<Window x:Class="Snake.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Snake"
+        mc:Ignorable="d"
+        x:Name="SnakeWindow"
+        Title="Snake"
+        BorderThickness="1"
+        BorderBrush="#333"
+        Height="355"
+        Width="522"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        KeyDown="SnakeWindow_KeyDown"
+        Activated="SnakeWindow_Activated"
+        Deactivated="SnakeWindow_Deactivated"
+        >
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#333" Grid.Row="0" MouseDown="WindowDrag">
+            <TextBlock x:Name="tb_title"
+                       Text="{Binding Title, ElementName=SnakeWindow}"
+                       Foreground="White"
+                       Padding="10,5,5,5"
+                       VerticalAlignment="Center"
+                       />
+            
+            <TextBlock x:Name="tb_score"
+                       Text="Score: 0"
+                       Foreground="White"
+                       Padding="5"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="bt_minimize"
+                        Content="&#xE921;"
+                        FontSize="10"
+                        FontFamily="Segoe MDL2 Assets"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Width="45"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Right"
+                        Click="Minimize"
+                        >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#1898ff"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="#116bb3"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button x:Name="bt_close"
+                        Content="&#xE106;"
+                        FontSize="11"
+                        FontFamily="Segoe MDL2 Assets"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Width="45"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Right"
+                        Click="Close"
+                        >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="DarkRed"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Canvas x:Name="cv_board" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"/>
+
+        <Label x:Name="lb_message"
+               Visibility="Collapsed"
+               Background="#333"
+               Foreground="White"
+               FontSize="50"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Grid.Row="1"
+               />
+    </Grid>
+</Window>

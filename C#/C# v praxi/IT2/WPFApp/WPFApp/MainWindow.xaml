@@ -1,0 +1,17 @@
+﻿<Window x:Class="WPFApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="bt_showTime" Content="Show time" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="45,42,0,0" ToolTip="Shows actual time" Click="bt_showTime_Click"/>
+        <Button x:Name="nt_Name" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="331,183,0,0" Click="nt_Name_Click"/>
+        <Label x:Name="lb_time" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="216,42,0,0"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="56" Margin="366,120,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="tx_Name" HorizontalAlignment="Left" Height="23" Margin="176,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,180,0,0" />
+    </Grid>
+</Window>

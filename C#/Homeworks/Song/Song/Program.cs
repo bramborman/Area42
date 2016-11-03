@@ -9,7 +9,7 @@ namespace Song
     class Program
     {
         #region Constants
-        const int I1 = 580;
+        const int I1 = 579;
         const int I2 = I1 / 2;
         const int I4 = I1 / 4;
 
@@ -47,16 +47,16 @@ namespace Song
             Console.Title = "All star - Mouth Smash";
             Console.CursorVisible = false;
             Stopwatch stopwatch = new Stopwatch();
-            SoundPlayer accompaniment = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("Song.Accompaniment.wav"));
+            SoundPlayer accompaniment = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("Song.Song.wav"));
 
             while (true)
             {
-                //Thread.Sleep(60);
+                Thread.Sleep(50);
                 Console.Clear();
                 stopwatch.Restart();
                 accompaniment.Play();
 
-                WriteNBeep(Fx4, I1, "Some");
+                WriteNBeep(Fx4, I1 + 50, "Some");
                 WriteNBeep(Dx5, I2, "bo");
                 WriteNBeep(Ax4, I2, "dy ");
                 WriteNBeep(Ax4, I1, "once ");
@@ -70,10 +70,10 @@ namespace Song
                 WriteNBeep(Gx4, I2, "roll ");
                 WriteNBeep(Fx4, I2, "me\n");
 
-                Thread.Sleep(I2 - 50);
+                Thread.Sleep(I2);
 
                 WriteNBeep(Fx4, I2, "I ");
-                WriteNBeep(Dx5, I2, "ain't ");
+                WriteNBeep(Cx5, I2, "ain't ");
                 WriteNBeep(Ax4, I2, "the ");
                 WriteNBeep(Ax4, I2, "shar");
                 WriteNBeep(Gx4, I2, "pest ");
@@ -83,25 +83,26 @@ namespace Song
                 WriteNBeep(Dx4, I1, "she");
                 WriteNBeep(Cx4, I1 + 100, "d\n");
 
-                Thread.Sleep(I1 + 100);
+                Thread.Sleep(I1 + 130);
 
                 WriteNBeep(Fx4, I2, "She ");
                 WriteNBeep(Fx4, I2, "was ");
-                WriteNBeep(Dx5, I2, "loo");
+                WriteNBeep(Cx5, I2, "loo");
                 WriteNBeep(Ax4, I2, "king ");
                 WriteNBeep(Ax4, I2, "kind ");
                 WriteNBeep(Gx4, I2, "of ");
                 WriteNBeep(Gx4, I2, "dumb ");
                 WriteNBeep(Fx4, I2, "with ");
                 WriteNBeep(Fx4, I2, "her ");
-                WriteNBeep( H4, I1, "fin");
+                WriteNBeep( H4, I1 - 50, "fin");
                 WriteNBeep(Ax4, I2, "ger ");
                 WriteNBeep(Ax4, I2, "and ");
                 WriteNBeep(Gx4, I2, "her ");
                 WriteNBeep(Gx4, I2, "thumb\n");
+
                 WriteNBeep(Fx4, I2, "In ");
                 WriteNBeep(Fx4, I2, "the ");
-                WriteNBeep(Dx5, I1, "shape ");
+                WriteNBeep(Cx5, I1, "shape ");
                 WriteNBeep(Ax4, I2, "of ");
                 WriteNBeep(Ax4, I2, "an ");
                 WriteNBeep(Gx4, I1, "L ");
@@ -112,7 +113,7 @@ namespace Song
 
                 Thread.Sleep(I1 + 100);
 
-                WriteNBeep(Fx4, I1, "Well ");
+                WriteNBeep(Fx4, I1 - 50, "Well ");
                 WriteNBeep(Fx4, I4, "the ");
                 WriteNBeep(Fx4, I2, "years ");
                 WriteNBeep(Fx4, I2, "start ");
@@ -142,9 +143,9 @@ namespace Song
                 Thread.Sleep(I2);
 
                 WriteNBeep(Ax4, I4, "Didn't ");
-                WriteNBeep(Dx5, I4, "make ");
-                WriteNBeep(Dx5, I2, "sense ");
-                WriteNBeep(Dx5, I2, "not ");
+                WriteNBeep(Cx5, I4, "make ");
+                WriteNBeep(Cx5, I2, "sense ");
+                WriteNBeep(Cx5, I2, "not ");
                 WriteNBeep( H4, I4, "to ");
                 WriteNBeep( H4, I4, "live ");
                 WriteNBeep(Ax4, I2, "for ");

@@ -12,34 +12,16 @@ namespace Song
         const int I1 = 579;
         const int I2 = I1 / 2;
         const int I4 = I1 / 4;
-
-        const int C4  = 262;
+        
         const int Cx4 = 277;
-        const int D4  = 294;
         const int Dx4 = 311;
-        const int E4  = 330;
-        const int F4  = 349;
         const int Fx4 = 370;
-        const int G4  = 392;
         const int Gx4 = 415;
-        const int A4  = 440;
         const int Ax4 = 466;
         const int H4  = 494;
-
-        const int C5  = 523;
+        
         const int Cx5 = 554;
-        const int D5  = 587;
         const int Dx5 = 622;
-        const int E5  = 659;
-        const int F5  = 698;
-        const int Fx5 = 740;
-        const int G5  = 784;
-        const int Gx5 = 831;
-        const int A5  = 880;
-        const int Ax5 = 932;
-        const int H5  = 988;
-
-        const int C6  = 1109;
         #endregion
 
         static void Main(string[] args)
@@ -48,16 +30,17 @@ namespace Song
             Console.CursorVisible = false;
             Stopwatch stopwatch = new Stopwatch();
             SoundPlayer accompaniment = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("Song.Song.wav"));
+            accompaniment.Load();
 
             while (true)
             {
                 Thread.Sleep(50);
                 Console.Clear();
                 stopwatch.Restart();
-                accompaniment.Play();
+                //accompaniment.Play(); // DON'T DO THIS!!!
 
                 WriteNBeep(Fx4, I1 + 50, "Some");
-                WriteNBeep(Dx5, I2, "bo");
+                WriteNBeep(Cx5, I2, "bo");
                 WriteNBeep(Ax4, I2, "dy ");
                 WriteNBeep(Ax4, I1, "once ");
                 WriteNBeep(Gx4, I2, "told ");
@@ -83,7 +66,7 @@ namespace Song
                 WriteNBeep(Dx4, I1, "she");
                 WriteNBeep(Cx4, I1 + 100, "d\n");
 
-                Thread.Sleep(I1 + 130);
+                Thread.Sleep(I1 + I4);
 
                 WriteNBeep(Fx4, I2, "She ");
                 WriteNBeep(Fx4, I2, "was ");
@@ -111,7 +94,7 @@ namespace Song
                 WriteNBeep(Gx4, I1, "fore");
                 WriteNBeep(Dx4, I1 + 100, "head\n\n");
 
-                Thread.Sleep(I1 + 100);
+                Thread.Sleep(I1);
 
                 WriteNBeep(Fx4, I1 - 50, "Well ");
                 WriteNBeep(Fx4, I4, "the ");
@@ -120,13 +103,13 @@ namespace Song
                 WriteNBeep(Fx4, I4, "co");
                 WriteNBeep(Fx4, I4, "ming ");
                 WriteNBeep(Fx4, I4, "and ");
-                WriteNBeep(Fx4, I4, "they ");
+                WriteNBeep(Fx4, I4 , "they ");
                 WriteNBeep(Fx4, I2, "don't ");
                 WriteNBeep(Fx4, I2, "stop ");
                 WriteNBeep(Fx4, I4, "co");
                 WriteNBeep(Fx4, I4, "ming\n");
 
-                Thread.Sleep(I2);
+                Thread.Sleep(I2 - 50);
 
                 WriteNBeep(Fx4, I2, "Fed ");
                 WriteNBeep(Fx4, I4, "to ");
@@ -136,7 +119,7 @@ namespace Song
                 WriteNBeep(Fx4, I4, "I ");
                 WriteNBeep(Fx4, I4, "hit ");
                 WriteNBeep(Fx4, I4, "the ");
-                WriteNBeep(Fx4, I2, "ground ");
+                WriteNBeep(Fx4, I4, "ground ");
                 WriteNBeep(Ax4, I4, "run");
                 WriteNBeep(Fx4, I4, "ning\n");
 
@@ -146,14 +129,131 @@ namespace Song
                 WriteNBeep(Cx5, I4, "make ");
                 WriteNBeep(Cx5, I2, "sense ");
                 WriteNBeep(Cx5, I2, "not ");
-                WriteNBeep( H4, I4, "to ");
-                WriteNBeep( H4, I4, "live ");
+                WriteNBeep(H4, I4, "to ");
+                WriteNBeep(H4, I4, "li");
+                WriteNBeep(Ax4, I2, "ve ");
                 WriteNBeep(Ax4, I2, "for ");
-                WriteNBeep(Ax4, I2, "fun");
-                WriteNBeep(Ax4, I2);
-                Thread.Sleep(I4);
-                WriteNBeep(Cx4, I4);
+                WriteNBeep(Ax4, I2, "fun\n");
 
+                Thread.Sleep(I4);
+
+                WriteNBeep(Cx4, I4, "Your ");
+                WriteNBeep(Ax4, I2, "brain ");
+                WriteNBeep(Fx4, I2, "gets ");
+                WriteNBeep(Fx4, I2, "smart ");
+                WriteNBeep(Fx4, I4, "but ");
+                WriteNBeep(Dx4, I4, "your ");
+                WriteNBeep(Fx4, I2, "head ");
+                WriteNBeep(Fx4, I2, "gets ");
+                WriteNBeep(Dx4, I4, "du");
+                WriteNBeep(Cx4, I4, "mb\n\n");
+                
+                Thread.Sleep(I2 - 150);
+
+                WriteNBeep(Ax4, I4, "So ");
+                WriteNBeep(Cx5, I2, "much ");
+                WriteNBeep(Ax4, I4, "to ");
+                WriteNBeep(Dx5, I2, "do ");
+                WriteNBeep(Ax4, I4, "so ");
+                WriteNBeep(Cx5, I2, "much ");
+                WriteNBeep(Ax4, I4, "to ");
+                WriteNBeep(Dx5, I2, "see\n");
+
+                WriteNBeep(Ax4, I4, "So ");
+                WriteNBeep(Cx5, I2, "what's ");
+                WriteNBeep(H4, I2, "wrong ");
+                WriteNBeep(Ax4, I2, "with ");
+                WriteNBeep(Gx4, I2, "tak");
+                WriteNBeep(Gx4, I2, "ing ");
+                WriteNBeep(Fx4, I4, "the ");
+                WriteNBeep(Gx4, I2, "back ");
+                WriteNBeep(Fx4, I2, "streets\n");
+
+                Thread.Sleep(I1 - 150);
+
+                WriteNBeep(Cx4, I4, "You'll ");
+                WriteNBeep(Fx4, I4, "ne");
+                WriteNBeep(Fx4, I4, "ver ");
+                WriteNBeep(Fx4, I2, "know ");
+                WriteNBeep(Fx4, I4, "if ");
+                WriteNBeep(Fx4, I4, "you ");
+                WriteNBeep(Fx4, I2, "don't ");
+                WriteNBeep(Fx4, I2, "go\n");
+
+                Thread.Sleep(I1 - 50);
+
+                WriteNBeep(Cx4, I4, "You'll ");
+                WriteNBeep(Ax4, I4, "ne");
+                WriteNBeep(Fx4, I4, "ver ");
+                WriteNBeep(Fx4, I2, "shine ");
+                WriteNBeep(Fx4, I4, "if ");
+                WriteNBeep(Dx4, I4, "you ");
+                WriteNBeep(Dx4, I2, "don't ");
+                WriteNBeep(Dx4, I1, "glow\n\n");
+
+                Thread.Sleep(I1);
+
+                WriteNBeep(Ax4, I2, "Hey ");
+                WriteNBeep(Fx4, I1, "now ");
+                WriteNBeep(Fx4, I4, "you're ");
+                WriteNBeep(Dx4, I4, "an ");
+                WriteNBeep(Fx4, I2, "All ");
+                WriteNBeep(Fx4, I2, "Star ");
+                Thread.Sleep(I2);
+                WriteNBeep(Fx4, I4, "get ");
+                WriteNBeep(Dx4, I4, "your ");
+                WriteNBeep(Fx4, I2, "game ");
+                WriteNBeep(Fx4, I2, "on, ");
+                Thread.Sleep(I2);
+                WriteNBeep(Fx4, I4, "go ");
+                Thread.Sleep(I2);
+                WriteNBeep(Ax4, I1 + I2 - I4, "play\n");
+
+                Thread.Sleep(I4);
+
+                WriteNBeep(Ax4, I2, "Hey ");
+                WriteNBeep(Fx4, I1, "now ");
+                WriteNBeep(Fx4, I4, "you're ");
+                WriteNBeep(Dx4, I4, "an ");
+                WriteNBeep(Fx4, I2, "Rock ");
+                WriteNBeep(Fx4, I2, "Star ");
+                Thread.Sleep(I2);
+                WriteNBeep(Fx4, I4, "get ");
+                WriteNBeep(Dx4, I4, "the ");
+                WriteNBeep(Fx4, I2, "show ");
+                WriteNBeep(Fx4, I2, "on ");
+                Thread.Sleep(I2);
+                WriteNBeep(Fx4, I2, "get ");
+                Thread.Sleep(I2);
+                WriteNBeep(Ax4, I1 + I2 - I4, "paid\n");
+
+                Thread.Sleep(I4);
+
+                WriteNBeep(Dx4, I1 - 50, "And ");
+                Thread.Sleep(I4);
+                WriteNBeep(Ax4, I2 + I4, "all ");
+                WriteNBeep(Cx5, I4, "that ");
+                WriteNBeep( H4, I2, "glit");
+                WriteNBeep(Ax4, I2, "ters ");
+                WriteNBeep(Gx4, I2, "is ");
+                WriteNBeep(Gx4, I2, "go");
+                WriteNBeep(Fx4, (2 * I1) - I4, "ld\n");
+
+                Thread.Sleep(I4);
+
+                WriteNBeep(Fx4, I2, "On");
+                WriteNBeep(Fx4, I2, "ly ");
+                WriteNBeep(Gx4, I2, "shoo");
+                WriteNBeep(Fx4, I2, "ting ");
+                WriteNBeep(Ax4, I2, "sta");
+                WriteNBeep(Gx4, (2 * I2) + I4, "rs ");
+                Thread.Sleep(I4);
+                WriteNBeep(Gx4, I4, "break ");
+                WriteNBeep(Fx4, I1, "the ");
+                WriteNBeep(Gx4, I2, "m");
+                WriteNBeep(Ax4, I2, "o");
+                WriteNBeep(Dx4, 3 * I1, "ld");
+                
                 accompaniment.Stop();
                 stopwatch.Stop();
                 Console.WriteLine($"\n\nPlayback ended after {stopwatch.Elapsed.ToString("mm':'ss'.'fff")}");

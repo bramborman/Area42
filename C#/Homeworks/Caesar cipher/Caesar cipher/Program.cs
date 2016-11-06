@@ -6,6 +6,9 @@ namespace CaesarCipher
     {
         static void Main(string[] args)
         {
+            const int ALPHABET_COUNT = 'z' - 'a' + 1;
+            const int DIGITS_COUNT   = '9' - '0' + 1;
+
             Console.Title = "Caesar cipher";
 
             while (true)
@@ -20,37 +23,46 @@ namespace CaesarCipher
 
                 foreach (char ch in text)
                 {
-                    int encrypted;
+                    int encrypted = ch;
 
-                    if (ch == ' ')
+                    if (char.IsLetter(ch))
                     {
-                        encrypted = ch;
-                    }
-                    else
-                    {
-                        encrypted = ch + (offset % ('z' - 'a' + 1));
+                        encrypted = ch + (offset % ALPHABET_COUNT);
 
-                        if (!char.IsUpper((char)encrypted))
+                        if (char.IsLower(ch))
                         {
                             if (encrypted < 'a')
                             {
-                                encrypted += 'z' - 'a' + 1;
+                                encrypted += ALPHABET_COUNT;
                             }
                             else if (encrypted > 'z')
                             {
-                                encrypted -= 'z' - 'a' + 1;
+                                encrypted -= ALPHABET_COUNT;
                             }
                         }
                         else
                         {
                             if (encrypted < 'A')
                             {
-                                encrypted += 'Z' - 'A' + 1;
+                                encrypted += ALPHABET_COUNT;
                             }
                             else if (encrypted > 'Z')
                             {
-                                encrypted -= 'Z' - 'A' + 1;
+                                encrypted -= ALPHABET_COUNT;
                             }
+                        }
+                    }
+                    else if (char.IsDigit(ch))
+                    {
+                        encrypted = ch + (offset % DIGITS_COUNT);
+
+                        if (encrypted < '0')
+                        {
+                            encrypted += DIGITS_COUNT;
+                        }
+                        else if (encrypted > '9')
+                        {
+                            encrypted -= DIGITS_COUNT;
                         }
                     }
 

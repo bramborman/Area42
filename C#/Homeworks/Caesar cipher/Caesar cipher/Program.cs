@@ -20,28 +20,37 @@ namespace CaesarCipher
 
                 foreach (char ch in text)
                 {
-                    int encrypted = ch + (offset % ('z' - 'a'));
+                    int encrypted;
 
-                    if (!char.IsUpper((char)encrypted))
+                    if (ch == ' ')
                     {
-                        if (encrypted < 'a')
-                        {
-                            encrypted += 'z' - 'a' + 1;
-                        }
-                        else if (encrypted > 'z')
-                        {
-                            encrypted -= 'z' - 'a' + 1;
-                        }
+                        encrypted = ch;
                     }
                     else
                     {
-                        if (encrypted < 'A')
+                        encrypted = ch + (offset % ('z' - 'a' + 1));
+
+                        if (!char.IsUpper((char)encrypted))
                         {
-                            encrypted += 'Z' - 'A' + 1;
+                            if (encrypted < 'a')
+                            {
+                                encrypted += 'z' - 'a' + 1;
+                            }
+                            else if (encrypted > 'z')
+                            {
+                                encrypted -= 'z' - 'a' + 1;
+                            }
                         }
-                        else if (encrypted > 'Z')
+                        else
                         {
-                            encrypted -= 'Z' - 'A' + 1;
+                            if (encrypted < 'A')
+                            {
+                                encrypted += 'Z' - 'A' + 1;
+                            }
+                            else if (encrypted > 'Z')
+                            {
+                                encrypted -= 'Z' - 'A' + 1;
+                            }
                         }
                     }
 

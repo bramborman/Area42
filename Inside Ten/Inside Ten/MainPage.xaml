@@ -13,52 +13,102 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{x:Bind AppData.ShowAbout, Mode=OneWay}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SP_Header.Padding" Value="{StaticResource ContentMargin}"/>
+                        <Setter Target="TB_Title.Text" Value="Inside Ten"/>
+                        <Setter Target="TB_Title.Margin" Value="{StaticResource TitleGapBottomMargin}"/>
+                        <Setter Target="TB_Title.Style" Value="{StaticResource SubheaderTextBlockStyle}"/>
+                        <Setter Target="TB_About.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-              Padding="{StaticResource PageContentMargin}"
+              RequestedTheme="Dark"
               Grid.Row="0"
               >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Inside Ten"
-                           Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}"
-                           Style="{StaticResource SubheaderTextBlockStyle}"
-                           Margin="{StaticResource TitleGapBottomMargin}"
-                           />
+            <StackPanel x:Name="SP_Header" Grid.Column="0">
+                <Border Height="{StaticResource PageTitleHeight}">
+                    <TextBlock x:Name="TB_Title"
+                               Text="INSIDE TEN"
+                               VerticalAlignment="Center"
+                               >
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontWeight" Value="{StaticResource PageTitleFontWeight}"/>
+                                <Setter Property="FontSize" Value="{StaticResource PageTitleFontSize}"/>
+                                <Setter Property="Padding" Value="{StaticResource PageTitlePadding}"/>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Border>
 
-                <TextBlock TextWrapping="WrapWholeWords"
-                           Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}"
-                           Visibility="{x:Bind AppData.ShowAbout, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"
+                <TextBlock x:Name="TB_About"
+                           x:DeferLoadStrategy="Lazy"
+                           Visibility="Collapsed"
+                           TextWrapping="WrapWholeWords"
                            >
-                    Inside Ten lets you get the info about the latest builds that get released to the Windows Insider program. You can get info about Insider Fast, Slow, and more Insider rings here!
+                        Inside Ten lets you get the info about the latest builds that get released to the Windows Insider program. You can get info about Insider Fast, Slow, and more Insider rings here!
                 </TextBlock>
             </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                        >
+                <Button Content="&#xE946;"
+                        ToolTipService.ToolTip="About"
+                        Style="{StaticResource BorderlessButton}"
+                        Click="ToggleAbout"
+                        />
+
+                <Button Content="&#xE713;"
+                        ToolTipService.ToolTip="Settings"
+                        Style="{StaticResource BorderlessButton}"
+                        Click="Settings"
+                        />
+            </StackPanel>
         </Grid>
-
-        <Button x:Name="Bt_About"
-                Content="&#xE713;"
-                Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}"
-                FontSize="16"
-                FontFamily="Segoe MDL2 Assets"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Style="{StaticResource TransparentButton}"
-                Grid.Row="0"
-                Click="ToggleAbout"
-                />
-
-        <ui:ColoredPivot HeaderBackground="{ThemeResource SystemControlBackgroundAccentBrush}"
+        
+        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}"
+                   Height="48"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Top"
+                   Grid.Row="1"
+                   />
+        <ui:ColoredPivot HeaderBackground="#33000000"
+                         RequestedTheme="Dark"
                          SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
                          Grid.Row="1"
                          >
             <PivotItem Header="PC">
-                
+                <GridView ItemsSource="{x:Bind InsideInfo.PC.Fast}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="local:BuildInfo">
+                            <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                                <TextBlock Text="{x:Bind Build, Mode=OneWay}"/>
+                                <TextBlock Text="{x:Bind Version, Mode=OneWay}"/>
+                                <TextBlock Text="{x:Bind ReleaseDate, Mode=OneWay}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
             </PivotItem>
-            <PivotItem Header="Mobile">
-                
+            <PivotItem Header="MOBILE">
+
             </PivotItem>
         </ui:ColoredPivot>
     </Grid>

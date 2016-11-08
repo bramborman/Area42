@@ -11,6 +11,10 @@ namespace InsideTen
         {
             get { return AppData.Current; }
         }
+        private InsideInfo InsideInfo
+        {
+            get { return new InsideInfo(); }
+        }
 
         public MainPage()
         {
@@ -21,10 +25,15 @@ namespace InsideTen
                 if (AppData.ShowLoadingError)
                 {
                     AppData.ShowLoadingError = false;
-                    await LoadingErrorDialog.ShowAsync("Settings", true);
 
-                    // If it gets there it means that PrimaryButton weren't pressed so rewrite maybe corrupted appData file
-                    await AppData.Current.SaveAsync();
+                    if (await new LoadingErrorDialog("settings", "with default settings").ShowAsync() == ContentDialogResult.Primary)
+                    {
+                        Application.Current.Exit();
+                    }
+                    else
+                    {
+                        await AppData.Current.SaveAsync();
+                    }
                 }
             };
         }
@@ -32,6 +41,11 @@ namespace InsideTen
         private void ToggleAbout(object sender, RoutedEventArgs e)
         {
             AppData.ShowAbout = !AppData.ShowAbout;
+        }
+
+        private void Settings(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Settings));
         }
     }
 }

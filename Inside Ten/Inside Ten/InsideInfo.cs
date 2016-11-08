@@ -2,26 +2,28 @@
 
 namespace InsideTen
 {
-    public class InsideInfo : NotifyPropertyChangedBase
+    public sealed class InsideInfo : NotifyPropertyChangedBase
     {
+        public static InsideInfo Current { get; private set; }
+
         public DeviceInfo PC
         {
-            get { return GetValue<DeviceInfo>(nameof(PC)); }
+            get { return (DeviceInfo)GetValue(nameof(PC)); }
             set { SetValue(nameof(PC), ref value); }
         }
         public DeviceInfo Mobile
         {
-            get { return GetValue<DeviceInfo>(nameof(Mobile)); }
+            get { return (DeviceInfo)GetValue(nameof(Mobile)); }
             set { SetValue(nameof(Mobile), ref value); }
         }
         public BuildInfo Internal
         {
-            get { return GetValue<BuildInfo>(nameof(Internal)); }
+            get { return (BuildInfo)GetValue(nameof(Internal)); }
             set { SetValue(nameof(Internal), ref value); }
         }
         public BuildInfo InternalServicing
         {
-            get { return GetValue<BuildInfo>(nameof(InternalServicing)); }
+            get { return (BuildInfo)GetValue(nameof(InternalServicing)); }
             set { SetValue(nameof(InternalServicing), ref value); }
         }
 
@@ -33,62 +35,67 @@ namespace InsideTen
             RegisterProperty(nameof(InternalServicing), typeof(BuildInfo), null);
         }
 
-        public class BuildInfo : NotifyPropertyChangedBase
+        public static void AssignFromObjectAsync(object obj)
         {
-            public string Build
-            {
-                get { return GetValue<string>(nameof(Build)); }
-                set { SetValue(nameof(Build), ref value); }
-            }
-            public string Version
-            {
-                get { return GetValue<string>(nameof(Version)); }
-                set { SetValue(nameof(Version), ref value); }
-            }
-            public string More
-            {
-                get { return GetValue<string>(nameof(More)); }
-                set { SetValue(nameof(More), ref value); }
-            }
-            public string ReleaseDate
-            {
-                get { return GetValue<string>(nameof(ReleaseDate)); }
-                set { SetValue(nameof(ReleaseDate), ref value); }
-            }
+            Current = new InsideInfo();
+        }
+    }
 
-            public BuildInfo()
-            {
-                RegisterProperty(nameof(Build), typeof(string), null);
-                RegisterProperty(nameof(Version), typeof(string), null);
-                RegisterProperty(nameof(More), typeof(string), null);
-                RegisterProperty(nameof(ReleaseDate), typeof(string), null);
-            }
+    public sealed class DeviceInfo : NotifyPropertyChangedBase
+    {
+        public BuildInfo Fast
+        {
+            get { return (BuildInfo)GetValue(nameof(Fast)); }
+            set { SetValue(nameof(Fast), ref value); }
+        }
+        public BuildInfo Slow
+        {
+            get { return (BuildInfo)GetValue(nameof(Slow)); }
+            set { SetValue(nameof(Slow), ref value); }
+        }
+        public BuildInfo ReleasePreview
+        {
+            get { return (BuildInfo)GetValue(nameof(ReleasePreview)); }
+            set { SetValue(nameof(ReleasePreview), ref value); }
         }
 
-        public class DeviceInfo : NotifyPropertyChangedBase
+        public DeviceInfo()
         {
-            public BuildInfo Fast
-            {
-                get { return GetValue<BuildInfo>(nameof(Fast)); }
-                set { SetValue(nameof(Fast), ref value); }
-            }
-            public BuildInfo Slow
-            {
-                get { return GetValue<BuildInfo>(nameof(Slow)); }
-                set { SetValue(nameof(Slow), ref value); }
-            }
-            public BuildInfo ReleasePreview
-            {
-                get { return GetValue<BuildInfo>(nameof(ReleasePreview)); }
-                set { SetValue(nameof(ReleasePreview), ref value); }
-            }
+            RegisterProperty(nameof(Fast), typeof(BuildInfo), null);
+            RegisterProperty(nameof(Slow), typeof(BuildInfo), null);
+            RegisterProperty(nameof(ReleasePreview), typeof(BuildInfo), null);
+        }
+    }
 
-            public DeviceInfo()
-            {
-                RegisterProperty(nameof(Fast), typeof(BuildInfo), null);
-                RegisterProperty(nameof(Slow), typeof(BuildInfo), null);
-                RegisterProperty(nameof(ReleasePreview), typeof(BuildInfo), null);
-            }
+    public sealed class BuildInfo : NotifyPropertyChangedBase
+    {
+        public string Build
+        {
+            get { return (string)GetValue(nameof(Build)); }
+            set { SetValue(nameof(Build), ref value); }
+        }
+        public string Version
+        {
+            get { return (string)GetValue(nameof(Version)); }
+            set { SetValue(nameof(Version), ref value); }
+        }
+        public string More
+        {
+            get { return (string)GetValue(nameof(More)); }
+            set { SetValue(nameof(More), ref value); }
+        }
+        public string ReleaseDate
+        {
+            get { return (string)GetValue(nameof(ReleaseDate)); }
+            set { SetValue(nameof(ReleaseDate), ref value); }
+        }
+
+        public BuildInfo()
+        {
+            RegisterProperty(nameof(Build), typeof(string), null);
+            RegisterProperty(nameof(Version), typeof(string), null);
+            RegisterProperty(nameof(More), typeof(string), null);
+            RegisterProperty(nameof(ReleaseDate), typeof(string), null);
         }
     }
 }

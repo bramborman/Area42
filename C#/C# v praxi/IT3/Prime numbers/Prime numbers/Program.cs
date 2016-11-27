@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Threading;
 #endif
 
-namespace PrimeNumbers
+namespace Prime_numbers
 {
     class Program
     {
@@ -28,7 +28,7 @@ namespace PrimeNumbers
                 ;
 
             Console.Title = "Prime numbers";
-            
+
             bool uiVisible = true;
 #if ERATOSTHENES || ERATOSTHENES_THREADING
             List<int> numbers = new List<int>();
@@ -47,24 +47,24 @@ namespace PrimeNumbers
             stopwatch.Start();
 
 #if !ERATOSTHENES && !ERATOSTHENES_THREADING
-            bool divided;
+            bool isPrimeNumber;
             
             Console.Write("1 ");
 
             for (ulong i = 2; i < maxValue; i++)
             {
-                divided = false;
+                isPrimeNumber = true;
 
                 for (ulong j = 2; j < i; j++)
                 {
                     if (i % j == 0)
                     {
-                        divided = true;
+                        isPrimeNumber = false;
                         break;
                     }
                 }
 
-                if (!divided)
+                if (isPrimeNumber)
                 {
                     Console.Write($"{i} ");
                 }
@@ -92,6 +92,7 @@ namespace PrimeNumbers
                 numbers.RemoveAll(number => number % baseNumber == 0);
             }
 #elif ERATOSTHENES_THREADING
+            // Not working!!!
             int numbersCount = 0;
             ManualResetEventSlim resetEvent = new ManualResetEventSlim();
 
@@ -168,7 +169,7 @@ namespace PrimeNumbers
 
             stopwatch.Stop();
             Console.Write($"\nElapsed {stopwatch.Elapsed.ToString("hh':'mm':'ss':'fff")}");
-            
+
             if (uiVisible)
             {
                 Console.ReadKey();

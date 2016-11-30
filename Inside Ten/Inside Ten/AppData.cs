@@ -7,7 +7,7 @@ namespace InsideTen
 {
     public class AppData : NotifyPropertyChangedBase
     {
-        const string FILE_NAME = "AppData.json";
+        private const string FILE_NAME = "AppData.json";
 
         public static AppData Current { get; private set; }
         public static bool ShowLoadingError { get; set; }

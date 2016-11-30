@@ -15,9 +15,9 @@ namespace InsideTen
 {
     public sealed partial class App : Application
     {
-        Color? lastAccentColor;
-        Frame rootFrame;
-        SystemNavigationManager systemNavigationManager;
+        private Color? lastAccentColor;
+        private Frame rootFrame;
+        private SystemNavigationManager systemNavigationManager;
 
         public App()
         {

@@ -89,7 +89,7 @@ namespace GenericList
             if (firstNode != null)
             {
                 Node newNode = new Node();
-                newNode.Item   = item;
+                newNode.Item     = item;
                 newNode.NextNode = firstNode;
 
                 firstNode = newNode;
@@ -118,7 +118,7 @@ namespace GenericList
             while (!EqualityComparer<T>.Default.Equals(actualNode.Item, item))
             {
                 previousNode = actualNode;
-                actualNode = actualNode.NextNode;
+                actualNode   = actualNode.NextNode;
 
                 if (actualNode == null)
                 {

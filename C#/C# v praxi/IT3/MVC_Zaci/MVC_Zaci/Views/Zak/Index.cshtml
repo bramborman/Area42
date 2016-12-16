@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<ul>
+    <li><a href="@Url.Action("VypisZaka")">Výpis žáka</a></li>
+    <li><a href="@Url.Action("VypisZaka2")">Výpis žáka 2</a></li>
+</ul>
+
+@Html.ActionLink("Vypis žáka", "VypisZaka")
+<br />
+@Html.ActionLink("Výpis žáka 2", "VypisZaka2")

@@ -1,0 +1,31 @@
+﻿@model MVC_Zaci.Models.ZakModel
+
+@{
+    ViewBag.Title = "EditZaka";
+}
+
+<h2>EditZaka</h2>
+
+@using (Html.BeginForm())
+{
+    <table class="table table-bordered">
+        <tr>
+            <td><label for="@nameof(Model.Jmeno)">Jméno</label></td>
+            <td><input name="@nameof(Model.Jmeno)" type="text" value="@Model.Jmeno" /></td>
+        </tr>
+        <tr>
+            <td><label for="@nameof(Model.Prijmeni)">Příjmení</label></td>
+            <td><input name="@nameof(Model.Prijmeni)" type="text" value="@Model.Prijmeni" /></td>
+        </tr>
+        <tr>
+            <td><label for="@nameof(Model.JeMuz)">Pohlaví</label></td>
+            <td><input name="@nameof(Model.JeMuz)" type="checkbox" @(Model.JeMuz ? "checked" : "") /></td>
+        </tr>
+        <tr>
+            <td><label for="@nameof(Model.RokNarozeni)">Rok narození</label></td>
+            <td><input name="@nameof(Model.RokNarozeni)" type="text" value="@Model.RokNarozeni" /></td>
+        </tr>
+    </table>
+
+    <input name="Submit" type="submit" value="Uložit" class="btn btn-primary" />
+}

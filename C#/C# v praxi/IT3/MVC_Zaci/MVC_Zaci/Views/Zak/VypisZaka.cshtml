@@ -1,0 +1,30 @@
+﻿@model MVC_Zaci.Models.ZakModel
+
+@{
+    ViewBag.Title = "VypisZaka";
+}
+
+<h2>VypisZaka</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Jméno</td>
+        <td>@Model.Jmeno</td>
+    </tr>
+    <tr>
+        <td>Příjmení</td>
+        <td>@Model.Prijmeni</td>
+    </tr>
+    <tr>
+        <td>Pohlaví</td>
+        <td>@(Model.JeMuz ? "Muž" : "Žena"))</td>
+    </tr>
+    <tr>
+        <td>Rok narození</td>
+        <td>@Model.RokNarozeni</td>
+    </tr>
+</table>
+
+Osobě je @(DateTime.Today.Year - Model.RokNarozeni) let.
+
+<p style="display: @((DateTime.Today.Year - Model.RokNarozeni) >= 18 ? "inherit" : "none");">Osoba je plnoletá.</p>

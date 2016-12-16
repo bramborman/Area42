@@ -1,0 +1,50 @@
+﻿@model MVC_Zaci.Models.ZakModel
+
+@{
+    ViewBag.Title = "VypisZaka2";
+}
+
+<h2>VypisZaka2</h2>
+
+<div>
+    <h4>ZakModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Jmeno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jmeno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prijmeni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prijmeni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JeMuz)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JeMuz)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RokNarozeni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RokNarozeni)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

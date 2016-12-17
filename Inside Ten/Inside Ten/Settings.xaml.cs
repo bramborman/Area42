@@ -2,7 +2,7 @@
 
 namespace InsideTen
 {
-    public sealed partial class Settings : Page
+    public sealed partial class Settings : PageBase
     {
         public Settings()
         {

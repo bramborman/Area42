@@ -360,15 +360,13 @@
   <ProductReservedInfo>
     <MainPackageIdentityName>58714MarianDolinsk.InsideTenUWP</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>Inside Ten UWP</ReservedName>
       <ReservedName>Inside Ten</ReservedName>
-      <ReservedName>InsideTen</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
-    <MainPackageIdentityName>58714MarianDolinsk.EveryMessenger</MainPackageIdentityName>
     <MainPackageIdentityName>58714MarianDolinsk.Mytronome</MainPackageIdentityName>
     <MainPackageIdentityName>58714MarianDolinsk.Quizzes</MainPackageIdentityName>
+    <MainPackageIdentityName>58714MarianDolinsk.UWPHelperSampleApp</MainPackageIdentityName>
     <MainPackageIdentityName>58714MarianDolinsk.xCalculator</MainPackageIdentityName>
   </AccountPackageIdentityNames>
   <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH42JGH" />

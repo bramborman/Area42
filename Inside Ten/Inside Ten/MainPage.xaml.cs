@@ -1,11 +1,12 @@
 ﻿using System;
 using UWPHelper.UI;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace InsideTen
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : PageBase
     {
         private AppData AppData
         {
@@ -25,10 +26,11 @@ namespace InsideTen
                 if (AppData.ShowLoadingError)
                 {
                     AppData.ShowLoadingError = false;
+                    ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
 
-                    if (await new LoadingErrorDialog("settings", "with default settings").ShowAsync() == ContentDialogResult.Primary)
+                    if (await new LoadingErrorDialog(resourceLoader.GetString("LoadingErrorDialog/Settings"), resourceLoader.GetString("LoadingErrorDialog/ContinueWith")).ShowAsync() == ContentDialogResult.Primary)
                     {
-                        Application.Current.Exit();
+                        App.Current.Exit();
                     }
                     else
                     {

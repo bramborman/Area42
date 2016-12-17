@@ -8,6 +8,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <TransitionCollection x:Key="ContentTransitions">
+                <PopupThemeTransition/>
+            </TransitionCollection>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

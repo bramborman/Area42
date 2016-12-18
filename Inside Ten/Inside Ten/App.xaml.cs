@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -13,75 +14,116 @@ using Windows.UI.Xaml.Navigation;
 
 namespace InsideTen
 {
-    public sealed partial class App : Application
+    public sealed partial class App : Application, INotifyPropertyChanged
     {
-        private readonly Color[] lightOverlayColors = { Color.FromArgb(0xFF, 0x19, 0x0D, 0x03), Color.FromArgb(0xFF, 0x33, 0x1B, 0x08) };
-        private readonly Color[] darkOverlayColors  = { new Color(), new Color() };
-        
+        public static new App Current { get; private set; }
+
+        private readonly Color[] lightOverlayColors = { Color.FromArgb(0x19, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF) };
+        private readonly Color[] darkOverlayColors  = { Color.FromArgb(0x19, 0x00, 0x00, 0x00), Color.FromArgb(0x33, 0x00, 0x00, 0x00) };
+
+        private bool isTitleBarAvailable;
+        private bool isStatusBarAvailable;
+        private ElementTheme _contrastingColorTheme;
         private Color lastAccentColor;
         private Frame rootFrame;
         private ApplicationViewTitleBar titleBar;
         private StatusBar statusBar;
         private SystemNavigationManager systemNavigationManager;
 
+        //TODO: this
+        private bool IsLightOverlay
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public ElementTheme ContrastingColorTheme
+        {
+            get { return _contrastingColorTheme; }
+            set
+            {
+                if (_contrastingColorTheme != value)
+                {
+                    _contrastingColorTheme = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ContrastingColorTheme)));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public App()
         {
+            Current = this;
+
             InitializeComponent();
             Suspending += OnSuspending;
         }
-        
-        //TODO: this
-        private bool IsLightOverlay()
+
+        // Original taken from http://stackoverflow.com/a/9955317/6843321
+        public static Color MixColors(Color foreground, Color? background)
         {
-            return true;
-        }
-        
-        private Color? MixColors(Color? first, Color? second)
-        {
-            return Color.FromArgb(0xFF, (byte)Math.Min(first.Value.R + second.Value.R, 0xFF), (byte)Math.Min(first.Value.G + second.Value.G, 0xFF), (byte)Math.Min(first.Value.B + second.Value.B, 0xFF));
-        }
-        
-        public void SetBarsColors()
-        {
-            if (titleBar != null)
+            if (foreground.A == 0xFF)
             {
-                if (lastAccentColor != (Color)Resources["SystemAccentColor"])
+                throw new Exception("You're not doing it right ;)");
+            }
+
+            double alpha      = foreground.A / 255.0;
+            double difference = 1.0 - alpha;
+
+            byte r = (byte)((foreground.R * alpha) + (background.Value.R * difference));
+            byte g = (byte)((foreground.G * alpha) + (background.Value.G * difference));
+            byte b = (byte)((foreground.B * alpha) + (background.Value.B * difference));
+
+            return Color.FromArgb(0xFF, r, g, b);
+        }
+        
+        public void SetColors()
+        {
+            if (lastAccentColor != (Color)Resources["SystemAccentColor"])
+            {
+                lastAccentColor = (Color)Resources["SystemAccentColor"];
+                ContrastingColorTheme = IsLightOverlay ? ElementTheme.Dark : ElementTheme.Light;
+
+                if (isTitleBarAvailable)
                 {
-                    lastAccentColor = (Color)Resources["SystemAccentColor"];
-                        
                     titleBar.BackgroundColor                = lastAccentColor;
-                    titleBar.ForegroundColor                = Colors.White;
-                    titleBar.InactiveForegroundColor        = Color.FromArgb(0xFF, 0x66, 0x66, 0x66);
-                    
-                    titleBar.InactiveBackgroundColor        = titleBar.BackgroundColor;
-
                     titleBar.ButtonBackgroundColor          = titleBar.BackgroundColor;
-                    titleBar.ButtonForegroundColor          = titleBar.ForegroundColor;
 
-                    titleBar.ButtonHoverForegroundColor     = titleBar.ButtonForegroundColor;
-                    titleBar.ButtonInactiveBackgroundColor  = titleBar.InactiveBackgroundColor;
-                    titleBar.ButtonInactiveForegroundColor  = titleBar.InactiveForegroundColor;
-                    titleBar.ButtonPressedForegroundColor   = titleBar.ButtonForegroundColor;
+                    // Use default system colors in inactive state
+                    //x titleBar.InactiveBackgroundColor        = WhatheverColor;
+                    //x titleBar.InactiveForegroundColor        = WhatheverColor;
+                    //x titleBar.ButtonInactiveBackgroundColor  = WhatheverColor;
+                    //x titleBar.ButtonInactiveForegroundColor  = WhatheverColor;
                     
-                    if (IsLightOverlay())
+                    if (IsLightOverlay)
                     {
-                        titleBar.ButtonHoverBackgroundColor   = MixColors(titleBar.ButtonBackgroundColor, lightOverlayColors[0]);
-                        titleBar.ButtonPressedBackgroundColor = MixColors(titleBar.ButtonBackgroundColor, lightOverlayColors[1]);
+                        titleBar.ForegroundColor = Colors.White;
+
+                        titleBar.ButtonHoverBackgroundColor   = MixColors(lightOverlayColors[0], titleBar.ButtonBackgroundColor);
+                        titleBar.ButtonPressedBackgroundColor = MixColors(lightOverlayColors[1], titleBar.ButtonBackgroundColor);
                     }
                     else
                     {
-                        titleBar.ButtonHoverBackgroundColor   = MixColors(titleBar.ButtonBackgroundColor, darkOverlayColors[0]);
-                        titleBar.ButtonPressedBackgroundColor = MixColors(titleBar.ButtonBackgroundColor, darkOverlayColors[1]);
-                    }
-                }
-            }
-            
-            if (statusBar != null)
-            {
-                statusBar.BackgroundOpacity = 1;
+                        titleBar.ForegroundColor = Colors.Black;
 
-                statusBar.BackgroundColor = (Color)Resources["SystemAccentColor"];
-                statusBar.ForegroundColor = Color.FromArgb(0xFF, 0xC7, 0xC7, 0xC7);
+                        titleBar.ButtonHoverBackgroundColor   = MixColors(darkOverlayColors[0], titleBar.ButtonBackgroundColor);
+                        titleBar.ButtonPressedBackgroundColor = MixColors(darkOverlayColors[1], titleBar.ButtonBackgroundColor);
+                    }
+
+                    // Don't change foreground colors when buttons are in different states
+                    titleBar.ButtonForegroundColor          = titleBar.ForegroundColor;
+                    titleBar.ButtonHoverForegroundColor     = titleBar.ForegroundColor;
+                    titleBar.ButtonPressedForegroundColor   = titleBar.ForegroundColor;
+                }
+
+                if (isStatusBarAvailable)
+                {
+                    statusBar.BackgroundColor = lastAccentColor;
+                    statusBar.ForegroundColor = IsLightOverlay ? Colors.White : Colors.Black;
+                }
             }
         }
 
@@ -121,20 +163,28 @@ namespace InsideTen
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
                 {
                     titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                    isTitleBarAvailable = titleBar != null;
+
                     ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(330, 460));
                 }
 
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
                 {
                     statusBar = StatusBar.GetForCurrentView();
+                    isStatusBarAvailable = statusBar != null;
+
+                    if (isStatusBarAvailable)
+                    {
+                        statusBar.BackgroundOpacity = 1;
+                    }
                 }
 
-                SetBarsColors();
+                SetColors();
                 Window.Current.Activated += (sender, e) =>
                 {
                     if (e.WindowActivationState != CoreWindowActivationState.Deactivated)
                     {
-                        SetBarsColors();
+                        SetColors();
                     }
                 };
             }

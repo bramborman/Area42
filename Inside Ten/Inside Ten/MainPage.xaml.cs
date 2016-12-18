@@ -8,6 +8,10 @@ namespace InsideTen
 {
     public sealed partial class MainPage : PageBase
     {
+        private App App
+        {
+            get { return App.Current; }
+        }
         private AppData AppData
         {
             get { return AppData.Current; }

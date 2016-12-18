@@ -31,7 +31,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-              RequestedTheme="Dark"
+              RequestedTheme="{x:Bind App.ContrastingColorTheme, Mode=OneWay}"
               Grid.Row="0"
               >
             <Grid.ColumnDefinitions>
@@ -89,7 +89,7 @@
                    Grid.Row="1"
                    />
         <ui:ColoredPivot HeaderBackground="#33000000"
-                         RequestedTheme="Dark"
+                         RequestedTheme="{x:Bind App.ContrastingColorTheme, Mode=OneWay}"
                          SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
                          Grid.Row="1"
                          >

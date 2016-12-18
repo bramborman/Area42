@@ -2,9 +2,9 @@
 
 namespace InsideTen
 {
-    public sealed class InsideInfo : NotifyPropertyChangedBase
+    public sealed class InsiderInfo : NotifyPropertyChangedBase
     {
-        public static InsideInfo Current { get; private set; }
+        public static InsiderInfo Current { get; private set; }
 
         public DeviceInfo PC
         {
@@ -27,7 +27,7 @@ namespace InsideTen
             set { SetValue(nameof(InternalServicing), ref value); }
         }
 
-        public InsideInfo()
+        public InsiderInfo()
         {
             RegisterProperty(nameof(PC), typeof(DeviceInfo), null);
             RegisterProperty(nameof(Mobile), typeof(DeviceInfo), null);
@@ -35,9 +35,19 @@ namespace InsideTen
             RegisterProperty(nameof(InternalServicing), typeof(BuildInfo), null);
         }
 
-        public static void AssignFromObjectAsync(object obj)
+        public static void CreateExampleData()
         {
-            Current = new InsideInfo();
+            Current = new InsiderInfo();
+            Current.PC = new DeviceInfo();
+            Current.PC.Fast = new BuildInfo("Fast") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
+            Current.PC.Slow = new BuildInfo("Slow") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
+            Current.PC.ReleasePreview = new BuildInfo("Release preview") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
+            Current.Mobile = new DeviceInfo();
+            Current.Mobile.Fast = new BuildInfo("Fast") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
+            Current.Mobile.Slow = new BuildInfo("Slow") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
+            Current.Mobile.ReleasePreview = new BuildInfo("Release preview") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
+            Current.Internal = new BuildInfo("Internal") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
+            Current.InternalServicing = new BuildInfo("Internal servicing") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
         }
     }
 
@@ -69,6 +79,8 @@ namespace InsideTen
 
     public sealed class BuildInfo : NotifyPropertyChangedBase
     {
+        internal string DisplayName { get; }
+
         public string Build
         {
             get { return (string)GetValue(nameof(Build)); }
@@ -90,8 +102,10 @@ namespace InsideTen
             set { SetValue(nameof(ReleaseDate), ref value); }
         }
 
-        public BuildInfo()
+        public BuildInfo(string displayName)
         {
+            DisplayName = displayName.ToUpper();
+
             RegisterProperty(nameof(Build), typeof(string), null);
             RegisterProperty(nameof(Version), typeof(string), null);
             RegisterProperty(nameof(More), typeof(string), null);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UWPHelper.UI;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -16,13 +17,12 @@ namespace InsideTen
         {
             get { return AppData.Current; }
         }
-        private InsideInfo InsideInfo
-        {
-            get { return new InsideInfo(); }
-        }
+        private List<BuildInfo> BuildList { get; }
 
         public MainPage()
         {
+            InsiderInfo.CreateExampleData();
+            BuildList = new List<BuildInfo> { InsiderInfo.Current.PC.Fast, InsiderInfo.Current.PC.Slow, InsiderInfo.Current.PC.ReleasePreview };
             InitializeComponent();
 
             Loaded += async (sender, e) =>

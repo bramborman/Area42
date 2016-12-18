@@ -63,4 +63,7 @@
   <data name="LoadingErrorDialog.ContinueWith" xml:space="preserve">
     <value>s výchozím nastavením</value>
   </data>
+  <data name="BuildInfoMore.Content" xml:space="preserve">
+    <value>Více</value>
+  </data>
 </root>

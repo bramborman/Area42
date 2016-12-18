@@ -99,14 +99,32 @@
                 </Style>
             </ui:ColoredPivot.Resources>
             
-            <PivotItem x:Uid="PC">
-                <GridView ItemsSource="{x:Bind InsideInfo.PC.Fast}">
+            <PivotItem x:Uid="PC"
+                       Padding="{StaticResource ContentMargin}"
+                       >
+                <GridView ItemsSource="{x:Bind BuildList}"
+                          SelectionMode="None"
+                          IsItemClickEnabled="False"
+                          >
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="Margin" Value="0,0,20,20"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local:BuildInfo">
-                            <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                            <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                                        Padding="10,5"
+                                        MinWidth="250"
+                                        >
+                                <TextBlock Text="{x:Bind DisplayName}" FontWeight="SemiBold"/>
                                 <TextBlock Text="{x:Bind Build, Mode=OneWay}"/>
                                 <TextBlock Text="{x:Bind Version, Mode=OneWay}"/>
                                 <TextBlock Text="{x:Bind ReleaseDate, Mode=OneWay}"/>
+                                <HyperlinkButton x:Uid="BuildInfoMore"
+                                                 Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                                 NavigateUri="{x:Bind More, Mode=OneWay}"
+                                                 />
                             </StackPanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>

@@ -88,50 +88,61 @@
                    VerticalAlignment="Top"
                    Grid.Row="1"
                    />
-        <ui:ColoredPivot HeaderBackground="#33000000"
+        <ui:ColoredPivot HeaderBackground="{StaticResource DarkOverlay}"
                          RequestedTheme="{x:Bind App.ContrastingColorTheme, Mode=OneWay}"
                          SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
+                         Transitions="{StaticResource ContentTransitions}"
                          Grid.Row="1"
                          >
             <ui:ColoredPivot.Resources>
-                <Style TargetType="PivotItem">
-                    <Setter Property="Transitions" Value="{StaticResource ContentTransitions}"/>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="Margin" Value="20,20,0,0"/>
                 </Style>
+                
+                <DataTemplate x:Key="DeviceInfoDataTemplate" x:DataType="local:BuildInfo">
+                    <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                                MinWidth="250"
+                                >
+                        <StackPanel Padding="10">
+                            <TextBlock Text="{x:Bind DisplayName}"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,5"
+                                       />
+                            <TextBlock Text="{x:Bind Build, Mode=OneWay}"
+                                       FontSize="30"
+                                       />
+                            <TextBlock Text="{x:Bind Version, Mode=OneWay}"/>
+                            <TextBlock Text="{x:Bind ReleaseDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:D}', Mode=OneWay}"/>
+                        </StackPanel>
+
+                        <Button x:Uid="BuildInfoMore"
+                                FontWeight="SemiBold"
+                                Background="{StaticResource DarkOverlay}"
+                                IsEnabled="{x:Bind More, Converter={StaticResource StringIsNullOrWhiteSpaceInvertedConverter}, Mode=OneWay}"
+                                Padding="8"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Style="{StaticResource BuildInfoMoreButton}"
+                                Command="{x:Bind OpenMoreCommand}"
+                                CommandParameter="{x:Bind More, Mode=OneWay}"
+                                />
+                    </StackPanel>
+                </DataTemplate>
             </ui:ColoredPivot.Resources>
-            
-            <PivotItem x:Uid="PC"
-                       Padding="{StaticResource ContentMargin}"
-                       >
-                <GridView ItemsSource="{x:Bind BuildList}"
+
+            <PivotItem x:Uid="PC">
+                <GridView ItemsSource="{x:Bind InsiderInfo.PC}"
                           SelectionMode="None"
                           IsItemClickEnabled="False"
-                          >
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="GridViewItem">
-                            <Setter Property="Margin" Value="0,0,20,20"/>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="local:BuildInfo">
-                            <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-                                        Padding="10,5"
-                                        MinWidth="250"
-                                        >
-                                <TextBlock Text="{x:Bind DisplayName}" FontWeight="SemiBold"/>
-                                <TextBlock Text="{x:Bind Build, Mode=OneWay}"/>
-                                <TextBlock Text="{x:Bind Version, Mode=OneWay}"/>
-                                <TextBlock Text="{x:Bind ReleaseDate, Mode=OneWay}"/>
-                                <HyperlinkButton x:Uid="BuildInfoMore"
-                                                 Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                                                 NavigateUri="{x:Bind More, Mode=OneWay}"
-                                                 />
-                            </StackPanel>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                          ItemTemplate="{StaticResource DeviceInfoDataTemplate}"
+                          />
             </PivotItem>
             <PivotItem x:Uid="Mobile">
-
+                <GridView ItemsSource="{x:Bind InsiderInfo.Mobile}"
+                          SelectionMode="None"
+                          IsItemClickEnabled="False"
+                          ItemTemplate="{StaticResource DeviceInfoDataTemplate}"
+                          />
             </PivotItem>
         </ui:ColoredPivot>
     </Grid>

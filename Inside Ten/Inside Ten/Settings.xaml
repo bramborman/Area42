@@ -32,7 +32,11 @@
                              IsGitHubLinkEnabled="True"
                              GitHubProjectName="InsideTenUWP"
                              GitHubLinkUrl="https://github.com/bramborman/InsideTenUWP"
-                             />
+                             >
+                    <ui:AboutApp.ThirdPartySoftwareInfo>
+                        <ui:ThirdPartySoftwareInfo SoftwareName="UWP Community Toolkit" SoftwareLicense="{x:Bind UWPCommunityToolkitLicense}"/>
+                    </ui:AboutApp.ThirdPartySoftwareInfo>
+                </ui:AboutApp>
             </StackPanel>
         </ScrollViewer>
     </Grid>

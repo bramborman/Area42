@@ -1,85 +1,118 @@
-﻿using UWPHelper.Utilities;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UWPHelper.Utilities;
+using Windows.ApplicationModel.Resources;
+using Windows.System;
 
 namespace InsideTen
 {
-    public sealed class InsiderInfo : NotifyPropertyChangedBase
+    public sealed class InsiderInfo
     {
         public static InsiderInfo Current { get; private set; }
 
-        public DeviceInfo PC
-        {
-            get { return (DeviceInfo)GetValue(nameof(PC)); }
-            set { SetValue(nameof(PC), ref value); }
-        }
-        public DeviceInfo Mobile
-        {
-            get { return (DeviceInfo)GetValue(nameof(Mobile)); }
-            set { SetValue(nameof(Mobile), ref value); }
-        }
-        public BuildInfo Internal
-        {
-            get { return (BuildInfo)GetValue(nameof(Internal)); }
-            set { SetValue(nameof(Internal), ref value); }
-        }
-        public BuildInfo InternalServicing
-        {
-            get { return (BuildInfo)GetValue(nameof(InternalServicing)); }
-            set { SetValue(nameof(InternalServicing), ref value); }
-        }
+        public DeviceInfo PC { get; }
+        public DeviceInfo Mobile { get; }
+        public BuildInfo Internal { get; }
+        public BuildInfo InternalServicing { get; }
 
         public InsiderInfo()
         {
-            RegisterProperty(nameof(PC), typeof(DeviceInfo), null);
-            RegisterProperty(nameof(Mobile), typeof(DeviceInfo), null);
-            RegisterProperty(nameof(Internal), typeof(BuildInfo), null);
-            RegisterProperty(nameof(InternalServicing), typeof(BuildInfo), null);
+            ResourceLoader resourceLoader = ResourceLoader.GetForViewIndependentUse();
+
+            PC                  = new DeviceInfo();
+            Mobile              = new DeviceInfo();
+            Internal            = new BuildInfo(resourceLoader.GetString("InternalRing"));
+            InternalServicing   = new BuildInfo(resourceLoader.GetString("InternalServicingRing"));
         }
 
-        public static void CreateExampleData()
+        public static void CreateSampleData()
         {
             Current = new InsiderInfo();
-            Current.PC = new DeviceInfo();
-            Current.PC.Fast = new BuildInfo("Fast") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
-            Current.PC.Slow = new BuildInfo("Slow") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
-            Current.PC.ReleasePreview = new BuildInfo("Release preview") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
-            Current.Mobile = new DeviceInfo();
-            Current.Mobile.Fast = new BuildInfo("Fast") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
-            Current.Mobile.Slow = new BuildInfo("Slow") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
-            Current.Mobile.ReleasePreview = new BuildInfo("Release preview") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
-            Current.Internal = new BuildInfo("Internal") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
-            Current.InternalServicing = new BuildInfo("Internal servicing") { Build = "14986.0", Version = "Redstone 2", ReleaseDate = "12/06/2016", More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/" };
+
+            Current.PC.Fast.Build = "14986";
+            Current.PC.Fast.Version = "Redstone 2";
+            Current.PC.Fast.More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/";
+            Current.PC.Fast.ReleaseDate = new DateTime(2016, 12, 16);
+
+            Current.PC.Slow.Build = "14986";
+            Current.PC.Slow.Version = "Redstone 2";
+            Current.PC.Slow.More = "";//"https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/";
+            Current.PC.Slow.ReleaseDate = new DateTime(2016, 12, 16);
+
+            Current.PC.ReleasePreview.Build = "14986";
+            Current.PC.ReleasePreview.Version = "Redstone 2";
+            Current.PC.ReleasePreview.More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/";
+            Current.PC.ReleasePreview.ReleaseDate = new DateTime(2016, 12, 16);
+
+            Current.Mobile.Fast.Build = "14986";
+            Current.Mobile.Fast.Version = "Redstone 2";
+            Current.Mobile.Fast.More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/";
+            Current.Mobile.Fast.ReleaseDate = new DateTime(2016, 12, 16);
+
+            Current.Mobile.Slow.Build = "14986";
+            Current.Mobile.Slow.Version = "Redstone 2";
+            Current.Mobile.Slow.More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/";
+            Current.Mobile.Slow.ReleaseDate = new DateTime(2016, 12, 16);
+
+            Current.Mobile.ReleasePreview.Build = "14986";
+            Current.Mobile.ReleasePreview.Version = "Redstone 2";
+            Current.Mobile.ReleasePreview.More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/";
+            Current.Mobile.ReleasePreview.ReleaseDate = new DateTime(2016, 12, 16);
+
+            Current.Internal.Build = "14986";
+            Current.Internal.Version = "Redstone 2";
+            Current.Internal.More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/";
+            Current.Internal.ReleaseDate = new DateTime(2016, 12, 16);
+
+            Current.InternalServicing.Build = "14986";
+            Current.InternalServicing.Version = "Redstone 2";
+            Current.InternalServicing.More = "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/";
+            Current.InternalServicing.ReleaseDate = new DateTime(2016, 12, 16);
         }
     }
 
-    public sealed class DeviceInfo : NotifyPropertyChangedBase
+    public sealed class DeviceInfo : IEnumerable<BuildInfo>
     {
-        public BuildInfo Fast
-        {
-            get { return (BuildInfo)GetValue(nameof(Fast)); }
-            set { SetValue(nameof(Fast), ref value); }
-        }
-        public BuildInfo Slow
-        {
-            get { return (BuildInfo)GetValue(nameof(Slow)); }
-            set { SetValue(nameof(Slow), ref value); }
-        }
-        public BuildInfo ReleasePreview
-        {
-            get { return (BuildInfo)GetValue(nameof(ReleasePreview)); }
-            set { SetValue(nameof(ReleasePreview), ref value); }
-        }
+        public BuildInfo Fast { get; }
+        public BuildInfo Slow { get; }
+        public BuildInfo ReleasePreview { get; }
 
         public DeviceInfo()
         {
-            RegisterProperty(nameof(Fast), typeof(BuildInfo), null);
-            RegisterProperty(nameof(Slow), typeof(BuildInfo), null);
-            RegisterProperty(nameof(ReleasePreview), typeof(BuildInfo), null);
+            ResourceLoader resourceLoader = ResourceLoader.GetForViewIndependentUse();
+
+            Fast            = new BuildInfo(resourceLoader.GetString("FastRing"));
+            Slow            = new BuildInfo(resourceLoader.GetString("SlowRing"));
+            ReleasePreview  = new BuildInfo(resourceLoader.GetString("ReleasePreviewRing"));
+        }
+
+        public IEnumerator<BuildInfo> GetEnumerator()
+        {
+            yield return Fast;
+            yield return Slow;
+            yield return ReleasePreview;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 
     public sealed class BuildInfo : NotifyPropertyChangedBase
     {
+        private static readonly DelegateCommand _openMoreCommand = new DelegateCommand(async (sender, e) =>
+        {
+            await Launcher.LaunchUriAsync(new Uri((string)e));
+        });
+
         internal string DisplayName { get; }
+
+        public DelegateCommand OpenMoreCommand
+        {
+            get { return _openMoreCommand; }
+        }
 
         public string Build
         {
@@ -96,9 +129,9 @@ namespace InsideTen
             get { return (string)GetValue(nameof(More)); }
             set { SetValue(nameof(More), ref value); }
         }
-        public string ReleaseDate
+        public DateTime ReleaseDate
         {
-            get { return (string)GetValue(nameof(ReleaseDate)); }
+            get { return (DateTime)GetValue(nameof(ReleaseDate)); }
             set { SetValue(nameof(ReleaseDate), ref value); }
         }
 
@@ -109,7 +142,7 @@ namespace InsideTen
             RegisterProperty(nameof(Build), typeof(string), null);
             RegisterProperty(nameof(Version), typeof(string), null);
             RegisterProperty(nameof(More), typeof(string), null);
-            RegisterProperty(nameof(ReleaseDate), typeof(string), null);
+            RegisterProperty(nameof(ReleaseDate), typeof(DateTime), new DateTime());
         }
     }
 }

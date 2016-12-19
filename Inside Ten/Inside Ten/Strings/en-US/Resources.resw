@@ -64,6 +64,21 @@
     <value>with default settings</value>
   </data>
   <data name="BuildInfoMore.Content" xml:space="preserve">
-    <value>More</value>
+    <value>MORE</value>
+  </data>
+  <data name="FastRing" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="SlowRing" xml:space="preserve">
+    <value>Slow</value>
+  </data>
+  <data name="ReleasePreviewRing" xml:space="preserve">
+    <value>Release preview</value>
+  </data>
+  <data name="InternalRing" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="InternalServicingRing" xml:space="preserve">
+    <value>Internal servicing</value>
   </data>
 </root>

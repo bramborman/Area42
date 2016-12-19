@@ -64,6 +64,21 @@
     <value>s výchozím nastavením</value>
   </data>
   <data name="BuildInfoMore.Content" xml:space="preserve">
-    <value>Více</value>
+    <value>VÍCE</value>
+  </data>
+  <data name="FastRing" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="SlowRing" xml:space="preserve">
+    <value>Slow</value>
+  </data>
+  <data name="ReleasePreviewRing" xml:space="preserve">
+    <value>Release preview</value>
+  </data>
+  <data name="InternalRing" xml:space="preserve">
+    <value>Interní</value>
+  </data>
+  <data name="InternalServicingRing" xml:space="preserve">
+    <value>Interní servisní</value>
   </data>
 </root>

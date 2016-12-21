@@ -69,33 +69,23 @@ namespace TicTacToe
                                 {
                                     if (row + cellsToWin <= gameBoardSize)
                                     {
-                                        int count = 1;
+                                        bool goHorizontal    = true;
+                                        bool goVertical      = true;
+                                        bool goLeftDiagonal  = true;
+                                        bool goRightDiagonal = true;
+
+                                        int horizontalCount    = 1;
+                                        int verticalCount      = 1;
+                                        int leftDiagonalCount  = 1;
+                                        int rightDiagonalCount = 1;
 
                                         for (int i = 1; i < gameBoardSize; i++)
                                         {
-                                            if (cells[row + i, column].Background == currentPlayerCellBrush)
+                                            if (goHorizontal)
                                             {
-                                                if (++count == cellsToWin)
+                                                if (row + i < gameBoardSize && cells[row + i, column].Background == currentPlayerCellBrush)
                                                 {
-                                                    win = true;
-                                                    break;
-                                                }
-                                            }
-                                            else
-                                            {
-                                                break;
-                                            }
-                                        }
-
-                                        if (!win)
-                                        {
-                                            count = 1;
-
-                                            for (int i = 1; i < gameBoardSize; i++)
-                                            {
-                                                if (cells[row, column + i].Background == currentPlayerCellBrush)
-                                                {
-                                                    if (++count == cellsToWin)
+                                                    if (++horizontalCount == cellsToWin)
                                                     {
                                                         win = true;
                                                         break;
@@ -103,8 +93,65 @@ namespace TicTacToe
                                                 }
                                                 else
                                                 {
-                                                    break;
+                                                    horizontalCount = 0;
+                                                    goHorizontal = false;
                                                 }
+                                            }
+
+                                            if (goVertical)
+                                            {
+                                                if (column + i < gameBoardSize && cells[row, column + i].Background == currentPlayerCellBrush)
+                                                {
+                                                    if (++verticalCount == cellsToWin)
+                                                    {
+                                                        win = true;
+                                                        break;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    verticalCount = 0;
+                                                    goVertical = false;
+                                                }
+                                            }
+
+                                            if (goLeftDiagonal)
+                                            {
+                                                if (row + i < gameBoardSize && column - i > 0 && cells[row + i, column - i].Background == currentPlayerCellBrush)
+                                                {
+                                                    if (++leftDiagonalCount == cellsToWin)
+                                                    {
+                                                        win = true;
+                                                        break;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    leftDiagonalCount = 0;
+                                                    goLeftDiagonal = false;
+                                                }
+                                            }
+
+                                            if (goRightDiagonal)
+                                            {
+                                                if (row + i < gameBoardSize && column + i < gameBoardSize && cells[row + i, column + i].Background == currentPlayerCellBrush)
+                                                {
+                                                    if (++rightDiagonalCount == cellsToWin)
+                                                    {
+                                                        win = true;
+                                                        break;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    rightDiagonalCount = 0;
+                                                    goRightDiagonal = false;
+                                                }
+                                            }
+
+                                            if (!goHorizontal && !goVertical && !goLeftDiagonal && !goRightDiagonal)
+                                            {
+                                                break;
                                             }
                                         }
                                     }

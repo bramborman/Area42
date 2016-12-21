@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -182,6 +183,11 @@ namespace TicTacToe
                                 Frame.GoBack();
                             };
 
+                            foreach (Button cell in cells)
+                            {
+                                cell.IsEnabled = false;
+                            }
+
                             await winDialog.ShowAsync();
                         }
 
@@ -228,10 +234,31 @@ namespace TicTacToe
             InitializeComponent();
         }
 
+        private void Game_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            e.Handled = true;
+            Frame.GoBack();
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            systemNavigationManager.BackRequested += Game_BackRequested;
+
             gameBoardSize = (int)e.Parameter;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+
+            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            systemNavigationManager.BackRequested -= Game_BackRequested;
+
+            base.OnNavigatingFrom(e);
         }
     }
 }

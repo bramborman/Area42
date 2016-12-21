@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,7 +22,7 @@ namespace TicTacToe
         private bool _player1;
         private int cellsToWin;
         private int gameBoardSize;
-        private List<Button> cells;
+        private Button[,] cells;
         private DelegateCommand colorizeCell;
 
         private bool Player1
@@ -49,7 +47,7 @@ namespace TicTacToe
         {
             Loaded += (loadedSender, loadedE) =>
             {
-                cells = new List<Button>(gameBoardSize * gameBoardSize);
+                cells = new Button[gameBoardSize, gameBoardSize];
                 cellsToWin = Math.Max(gameBoardSize - 2, 3);
 
                 colorizeCell = new DelegateCommand(
@@ -61,61 +59,85 @@ namespace TicTacToe
                         clickedCell.Background = currentPlayerCellBrush;
                         clickedCell.IsEnabled  = false;
 
-                        List<Button> currentPlayerCells = new List<Button>(cells.Where(b => b.Background == currentPlayerCellBrush).OrderBy(b => cells.IndexOf(b)));
-
-                        if (currentPlayerCells.Count >= cellsToWin)
+                        bool win = false;
+                        
+                        for (int row = 0; row < gameBoardSize; row++)
                         {
-                            int? lastRowIndex    = null;
-                            int? lastColumnIndex = null;
-                            int rowCount         = 0;
-                            int columnCount      = 0;
-
-                            foreach (Button cell in currentPlayerCells)
+                            for (int column = 0; column < gameBoardSize; column++)
                             {
-                                int currentIndex = cells.IndexOf(cell);
-
-                                if (lastRowIndex == null || lastRowIndex == currentIndex - 1)
+                                if (cells[row, column].Background == currentPlayerCellBrush)
                                 {
-                                    lastRowIndex = currentIndex;
-                                    rowCount++;
-                                }
-                                else
-                                {
-                                    lastRowIndex = null;
-                                    rowCount     = 0;
-                                }
-
-                                if (lastColumnIndex == null || lastColumnIndex == currentIndex - gameBoardSize)
-                                {
-                                    lastColumnIndex = currentIndex;
-                                    columnCount++;
-                                }
-                                else
-                                {
-                                    lastColumnIndex = null;
-                                    columnCount     = 0;
-                                }
-
-                                if (rowCount == cellsToWin || columnCount == cellsToWin)
-                                {
-                                    ContentDialog winDialog = new ContentDialog
+                                    if (row + cellsToWin <= gameBoardSize)
                                     {
-                                        Title               = $"Player {PlayerNumber} won!",
-                                        SecondaryButtonText = "Back"
-                                    };
+                                        int count = 1;
 
-                                    winDialog.SecondaryButtonClick += (winDialogSender, winDialogE) =>
-                                    {
-                                        Frame.GoBack();
-                                    };
+                                        for (int i = 1; i < gameBoardSize; i++)
+                                        {
+                                            if (cells[row + i, column].Background == currentPlayerCellBrush)
+                                            {
+                                                if (++count == cellsToWin)
+                                                {
+                                                    win = true;
+                                                    break;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                break;
+                                            }
+                                        }
 
-                                    await winDialog.ShowAsync();
+                                        if (!win)
+                                        {
+                                            count = 1;
 
+                                            for (int i = 1; i < gameBoardSize; i++)
+                                            {
+                                                if (cells[row, column + i].Background == currentPlayerCellBrush)
+                                                {
+                                                    if (++count == cellsToWin)
+                                                    {
+                                                        win = true;
+                                                        break;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (win)
+                                {
                                     break;
                                 }
                             }
+
+                            if (win)
+                            {
+                                break;
+                            }
                         }
-                    
+
+                        if (win)
+                        {
+                            ContentDialog winDialog = new ContentDialog
+                            {
+                                Title = $"Player {PlayerNumber} won!",
+                                SecondaryButtonText = "Back"
+                            };
+
+                            winDialog.SecondaryButtonClick += (winDialogSender, winDialogE) =>
+                            {
+                                Frame.GoBack();
+                            };
+
+                            await winDialog.ShowAsync();
+                        }
+
                         Player1 = !Player1;
                     });
 
@@ -150,7 +172,7 @@ namespace TicTacToe
                         Grid.SetRow(cell, row);
                         Grid.SetColumn(cell, column);
 
-                        cells.Add(cell);
+                        cells[row, column] = cell;
                     }
                 }
             };

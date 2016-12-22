@@ -53,5 +53,10 @@ namespace InsideTen
         {
             Frame.Navigate(typeof(Settings));
         }
+
+        private async void Refresh(object sender, RoutedEventArgs e)
+        {
+            await InsiderInfo.LoadAsync();
+        }
     }
 }

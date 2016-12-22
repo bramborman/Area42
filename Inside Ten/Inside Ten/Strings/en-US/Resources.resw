@@ -87,4 +87,17 @@
   <data name="InternalBuilds.Text" xml:space="preserve">
     <value>Internal Windows 10 Builds</value>
   </data>
+  <data name="NoContentUIText.Text" xml:space="preserve">
+    <value>We were unable to connect to the internet and load some necessary data.
+Please check your internet connection and try again.</value>
+  </data>
+  <data name="NoContentUITryAgainButton.Content" xml:space="preserve">
+    <value>TRY AGAIN</value>
+  </data>
+  <data name="RefreshButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="LastUpdated.Text" xml:space="preserve">
+    <value>Last updated</value>
+  </data>
 </root>

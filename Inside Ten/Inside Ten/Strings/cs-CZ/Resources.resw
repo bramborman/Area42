@@ -87,4 +87,17 @@
   <data name="InternalBuilds.Text" xml:space="preserve">
     <value>Interní sestavení Windows 10</value>
   </data>
+  <data name="NoContentUIText.Text" xml:space="preserve">
+    <value>Nepodařilo se nám připojit k internetu a stáhnout potřebná data.
+Ověřte prosím své připojení k internetu a zkuste to znovu.</value>
+  </data>
+  <data name="NoContentUITryAgainButton.Content" xml:space="preserve">
+    <value>ZKUSIT ZNOVU</value>
+  </data>
+  <data name="RefreshButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Aktualizovat</value>
+  </data>
+  <data name="LastUpdated.Text" xml:space="preserve">
+    <value>Naposledy aktualizováno</value>
+  </data>
 </root>

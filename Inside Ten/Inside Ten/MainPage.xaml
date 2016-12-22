@@ -28,6 +28,27 @@
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
+            <VisualStateGroup x:Name="ContentVisibilityStates">
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{x:Bind InsiderInfo.IsSuccessfullyLoaded, Converter={StaticResource BoolToBoolInvertedConverter}, Mode=OneWay}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Gr_Content.Visibility" Value="Collapsed"/>
+                        <Setter Target="SP_NoContentUI.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="LastUpdatedVisibilityStates">
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="380"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TB_LastUpdated.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
         <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}"
@@ -68,110 +89,159 @@
                         VerticalAlignment="Top"
                         Grid.Column="1"
                         >
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource BorderlessButton}"/>
+                </StackPanel.Resources>
+
+                <Button x:Uid="RefreshButton"
+                        Content="&#xE117;"
+                        Click="Refresh"
+                        />
+                
                 <Button x:Uid="AboutInsideTenButton"
                         Content="&#xE946;"
-                        Style="{StaticResource BorderlessButton}"
                         Click="ToggleAbout"
                         />
 
                 <Button x:Uid="SettingsButton"
                         Content="&#xE713;"
-                        Style="{StaticResource BorderlessButton}"
                         Click="Settings"
                         />
             </StackPanel>
         </Grid>
-        
-        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}"
-                   Height="48"
-                   HorizontalAlignment="Stretch"
-                   VerticalAlignment="Top"
-                   Grid.Row="1"
-                   />
-        <ui:ColoredPivot HeaderBackground="{StaticResource DarkOverlay}"
-                         RequestedTheme="{x:Bind App.ContrastingColorTheme, Mode=OneWay}"
-                         SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
-                         Transitions="{StaticResource ContentTransitions}"
-                         Grid.Row="1"
-                         >
-            <ui:ColoredPivot.Resources>
-                <DataTemplate x:Key="BuildInfoDataTemplate" x:DataType="local:BuildInfo">
-                    <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-                                MinWidth="250"
-                                >
-                        <StackPanel Padding="10">
-                            <TextBlock Text="{x:Bind DisplayName}"
-                                       FontWeight="SemiBold"
-                                       Margin="0,0,0,5"
-                                       />
-                            <TextBlock Text="{x:Bind Build, Mode=OneWay}"
-                                       FontSize="30"
-                                       />
-                            <TextBlock Text="{x:Bind Version, Mode=OneWay}"/>
-                            <TextBlock Text="{x:Bind ReleaseDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:D}', Mode=OneWay}"/>
+
+        <StackPanel x:Name="SP_NoContentUI"
+                    x:DeferLoadStrategy="Lazy"
+                    Visibility="Collapsed"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Grid.Row="1"
+                    >
+            <TextBlock x:Uid="NoContentUIText"
+                       TextAlignment="Center"
+                       Margin="{StaticResource TextBlockGapMargin}"
+                       HorizontalAlignment="Center"
+                       />
+
+            <Button x:Uid="NoContentUITryAgainButton"
+                    FontWeight="SemiBold"
+                    HorizontalAlignment="Center"
+                    Click="Refresh"
+                    />
+        </StackPanel>
+
+        <Grid x:Name="Gr_Content"
+              Grid.Row="1"
+              >
+            <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}"
+                       Height="48"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Top"
+                       />
+            <ui:ColoredPivot HeaderBackground="{StaticResource DarkOverlay}"
+                             RequestedTheme="{x:Bind App.ContrastingColorTheme, Mode=OneWay}"
+                             SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
+                             Transitions="{StaticResource ContentTransitions}"
+                             >
+                <ui:ColoredPivot.Resources>
+                    <DataTemplate x:Key="BuildInfoDataTemplate" x:DataType="local:BuildInfo">
+                        <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                                    MinWidth="250"
+                                    >
+                            <StackPanel Padding="10">
+                                <TextBlock Text="{x:Bind DisplayName}"
+                                           FontWeight="SemiBold"
+                                           Margin="0,0,0,5"
+                                           />
+                                <TextBlock Text="{x:Bind Build, Mode=OneWay}"
+                                           FontSize="30"
+                                           />
+                                <TextBlock Text="{x:Bind Version, Mode=OneWay}"/>
+                                <TextBlock Text="{x:Bind ReleaseDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:D}', Mode=OneWay}"/>
+                            </StackPanel>
+
+                            <Button x:Uid="BuildInfoMore"
+                                    FontWeight="SemiBold"
+                                    Background="{StaticResource DarkOverlay}"
+                                    IsEnabled="{x:Bind More, Converter={StaticResource StringIsNullOrWhiteSpaceInvertedConverter}, Mode=OneWay}"
+                                    Padding="8"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Style="{StaticResource BuildInfoMoreButton}"
+                                    Command="{x:Bind OpenMoreCommand}"
+                                    CommandParameter="{x:Bind More, Mode=OneWay}"
+                                    />
                         </StackPanel>
+                    </DataTemplate>
 
-                        <Button x:Uid="BuildInfoMore"
-                                FontWeight="SemiBold"
-                                Background="{StaticResource DarkOverlay}"
-                                IsEnabled="{x:Bind More, Converter={StaticResource StringIsNullOrWhiteSpaceInvertedConverter}, Mode=OneWay}"
-                                Padding="8"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Style="{StaticResource BuildInfoMoreButton}"
-                                Command="{x:Bind OpenMoreCommand}"
-                                CommandParameter="{x:Bind More, Mode=OneWay}"
-                                />
-                    </StackPanel>
-                </DataTemplate>
+                    <Thickness x:Key="LeftTopMargin">20,20,0,0</Thickness>
 
-                <Thickness x:Key="LeftTopMargin">20,20,0,0</Thickness>
+                    <Style TargetType="ScrollViewer">
+                        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                    </Style>
 
-                <Style TargetType="ScrollViewer">
-                    <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-                </Style>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
+                        <Setter Property="Margin" Value="{StaticResource LeftTopMargin}"/>
+                    </Style>
 
-                <Style TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
-                    <Setter Property="Margin" Value="{StaticResource LeftTopMargin}"/>
-                </Style>
+                    <Style TargetType="GridView">
+                        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
+                        <Setter Property="SelectionMode" Value="None"/>
+                        <Setter Property="IsItemClickEnabled" Value="False"/>
+                        <Setter Property="ItemTemplate" Value="{StaticResource BuildInfoDataTemplate}"/>
+                        <Setter Property="ItemContainerStyle">
+                            <Setter.Value>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="Margin" Value="{StaticResource LeftTopMargin}"/>
+                                </Style>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ui:ColoredPivot.Resources>
 
-                <Style TargetType="GridView">
-                    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
-                    <Setter Property="SelectionMode" Value="None"/>
-                    <Setter Property="IsItemClickEnabled" Value="False"/>
-                    <Setter Property="ItemTemplate" Value="{StaticResource BuildInfoDataTemplate}"/>
-                    <Setter Property="ItemContainerStyle">
-                        <Setter.Value>
-                            <Style TargetType="GridViewItem">
-                                <Setter Property="Margin" Value="{StaticResource LeftTopMargin}"/>
-                            </Style>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ui:ColoredPivot.Resources>
+                <PivotItem x:Uid="PC">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock x:Uid="InsiderBuilds"/>
+                            <GridView ItemsSource="{x:Bind InsiderInfo.PC}"/>
 
-            <PivotItem x:Uid="PC">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock x:Uid="InsiderBuilds"/>
-                        <GridView ItemsSource="{x:Bind InsiderInfo.PC}"/>
+                            <TextBlock x:Uid="InternalBuilds"/>
+                            <GridView ItemsSource="{x:Bind InsiderInfo}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </PivotItem>
+                <PivotItem x:Uid="Mobile">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock x:Uid="InsiderBuilds"/>
+                            <GridView ItemsSource="{x:Bind InsiderInfo.Mobile}"/>
 
-                        <TextBlock x:Uid="InternalBuilds"/>
-                        <GridView ItemsSource="{x:Bind InsiderInfo}"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </PivotItem>
-            <PivotItem x:Uid="Mobile">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock x:Uid="InsiderBuilds"/>
-                        <GridView ItemsSource="{x:Bind InsiderInfo.Mobile}"/>
+                            <TextBlock x:Uid="InternalBuilds"/>
+                            <GridView ItemsSource="{x:Bind InsiderInfo}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </PivotItem>
+            </ui:ColoredPivot>
 
-                        <TextBlock x:Uid="InternalBuilds"/>
-                        <GridView ItemsSource="{x:Bind InsiderInfo}"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </PivotItem>
-        </ui:ColoredPivot>
+            <StackPanel Orientation="Horizontal"
+                        Height="48"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        >
+                <TextBlock x:Name="TB_LastUpdated"
+                           x:DeferLoadStrategy="Lazy"
+                           Visibility="Collapsed"
+                           Margin="{StaticResource WordSpaceRightMargin}"
+                           VerticalAlignment="Center"
+                           >
+                    <Run x:Uid="LastUpdated"/>:
+                </TextBlock>
+                
+                <TextBlock Text="{x:Bind AppData.InsiderInfoLastUpdate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}', Mode=OneWay}"
+                           Margin="0,0,12,0"
+                           VerticalAlignment="Center"
+                           />
+            </StackPanel>
+        </Grid>
     </Grid>
 </local:PageBase>

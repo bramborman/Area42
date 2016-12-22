@@ -12,15 +12,24 @@ using Windows.System;
 
 namespace InsideTen
 {
-    public sealed class InsiderInfo : IEnumerable<BuildInfo>
+    public sealed class InsiderInfo : NotifyPropertyChangedBase, IEnumerable<BuildInfo>
     {
         private const string FILE_NAME = "InsideTenApi.json";
 
         public static InsiderInfo Current { get; private set; }
         public static bool ShowLoadingError { get; set; }
-
-        internal bool ShowInternetConnectionError { get; set; }
-
+        
+        internal bool IsSuccessfullyLoaded
+        {
+            get { return (bool)GetValue(nameof(IsSuccessfullyLoaded)); }
+            private set { SetValue(nameof(IsSuccessfullyLoaded), ref value); }
+        }
+        internal bool IsLoading
+        {
+            get { return (bool)GetValue(nameof(IsLoading)); }
+            private set { SetValue(nameof(IsLoading), ref value); }
+        }
+        
         public DeviceInfo PC { get; }
         public DeviceInfo Mobile { get; }
         public BuildInfo Internal { get; }
@@ -28,6 +37,9 @@ namespace InsideTen
 
         public InsiderInfo()
         {
+            RegisterProperty(nameof(IsSuccessfullyLoaded), typeof(bool), false);
+            RegisterProperty(nameof(IsLoading), typeof(bool), false);
+
             ResourceLoader resourceLoader = ResourceLoader.GetForViewIndependentUse();
 
             PC              = new DeviceInfo();
@@ -59,28 +71,34 @@ namespace InsideTen
 
             Internal.AssignFromInsideTenApiBuildInfo(insideTenApi.@internal);
             InternalService.AssignFromInsideTenApiBuildInfo(insideTenApi.internalservice);
+
+            DebugMessages.OperationInfo(nameof(InsiderInfo), "assigning", true);
         }
         
         public static async Task LoadAsync()
         {
-            bool initialLoad     = Current == null;
-            bool downloadSuccess = false;
-
+            bool initialLoad = Current == null;
+            ShowLoadingError = false;
+            
             if (initialLoad)
             {
                 Current = new InsiderInfo();
             }
+
+            Current.IsLoading = true;
             
-            if (NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+            if (NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
                     string insideTenApiJson = await httpClient.GetStringAsync("https://raw.githubusercontent.com/MehediH/InsideTen/gh-pages/api.json");
+                    DebugMessages.OperationInfo("Inside Ten api.json", "downloading", true);
 
                     if (!string.IsNullOrWhiteSpace(insideTenApiJson))
                     {
                         Current.AssignFromInsideTenApi(await Task.Run(() => JsonConvert.DeserializeObject<InsideTenApi>(insideTenApiJson)));
-                        downloadSuccess = true;
+                        AppData.Current.InsiderInfoLastUpdate   = DateTime.Now;
+                        Current.IsSuccessfullyLoaded            = true;
 
                         await FileIO.WriteTextAsync(await ApplicationData.Current.LocalFolder.CreateFileAsync(FILE_NAME, CreationCollisionOption.OpenIfExists), insideTenApiJson);
                     }
@@ -88,16 +106,30 @@ namespace InsideTen
             }
             else if (initialLoad)
             {
-                var loadObjectAsyncResult = await StorageFileHelper.LoadObjectAsync<InsideTenApi>(FILE_NAME, ApplicationData.Current.LocalFolder);
-                ShowLoadingError    = !loadObjectAsyncResult.Success;
-
-                if (loadObjectAsyncResult.Success)
+                try
                 {
-                    Current.AssignFromInsideTenApi(loadObjectAsyncResult.Object);
+                    StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(FILE_NAME);
+
+                    string json = await FileIO.ReadTextAsync(file);
+
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        Current.AssignFromInsideTenApi(await Task.Run(() => JsonConvert.DeserializeObject<InsideTenApi>(json)));
+                        Current.IsSuccessfullyLoaded = true;
+                    }
+                    else
+                    {
+                        ShowLoadingError = true;
+                    }
+                }
+                catch
+                {
+                    ShowLoadingError = true;
                 }
             }
 
-            Current.ShowInternetConnectionError = !downloadSuccess;
+
+            Current.IsLoading = false;
         }
     }
 
@@ -146,22 +178,22 @@ namespace InsideTen
         public string Build
         {
             get { return (string)GetValue(nameof(Build)); }
-            set { SetValue(nameof(Build), ref value); }
+            private set { SetValue(nameof(Build), ref value); }
         }
         public string Version
         {
             get { return (string)GetValue(nameof(Version)); }
-            set { SetValue(nameof(Version), ref value); }
+            private set { SetValue(nameof(Version), ref value); }
         }
         public string More
         {
             get { return (string)GetValue(nameof(More)); }
-            set { SetValue(nameof(More), ref value); }
+            private set { SetValue(nameof(More), ref value); }
         }
         public DateTime ReleaseDate
         {
             get { return (DateTime)GetValue(nameof(ReleaseDate)); }
-            set { SetValue(nameof(ReleaseDate), ref value); }
+            private set { SetValue(nameof(ReleaseDate), ref value); }
         }
 
         public BuildInfo(string displayName)

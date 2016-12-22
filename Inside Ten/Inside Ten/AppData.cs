@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using UWPHelper.Utilities;
 using Windows.Storage;
 using Windows.System.Profile;
@@ -22,11 +23,17 @@ namespace InsideTen
             get { return (bool)GetValue(nameof(ShowMobile)); }
             set { SetValue(nameof(ShowMobile), ref value); }
         }
+        public DateTime InsiderInfoLastUpdate
+        {
+            get { return (DateTime)GetValue(nameof(InsiderInfoLastUpdate)); }
+            set { SetValue(nameof(InsiderInfoLastUpdate), ref value); }
+        }
 
         public AppData()
         {
             RegisterProperty(nameof(ShowAbout), typeof(bool), true);
             RegisterProperty(nameof(ShowMobile), typeof(bool), AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile");
+            RegisterProperty(nameof(InsiderInfoLastUpdate), typeof(DateTime), new DateTime());
         }
 
         public Task SaveAsync()

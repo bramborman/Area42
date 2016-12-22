@@ -76,9 +76,15 @@
     <value>Release preview</value>
   </data>
   <data name="InternalRing" xml:space="preserve">
-    <value>Interní</value>
+    <value>Vývojová větev</value>
   </data>
-  <data name="InternalServicingRing" xml:space="preserve">
-    <value>Interní servisní</value>
+  <data name="InternalServiceRing" xml:space="preserve">
+    <value>Aktuální servisní větev</value>
+  </data>
+  <data name="InsiderBuilds.Text" xml:space="preserve">
+    <value>Sestavení Windows Insider</value>
+  </data>
+  <data name="InternalBuilds.Text" xml:space="preserve">
+    <value>Interní sestavení Windows 10</value>
   </data>
 </root>

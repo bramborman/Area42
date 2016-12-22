@@ -23,7 +23,6 @@ namespace InsideTen
 
         public MainPage()
         {
-            InsiderInfo.CreateSampleData();
             InitializeComponent();
 
             Loaded += async (sender, e) =>

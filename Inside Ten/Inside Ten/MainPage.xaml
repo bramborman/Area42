@@ -95,11 +95,7 @@
                          Grid.Row="1"
                          >
             <ui:ColoredPivot.Resources>
-                <Style TargetType="GridViewItem">
-                    <Setter Property="Margin" Value="20,20,0,0"/>
-                </Style>
-                
-                <DataTemplate x:Key="DeviceInfoDataTemplate" x:DataType="local:BuildInfo">
+                <DataTemplate x:Key="BuildInfoDataTemplate" x:DataType="local:BuildInfo">
                     <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}"
                                 MinWidth="250"
                                 >
@@ -128,21 +124,53 @@
                                 />
                     </StackPanel>
                 </DataTemplate>
+
+                <Thickness x:Key="LeftTopMargin">20,20,0,0</Thickness>
+
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                </Style>
+
+                <Style TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
+                    <Setter Property="Margin" Value="{StaticResource LeftTopMargin}"/>
+                </Style>
+
+                <Style TargetType="GridView">
+                    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
+                    <Setter Property="SelectionMode" Value="None"/>
+                    <Setter Property="IsItemClickEnabled" Value="False"/>
+                    <Setter Property="ItemTemplate" Value="{StaticResource BuildInfoDataTemplate}"/>
+                    <Setter Property="ItemContainerStyle">
+                        <Setter.Value>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="Margin" Value="{StaticResource LeftTopMargin}"/>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
             </ui:ColoredPivot.Resources>
 
             <PivotItem x:Uid="PC">
-                <GridView ItemsSource="{x:Bind InsiderInfo.PC}"
-                          SelectionMode="None"
-                          IsItemClickEnabled="False"
-                          ItemTemplate="{StaticResource DeviceInfoDataTemplate}"
-                          />
+                <ScrollViewer>
+                    <StackPanel>
+                        <TextBlock x:Uid="InsiderBuilds"/>
+                        <GridView ItemsSource="{x:Bind InsiderInfo.PC}"/>
+
+                        <TextBlock x:Uid="InternalBuilds"/>
+                        <GridView ItemsSource="{x:Bind InsiderInfo}"/>
+                    </StackPanel>
+                </ScrollViewer>
             </PivotItem>
             <PivotItem x:Uid="Mobile">
-                <GridView ItemsSource="{x:Bind InsiderInfo.Mobile}"
-                          SelectionMode="None"
-                          IsItemClickEnabled="False"
-                          ItemTemplate="{StaticResource DeviceInfoDataTemplate}"
-                          />
+                <ScrollViewer>
+                    <StackPanel>
+                        <TextBlock x:Uid="InsiderBuilds"/>
+                        <GridView ItemsSource="{x:Bind InsiderInfo.Mobile}"/>
+
+                        <TextBlock x:Uid="InternalBuilds"/>
+                        <GridView ItemsSource="{x:Bind InsiderInfo}"/>
+                    </StackPanel>
+                </ScrollViewer>
             </PivotItem>
         </ui:ColoredPivot>
     </Grid>

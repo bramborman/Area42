@@ -76,9 +76,15 @@
     <value>Release preview</value>
   </data>
   <data name="InternalRing" xml:space="preserve">
-    <value>Internal</value>
+    <value>Development branch</value>
   </data>
-  <data name="InternalServicingRing" xml:space="preserve">
-    <value>Internal servicing</value>
+  <data name="InternalServiceRing" xml:space="preserve">
+    <value>Current servicing branch</value>
+  </data>
+  <data name="InsiderBuilds.Text" xml:space="preserve">
+    <value>Windows Insider Builds</value>
+  </data>
+  <data name="InternalBuilds.Text" xml:space="preserve">
+    <value>Internal Windows 10 Builds</value>
   </data>
 </root>

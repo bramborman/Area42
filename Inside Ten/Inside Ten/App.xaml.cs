@@ -144,12 +144,19 @@ namespace InsideTen
 
         protected override async void OnActivated(IActivatedEventArgs args)
         {
-            bool loadAppData     = AppData.Current == null;
-            Task loadAppDataTask = null;
+            bool loadAppData         = AppData.Current == null;
+            bool loadInsiderInfo     = InsiderInfo.Current == null;
+            Task loadAppDataTask     = null;
+            Task loadInsiderInfoTask = null;
 
             if (loadAppData)
             {
                 loadAppDataTask = AppData.LoadAsync();
+            }
+
+            if (loadInsiderInfo)
+            {
+                loadInsiderInfoTask = InsiderInfo.LoadAsync();
             }
 
             systemNavigationManager = SystemNavigationManager.GetForCurrentView();
@@ -209,6 +216,11 @@ namespace InsideTen
             if (loadAppData)
             {
                 await loadAppDataTask;
+            }
+
+            if (loadInsiderInfo)
+            {
+                await loadInsiderInfoTask;
             }
 
             if (launchArgs?.PrelaunchActivated != true)

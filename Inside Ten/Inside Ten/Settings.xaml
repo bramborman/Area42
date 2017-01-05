@@ -15,7 +15,7 @@
         
         <ContentPresenter Content="{x:Bind Name}"
                           Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-                          RequestedTheme="{x:Bind App.ContrastingColorTheme, Mode=OneWay}"
+                          RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
                           Style="{StaticResource PageTitle}"
                           Grid.Row="0"
                           />

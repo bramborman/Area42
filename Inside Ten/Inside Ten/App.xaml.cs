@@ -23,7 +23,8 @@ namespace InsideTen
 
         private bool isTitleBarAvailable;
         private bool isStatusBarAvailable;
-        private ElementTheme _contrastingColorTheme;
+        private ElementTheme _currentTheme;
+        private ElementTheme _contrastingTheme;
         private Color _lastAccentColor;
         private Frame rootFrame;
         private ApplicationViewTitleBar titleBar;
@@ -46,22 +47,34 @@ namespace InsideTen
                 // Original taken from http://stackoverflow.com/a/6763332/6843321
                 float luma = (0.2126f * (_lastAccentColor.R / 255.0f)) + (0.7152f * (_lastAccentColor.G / 255.0f)) + (0.0722f * (_lastAccentColor.B / 255.0f));
                 IsLightOverlay = luma < 0.4869937f || luma == 0.541142f;
-
-                ContrastingColorTheme = IsLightOverlay ? ElementTheme.Dark : ElementTheme.Light;
+                
+                ContrastingTheme = IsLightOverlay ? ElementTheme.Dark : ElementTheme.Light;
                 System.Diagnostics.Debug.WriteLine(luma);
             }
         }
         private bool IsLightOverlay { get; set; }
 
-        public ElementTheme ContrastingColorTheme
+        public ElementTheme CurrentTheme
         {
-            get { return _contrastingColorTheme; }
+            get { return _currentTheme; }
             private set
             {
-                if (_contrastingColorTheme != value)
+                if (_currentTheme != value)
                 {
-                    _contrastingColorTheme = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ContrastingColorTheme)));
+                    _currentTheme = value;
+                    OnPropertyChanged(nameof(CurrentTheme));
+                }
+            }
+        }
+        public ElementTheme ContrastingTheme
+        {
+            get { return _contrastingTheme; }
+            private set
+            {
+                if (_contrastingTheme != value)
+                {
+                    _contrastingTheme = value;
+                    OnPropertyChanged(nameof(ContrastingTheme));
                 }
             }
         }
@@ -74,6 +87,11 @@ namespace InsideTen
 
             InitializeComponent();
             Suspending += OnSuspending;
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
         private Color MixColors(Color foreground, Color? background)
@@ -142,7 +160,9 @@ namespace InsideTen
             }
         }
 
+#pragma warning disable IDE1006 // Naming Styles
         protected override async void OnActivated(IActivatedEventArgs args)
+#pragma warning restore IDE1006 // Naming Styles
         {
             bool loadAppData         = AppData.Current == null;
             bool loadInsiderInfo     = InsiderInfo.Current == null;
@@ -206,6 +226,7 @@ namespace InsideTen
                 {
                     if (e.WindowActivationState != CoreWindowActivationState.Deactivated)
                     {
+                        CurrentTheme = RequestedTheme == ApplicationTheme.Light ? ElementTheme.Light : ElementTheme.Dark;
                         SetColors();
                     }
                 };
@@ -244,7 +265,9 @@ namespace InsideTen
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
+#pragma warning disable IDE1006 // Naming Styles
         private async void OnSuspending(object sender, SuspendingEventArgs e)
+#pragma warning restore IDE1006 // Naming Styles
         {
             SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
 

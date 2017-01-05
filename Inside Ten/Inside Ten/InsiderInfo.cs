@@ -59,20 +59,19 @@ namespace InsideTen
             return GetEnumerator();
         }
 
-        public void AssignFromInsideTenApi(InsideTenApi insideTenApi)
+        public bool AssignFromInsideTenApi(InsideTenApi insideTenApi)
         {
-            PC.Fast.AssignFromInsideTenApiBuildInfo(insideTenApi.pcwif);
-            PC.Slow.AssignFromInsideTenApiBuildInfo(insideTenApi.pcwis);
-            PC.ReleasePreview.AssignFromInsideTenApiBuildInfo(insideTenApi.pcwrp);
+            bool pcFastChanged                  = PC.Fast.AssignFromInsideTenApiBuildInfo(insideTenApi.pcwif);
+            bool pcSlowChanged                  = PC.Slow.AssignFromInsideTenApiBuildInfo(insideTenApi.pcwis);
+            bool pcReleasePreviewChanged        = PC.ReleasePreview.AssignFromInsideTenApiBuildInfo(insideTenApi.pcwrp);
+            bool mobileFastChanged              = Mobile.Fast.AssignFromInsideTenApiBuildInfo(insideTenApi.mowif);
+            bool mobileSlowChanged              = Mobile.Slow.AssignFromInsideTenApiBuildInfo(insideTenApi.mowis);
+            bool mobileReleasePreviewChanged    = Mobile.ReleasePreview.AssignFromInsideTenApiBuildInfo(insideTenApi.mowrp);
+            bool internalChanged                = Internal.AssignFromInsideTenApiBuildInfo(insideTenApi.@internal);
+            bool internalServiceChanged         = InternalService.AssignFromInsideTenApiBuildInfo(insideTenApi.internalservice);
 
-            Mobile.Fast.AssignFromInsideTenApiBuildInfo(insideTenApi.mowif);
-            Mobile.Slow.AssignFromInsideTenApiBuildInfo(insideTenApi.mowis);
-            Mobile.ReleasePreview.AssignFromInsideTenApiBuildInfo(insideTenApi.mowrp);
-
-            Internal.AssignFromInsideTenApiBuildInfo(insideTenApi.@internal);
-            InternalService.AssignFromInsideTenApiBuildInfo(insideTenApi.internalservice);
-
-            DebugMessages.OperationInfo(nameof(InsiderInfo), "assigning", true);
+            DebugHelper.OperationInfo(nameof(InsiderInfo), "assigning", true);
+            return pcFastChanged || pcSlowChanged || pcReleasePreviewChanged || mobileFastChanged || mobileSlowChanged || mobileReleasePreviewChanged || internalChanged || internalServiceChanged;
         }
         
         public static async Task LoadAsync()
@@ -92,14 +91,17 @@ namespace InsideTen
                 using (HttpClient httpClient = new HttpClient())
                 {
                     string insideTenApiJson = await httpClient.GetStringAsync("https://raw.githubusercontent.com/MehediH/InsideTen/gh-pages/api.json");
-                    DebugMessages.OperationInfo("Inside Ten api.json", "downloading", true);
+                    DebugHelper.OperationInfo("Inside Ten api.json", "downloading", true);
 
                     if (!string.IsNullOrWhiteSpace(insideTenApiJson))
                     {
-                        Current.AssignFromInsideTenApi(await Task.Run(() => JsonConvert.DeserializeObject<InsideTenApi>(insideTenApiJson)));
-                        AppData.Current.InsiderInfoLastUpdate   = DateTime.Now;
-                        Current.IsSuccessfullyLoaded            = true;
+                        if (Current.AssignFromInsideTenApi(await Task.Run(() => JsonConvert.DeserializeObject<InsideTenApi>(insideTenApiJson))))
+                        {
+                            AppData.Current.InsiderInfoLastUpdate = DateTime.Now;
+                            System.Diagnostics.Debug.WriteLine($"{nameof(InsiderInfo)} data was updated at {AppData.Current.InsiderInfoLastUpdate:HH:mm:ss}");
+                        }
 
+                        Current.IsSuccessfullyLoaded = true;
                         await FileIO.WriteTextAsync(await ApplicationData.Current.LocalFolder.CreateFileAsync(FILE_NAME, CreationCollisionOption.OpenIfExists), insideTenApiJson);
                     }
                 }
@@ -206,8 +208,10 @@ namespace InsideTen
             RegisterProperty(nameof(ReleaseDate), typeof(DateTime), new DateTime());
         }
 
-        public void AssignFromInsideTenApiBuildInfo(InsideTenApiBuildInfo insideTenApiBuildInfo)
+        public bool AssignFromInsideTenApiBuildInfo(InsideTenApiBuildInfo insideTenApiBuildInfo)
         {
+            bool changed = Build != insideTenApiBuildInfo.build;
+
             Build   = insideTenApiBuildInfo.build;
             Version = insideTenApiBuildInfo.version;
             More    = insideTenApiBuildInfo.more;
@@ -224,26 +228,8 @@ namespace InsideTen
                 ReleaseDate = DateTime.Now;
 #endif
             }
+
+            return changed;
         }
-    }
-
-    public class InsideTenApi
-    {
-        public InsideTenApiBuildInfo pcwrp { get; set; }
-        public InsideTenApiBuildInfo pcwif { get; set; }
-        public InsideTenApiBuildInfo pcwis { get; set; }
-        public InsideTenApiBuildInfo mowrp { get; set; }
-        public InsideTenApiBuildInfo mowif { get; set; }
-        public InsideTenApiBuildInfo mowis { get; set; }
-        public InsideTenApiBuildInfo @internal { get; set; }
-        public InsideTenApiBuildInfo internalservice { get; set; }
-    }
-
-    public class InsideTenApiBuildInfo
-    {
-        public string build { get; set; }
-        public string version { get; set; }
-        public string more { get; set; }
-        public string release_date { get; set; }
     }
 }

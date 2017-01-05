@@ -52,7 +52,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-              RequestedTheme="{x:Bind App.ContrastingColorTheme, Mode=OneWay}"
+              RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
               Grid.Row="0"
               >
             <Grid.ColumnDefinitions>
@@ -95,7 +95,7 @@
 
                 <Button x:Uid="RefreshButton"
                         Content="&#xE117;"
-                        Click="Refresh"
+                        Click="RefreshAsync"
                         />
                 
                 <Button x:Uid="AboutInsideTenButton"
@@ -126,7 +126,7 @@
             <Button x:Uid="NoContentUITryAgainButton"
                     FontWeight="SemiBold"
                     HorizontalAlignment="Center"
-                    Click="Refresh"
+                    Click="RefreshAsync"
                     />
         </StackPanel>
 
@@ -139,7 +139,7 @@
                        VerticalAlignment="Top"
                        />
             <ui:ColoredPivot HeaderBackground="{StaticResource DarkOverlay}"
-                             RequestedTheme="{x:Bind App.ContrastingColorTheme, Mode=OneWay}"
+                             RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
                              SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
                              Transitions="{StaticResource ContentTransitions}"
                              >
@@ -202,10 +202,14 @@
                 <PivotItem x:Uid="PC">
                     <ScrollViewer>
                         <StackPanel>
-                            <TextBlock x:Uid="InsiderBuilds"/>
+                            <TextBlock x:Uid="InsiderBuilds"
+                                       RequestedTheme="{x:Bind App.CurrentTheme, Mode=OneWay}"
+                                       />
                             <GridView ItemsSource="{x:Bind InsiderInfo.PC}"/>
 
-                            <TextBlock x:Uid="InternalBuilds"/>
+                            <TextBlock x:Uid="InternalBuilds"
+                                       RequestedTheme="{x:Bind App.CurrentTheme, Mode=OneWay}"
+                                       />
                             <GridView ItemsSource="{x:Bind InsiderInfo}"/>
                         </StackPanel>
                     </ScrollViewer>
@@ -213,10 +217,14 @@
                 <PivotItem x:Uid="Mobile">
                     <ScrollViewer>
                         <StackPanel>
-                            <TextBlock x:Uid="InsiderBuilds"/>
+                            <TextBlock x:Uid="InsiderBuilds"
+                                       RequestedTheme="{x:Bind App.CurrentTheme, Mode=OneWay}"
+                                       />
                             <GridView ItemsSource="{x:Bind InsiderInfo.Mobile}"/>
 
-                            <TextBlock x:Uid="InternalBuilds"/>
+                            <TextBlock x:Uid="InternalBuilds"
+                                       RequestedTheme="{x:Bind App.CurrentTheme, Mode=OneWay}"
+                                       />
                             <GridView ItemsSource="{x:Bind InsiderInfo}"/>
                         </StackPanel>
                     </ScrollViewer>
@@ -224,6 +232,7 @@
             </ui:ColoredPivot>
 
             <StackPanel Orientation="Horizontal"
+                        RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
                         Height="48"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"

@@ -68,7 +68,7 @@ namespace TicTacToe
                             {
                                 if (cells[row, column].Background == currentPlayerCellBrush)
                                 {
-                                    if (row + cellsToWin <= gameBoardSize)
+                                    if (row + cellsToWin <= gameBoardSize || column + cellsToWin <= gameBoardSize)
                                     {
                                         bool goHorizontal    = true;
                                         bool goVertical      = true;

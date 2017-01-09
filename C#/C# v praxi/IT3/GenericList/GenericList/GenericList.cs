@@ -88,16 +88,19 @@ namespace GenericList
 
             if (firstNode != null)
             {
-                Node newNode = new Node();
-                newNode.Item     = item;
-                newNode.NextNode = firstNode;
-
+                Node newNode = new Node()
+                {
+                    Item = item,
+                    NextNode = firstNode
+                };
                 firstNode = newNode;
             }
             else
             {
-                firstNode = new Node();
-                firstNode.Item = item;
+                firstNode = new Node()
+                {
+                    Item = item
+                };
             }
         }
 
@@ -190,10 +193,11 @@ namespace GenericList
                 actualNode = actualNode.NextNode;
             }
 
-            Node newNode     = new Node();
-            newNode.Item     = actualNode.Item;
-            newNode.NextNode = actualNode.NextNode;
-
+            Node newNode = new Node()
+            {
+                Item = actualNode.Item,
+                NextNode = actualNode.NextNode
+            };
             actualNode.Item     = item;
             actualNode.NextNode = newNode;
         }
@@ -262,13 +266,7 @@ namespace GenericList
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            Node actualNode = firstNode;
-
-            while (actualNode != null)
-            {
-                yield return actualNode.Item;
-                actualNode = actualNode.NextNode;
-            }
+            return GetEnumerator();
         }
 
         private void ValidateIndex(int index)

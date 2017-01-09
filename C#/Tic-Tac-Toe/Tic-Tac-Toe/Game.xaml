@@ -12,12 +12,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
-                Height="48"
+        <Border Height="48"
                 Padding="12,0,0,0"
                 Grid.Row="0"
                 >
             <TextBlock FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        >
             <Run Text="PLAYER: "/><Run Text="{x:Bind PlayerNumber, Mode=OneWay}"/>

@@ -193,11 +193,12 @@ namespace GenericList
                 actualNode = actualNode.NextNode;
             }
 
-            Node newNode = new Node()
+            Node newNode = new Node
             {
-                Item = actualNode.Item,
-                NextNode = actualNode.NextNode
+                Item        = actualNode.Item,
+                NextNode    = actualNode.NextNode
             };
+
             actualNode.Item     = item;
             actualNode.NextNode = newNode;
         }

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace MVC_WebService.Models
 {
-    public class ZakModel
+    public class ZakLocalModel
     {
         public Guid Id { get; set; }
         [DisplayName("JMÉNO")]

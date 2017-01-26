@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC_WebService.Models.ZakModel>
+﻿@model IEnumerable<MVC_WebService.Models.ZakLocalModel>
 
 @{
     ViewBag.Title = "Seznam žáků školy";
@@ -9,7 +9,7 @@
 <p>
     Celkový počet žáků: @ViewBag.PocetZaku
     <br />
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Přidat žáka", "Create")
 </p>
 <table class="table">
     <tr>
@@ -67,9 +67,8 @@
             @Html.DisplayFor(modelItem => item.ZmenenoKdo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Známky", "List", "Znamka", new { zakId = item.Id, jmenoZaka = $"{item.Jmeno} {item.Prijmeni}" }, null) |
+            @Html.ActionLink("Smazat", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

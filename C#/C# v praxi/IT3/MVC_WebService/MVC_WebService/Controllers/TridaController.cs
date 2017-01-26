@@ -8,12 +8,6 @@ namespace MVC_WebService.Controllers
 {
     public class TridaController : Controller
     {
-        // GET: Trida
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult List()
         {
             SkolaWS.SkolaSoapClient skola = new SkolaWS.SkolaSoapClient();

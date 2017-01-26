@@ -8,10 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC_WebService.SkolaWS
-{
-
-
+namespace MVC_WebService.SkolaWS {
+    using System.Runtime.Serialization;
+    using System;
+    
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SkolaTridy", Namespace="http://tempuri.org/")]
@@ -136,9 +137,9 @@ namespace MVC_WebService.SkolaWS
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SkolaZaci", Namespace="http://tempuri.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ZakModel", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
-    public partial class SkolaZaci : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ZakModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -302,6 +303,170 @@ namespace MVC_WebService.SkolaWS
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PredmetModel", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class PredmetModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PredmetField;
+        
+        private System.Nullable<bool> PovinnyField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Predmet {
+            get {
+                return this.PredmetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PredmetField, value) != true)) {
+                    this.PredmetField = value;
+                    this.RaisePropertyChanged("Predmet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.Nullable<bool> Povinny {
+            get {
+                return this.PovinnyField;
+            }
+            set {
+                if ((this.PovinnyField.Equals(value) != true)) {
+                    this.PovinnyField = value;
+                    this.RaisePropertyChanged("Povinny");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ZnamkaModel", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class ZnamkaModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private System.Guid IdField;
+        
+        private decimal ZnamkaField;
+        
+        private System.Guid ZakField;
+        
+        private System.Guid PredmetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public decimal Znamka {
+            get {
+                return this.ZnamkaField;
+            }
+            set {
+                if ((this.ZnamkaField.Equals(value) != true)) {
+                    this.ZnamkaField = value;
+                    this.RaisePropertyChanged("Znamka");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.Guid Zak {
+            get {
+                return this.ZakField;
+            }
+            set {
+                if ((this.ZakField.Equals(value) != true)) {
+                    this.ZakField = value;
+                    this.RaisePropertyChanged("Zak");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public System.Guid Predmet {
+            get {
+                return this.PredmetField;
+            }
+            set {
+                if ((this.PredmetField.Equals(value) != true)) {
+                    this.PredmetField = value;
+                    this.RaisePropertyChanged("Predmet");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SkolaWS.SkolaSoap")]
     public interface SkolaSoap {
@@ -330,9 +495,32 @@ namespace MVC_WebService.SkolaWS
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZaciList", ReplyAction="*")]
         MVC_WebService.SkolaWS.ZaciListResponse ZaciList(MVC_WebService.SkolaWS.ZaciListRequest request);
         
-        // CODEGEN: Generating message contract since element name zaciData from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name item from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZaciCreate", ReplyAction="*")]
         MVC_WebService.SkolaWS.ZaciCreateResponse ZaciCreate(MVC_WebService.SkolaWS.ZaciCreateRequest request);
+        
+        // CODEGEN: Generating message contract since element name item from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PredmetCreate", ReplyAction="*")]
+        MVC_WebService.SkolaWS.PredmetCreateResponse PredmetCreate(MVC_WebService.SkolaWS.PredmetCreateRequest request);
+        
+        // CODEGEN: Generating message contract since element name PredmetyListResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PredmetyList", ReplyAction="*")]
+        MVC_WebService.SkolaWS.PredmetyListResponse PredmetyList(MVC_WebService.SkolaWS.PredmetyListRequest request);
+        
+        // CODEGEN: Generating message contract since element name Id from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PredmetyDelete", ReplyAction="*")]
+        MVC_WebService.SkolaWS.PredmetyDeleteResponse PredmetyDelete(MVC_WebService.SkolaWS.PredmetyDeleteRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZnamkaCreate", ReplyAction="*")]
+        void ZnamkaCreate(decimal znamkaHodnota, System.Guid zak, System.Guid predmet);
+        
+        // CODEGEN: Generating message contract since element name id from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZnamkyList", ReplyAction="*")]
+        MVC_WebService.SkolaWS.ZnamkyListResponse ZnamkyList(MVC_WebService.SkolaWS.ZnamkyListRequest request);
+        
+        // CODEGEN: Generating message contract since element name Id from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZnamkaDelete", ReplyAction="*")]
+        MVC_WebService.SkolaWS.ZnamkaDeleteResponse ZnamkaDelete(MVC_WebService.SkolaWS.ZnamkaDeleteRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -691,12 +879,12 @@ namespace MVC_WebService.SkolaWS
     public partial class ZaciListResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public MVC_WebService.SkolaWS.SkolaZaci[] ZaciListResult;
+        public MVC_WebService.SkolaWS.ZakModel[] ZaciListResult;
         
         public ZaciListResponseBody() {
         }
         
-        public ZaciListResponseBody(MVC_WebService.SkolaWS.SkolaZaci[] ZaciListResult) {
+        public ZaciListResponseBody(MVC_WebService.SkolaWS.ZakModel[] ZaciListResult) {
             this.ZaciListResult = ZaciListResult;
         }
     }
@@ -725,13 +913,13 @@ namespace MVC_WebService.SkolaWS
     public partial class ZaciCreateRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public MVC_WebService.SkolaWS.SkolaZaci zaciData;
+        public MVC_WebService.SkolaWS.ZakModel item;
         
         public ZaciCreateRequestBody() {
         }
         
-        public ZaciCreateRequestBody(MVC_WebService.SkolaWS.SkolaZaci zaciData) {
-            this.zaciData = zaciData;
+        public ZaciCreateRequestBody(MVC_WebService.SkolaWS.ZakModel item) {
+            this.item = item;
         }
     }
     
@@ -759,6 +947,318 @@ namespace MVC_WebService.SkolaWS
     public partial class ZaciCreateResponseBody {
         
         public ZaciCreateResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class PredmetCreateRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PredmetCreate", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.PredmetCreateRequestBody Body;
+        
+        public PredmetCreateRequest() {
+        }
+        
+        public PredmetCreateRequest(MVC_WebService.SkolaWS.PredmetCreateRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class PredmetCreateRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public MVC_WebService.SkolaWS.PredmetModel item;
+        
+        public PredmetCreateRequestBody() {
+        }
+        
+        public PredmetCreateRequestBody(MVC_WebService.SkolaWS.PredmetModel item) {
+            this.item = item;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class PredmetCreateResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PredmetCreateResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.PredmetCreateResponseBody Body;
+        
+        public PredmetCreateResponse() {
+        }
+        
+        public PredmetCreateResponse(MVC_WebService.SkolaWS.PredmetCreateResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class PredmetCreateResponseBody {
+        
+        public PredmetCreateResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class PredmetyListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PredmetyList", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.PredmetyListRequestBody Body;
+        
+        public PredmetyListRequest() {
+        }
+        
+        public PredmetyListRequest(MVC_WebService.SkolaWS.PredmetyListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class PredmetyListRequestBody {
+        
+        public PredmetyListRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class PredmetyListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PredmetyListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.PredmetyListResponseBody Body;
+        
+        public PredmetyListResponse() {
+        }
+        
+        public PredmetyListResponse(MVC_WebService.SkolaWS.PredmetyListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class PredmetyListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public MVC_WebService.SkolaWS.PredmetModel[] PredmetyListResult;
+        
+        public PredmetyListResponseBody() {
+        }
+        
+        public PredmetyListResponseBody(MVC_WebService.SkolaWS.PredmetModel[] PredmetyListResult) {
+            this.PredmetyListResult = PredmetyListResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class PredmetyDeleteRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PredmetyDelete", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.PredmetyDeleteRequestBody Body;
+        
+        public PredmetyDeleteRequest() {
+        }
+        
+        public PredmetyDeleteRequest(MVC_WebService.SkolaWS.PredmetyDeleteRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class PredmetyDeleteRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string Id;
+        
+        public PredmetyDeleteRequestBody() {
+        }
+        
+        public PredmetyDeleteRequestBody(string Id) {
+            this.Id = Id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class PredmetyDeleteResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PredmetyDeleteResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.PredmetyDeleteResponseBody Body;
+        
+        public PredmetyDeleteResponse() {
+        }
+        
+        public PredmetyDeleteResponse(MVC_WebService.SkolaWS.PredmetyDeleteResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class PredmetyDeleteResponseBody {
+        
+        public PredmetyDeleteResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ZnamkyListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ZnamkyList", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.ZnamkyListRequestBody Body;
+        
+        public ZnamkyListRequest() {
+        }
+        
+        public ZnamkyListRequest(MVC_WebService.SkolaWS.ZnamkyListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ZnamkyListRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string id;
+        
+        public ZnamkyListRequestBody() {
+        }
+        
+        public ZnamkyListRequestBody(string id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ZnamkyListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ZnamkyListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.ZnamkyListResponseBody Body;
+        
+        public ZnamkyListResponse() {
+        }
+        
+        public ZnamkyListResponse(MVC_WebService.SkolaWS.ZnamkyListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ZnamkyListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public MVC_WebService.SkolaWS.ZnamkaModel[] ZnamkyListResult;
+        
+        public ZnamkyListResponseBody() {
+        }
+        
+        public ZnamkyListResponseBody(MVC_WebService.SkolaWS.ZnamkaModel[] ZnamkyListResult) {
+            this.ZnamkyListResult = ZnamkyListResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ZnamkaDeleteRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ZnamkaDelete", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.ZnamkaDeleteRequestBody Body;
+        
+        public ZnamkaDeleteRequest() {
+        }
+        
+        public ZnamkaDeleteRequest(MVC_WebService.SkolaWS.ZnamkaDeleteRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ZnamkaDeleteRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string Id;
+        
+        public ZnamkaDeleteRequestBody() {
+        }
+        
+        public ZnamkaDeleteRequestBody(string Id) {
+            this.Id = Id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ZnamkaDeleteResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ZnamkaDeleteResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.ZnamkaDeleteResponseBody Body;
+        
+        public ZnamkaDeleteResponse() {
+        }
+        
+        public ZnamkaDeleteResponse(MVC_WebService.SkolaWS.ZnamkaDeleteResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class ZnamkaDeleteResponseBody {
+        
+        public ZnamkaDeleteResponseBody() {
         }
     }
     
@@ -854,7 +1354,7 @@ namespace MVC_WebService.SkolaWS
             return base.Channel.ZaciList(request);
         }
         
-        public MVC_WebService.SkolaWS.SkolaZaci[] ZaciList() {
+        public MVC_WebService.SkolaWS.ZakModel[] ZaciList() {
             MVC_WebService.SkolaWS.ZaciListRequest inValue = new MVC_WebService.SkolaWS.ZaciListRequest();
             inValue.Body = new MVC_WebService.SkolaWS.ZaciListRequestBody();
             MVC_WebService.SkolaWS.ZaciListResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).ZaciList(inValue);
@@ -866,11 +1366,76 @@ namespace MVC_WebService.SkolaWS
             return base.Channel.ZaciCreate(request);
         }
         
-        public void ZaciCreate(MVC_WebService.SkolaWS.SkolaZaci zaciData) {
+        public void ZaciCreate(MVC_WebService.SkolaWS.ZakModel item) {
             MVC_WebService.SkolaWS.ZaciCreateRequest inValue = new MVC_WebService.SkolaWS.ZaciCreateRequest();
             inValue.Body = new MVC_WebService.SkolaWS.ZaciCreateRequestBody();
-            inValue.Body.zaciData = zaciData;
+            inValue.Body.item = item;
             MVC_WebService.SkolaWS.ZaciCreateResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).ZaciCreate(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.PredmetCreateResponse MVC_WebService.SkolaWS.SkolaSoap.PredmetCreate(MVC_WebService.SkolaWS.PredmetCreateRequest request) {
+            return base.Channel.PredmetCreate(request);
+        }
+        
+        public void PredmetCreate(MVC_WebService.SkolaWS.PredmetModel item) {
+            MVC_WebService.SkolaWS.PredmetCreateRequest inValue = new MVC_WebService.SkolaWS.PredmetCreateRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.PredmetCreateRequestBody();
+            inValue.Body.item = item;
+            MVC_WebService.SkolaWS.PredmetCreateResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).PredmetCreate(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.PredmetyListResponse MVC_WebService.SkolaWS.SkolaSoap.PredmetyList(MVC_WebService.SkolaWS.PredmetyListRequest request) {
+            return base.Channel.PredmetyList(request);
+        }
+        
+        public MVC_WebService.SkolaWS.PredmetModel[] PredmetyList() {
+            MVC_WebService.SkolaWS.PredmetyListRequest inValue = new MVC_WebService.SkolaWS.PredmetyListRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.PredmetyListRequestBody();
+            MVC_WebService.SkolaWS.PredmetyListResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).PredmetyList(inValue);
+            return retVal.Body.PredmetyListResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.PredmetyDeleteResponse MVC_WebService.SkolaWS.SkolaSoap.PredmetyDelete(MVC_WebService.SkolaWS.PredmetyDeleteRequest request) {
+            return base.Channel.PredmetyDelete(request);
+        }
+        
+        public void PredmetyDelete(string Id) {
+            MVC_WebService.SkolaWS.PredmetyDeleteRequest inValue = new MVC_WebService.SkolaWS.PredmetyDeleteRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.PredmetyDeleteRequestBody();
+            inValue.Body.Id = Id;
+            MVC_WebService.SkolaWS.PredmetyDeleteResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).PredmetyDelete(inValue);
+        }
+        
+        public void ZnamkaCreate(decimal znamkaHodnota, System.Guid zak, System.Guid predmet) {
+            base.Channel.ZnamkaCreate(znamkaHodnota, zak, predmet);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.ZnamkyListResponse MVC_WebService.SkolaWS.SkolaSoap.ZnamkyList(MVC_WebService.SkolaWS.ZnamkyListRequest request) {
+            return base.Channel.ZnamkyList(request);
+        }
+        
+        public MVC_WebService.SkolaWS.ZnamkaModel[] ZnamkyList(string id) {
+            MVC_WebService.SkolaWS.ZnamkyListRequest inValue = new MVC_WebService.SkolaWS.ZnamkyListRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.ZnamkyListRequestBody();
+            inValue.Body.id = id;
+            MVC_WebService.SkolaWS.ZnamkyListResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).ZnamkyList(inValue);
+            return retVal.Body.ZnamkyListResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.ZnamkaDeleteResponse MVC_WebService.SkolaWS.SkolaSoap.ZnamkaDelete(MVC_WebService.SkolaWS.ZnamkaDeleteRequest request) {
+            return base.Channel.ZnamkaDelete(request);
+        }
+        
+        public void ZnamkaDelete(string Id) {
+            MVC_WebService.SkolaWS.ZnamkaDeleteRequest inValue = new MVC_WebService.SkolaWS.ZnamkaDeleteRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.ZnamkaDeleteRequestBody();
+            inValue.Body.Id = Id;
+            MVC_WebService.SkolaWS.ZnamkaDeleteResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).ZnamkaDelete(inValue);
         }
     }
 }

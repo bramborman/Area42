@@ -92,7 +92,13 @@
     <Content Include="Connected Services\SkolaWS\MVC_WebService.SkolaWS.SkolaTridy.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\SkolaWS\MVC_WebService.SkolaWS.SkolaZaci.datasource">
+    <Content Include="Connected Services\SkolaWS\MVC_WebService.SkolaWS.PredmetModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SkolaWS\MVC_WebService.SkolaWS.ZakModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SkolaWS\MVC_WebService.SkolaWS.ZnamkaModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\SkolaWS\skola.disco" />
@@ -139,17 +145,22 @@
     </Compile>
     <Compile Include="Controllers\TridaController.cs" />
     <Compile Include="Controllers\ZakController.cs" />
+    <Compile Include="Controllers\ZnamkaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PredmetLocalModel.cs" />
     <Compile Include="Models\TridaModel.cs" />
-    <Compile Include="Models\ZakModel.cs" />
+    <Compile Include="Models\ZakLocalModel.cs" />
+    <Compile Include="Models\ZnamkaLocalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <None Include="Connected Services\SkolaWS\skola.wsdl" />
+    <Content Include="Views\Znamka\List.cshtml" />
+    <Content Include="Views\Znamka\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

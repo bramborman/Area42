@@ -2,36 +2,31 @@
 using MVC_WebService.SkolaWS;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MVC_WebService.Controllers
 {
     public class ZakController : Controller
     {
-        // GET: Zak
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult List()
         {
             SkolaSoapClient skola = new SkolaSoapClient();
-            List<ZakModel> seznamZaku = new List<ZakModel>();
+            List<ZakLocalModel> seznamZaku = new List<ZakLocalModel>();
 
-            foreach (SkolaZaci skolaZaci in skola.ZaciList())
+            foreach (ZakModel zakModel in skola.ZaciList())
             {
-                seznamZaku.Add(new ZakModel
+                seznamZaku.Add(new ZakLocalModel
                 {
-                    Id          = skolaZaci.Id,
-                    Jmeno       = skolaZaci.Jmeno,
-                    Prijmeni    = skolaZaci.Prijmeni,
-                    Muz         = skolaZaci.Muz,
-                    RodneCislo  = skolaZaci.RodneCislo,
-                    Studuje     = skolaZaci.Studuje,
-                    Trida       = skolaZaci.Trida,
-                    ZmenenoKdy  = skolaZaci.ZmenenoKdy,
-                    ZmenenoKdo  = skolaZaci.ZmenenoKdo
+                    Id          = zakModel.Id,
+                    Jmeno       = zakModel.Jmeno,
+                    Prijmeni    = zakModel.Prijmeni,
+                    Muz         = zakModel.Muz,
+                    RodneCislo  = zakModel.RodneCislo,
+                    Studuje     = zakModel.Studuje,
+                    Trida       = zakModel.Trida,
+                    ZmenenoKdy  = zakModel.ZmenenoKdy,
+                    ZmenenoKdo  = zakModel.ZmenenoKdo
                 });
             }
 
@@ -42,29 +37,29 @@ namespace MVC_WebService.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new ZakModel
+            return View(new ZakLocalModel
             {
                 ZmenenoKdo  = "(⌐■_■)"
             });
         }
 
         [HttpPost]
-        public ActionResult Create(ZakModel zak)
+        public ActionResult Create(ZakLocalModel zakLocalModel)
         {
-            new SkolaSoapClient().ZaciCreate(new SkolaZaci
+            new SkolaSoapClient().ZaciCreate(new ZakModel
             {
                 Id          = Guid.NewGuid(),
-                Jmeno       = zak.Jmeno,
-                Prijmeni    = zak.Prijmeni,
-                Muz         = zak.Muz,
-                RodneCislo  = zak.RodneCislo,
-                Studuje     = zak.Studuje,
+                Jmeno       = zakLocalModel.Jmeno,
+                Prijmeni    = zakLocalModel.Prijmeni,
+                Muz         = zakLocalModel.Muz,
+                RodneCislo  = zakLocalModel.RodneCislo,
+                Studuje     = zakLocalModel.Studuje,
                 Trida       = Guid.NewGuid(),
                 ZmenenoKdy  = DateTime.Now,
-                ZmenenoKdo  = zak.ZmenenoKdo
+                ZmenenoKdo  = zakLocalModel.ZmenenoKdo
             });
 
-            return View(zak);
+            return View(zakLocalModel);
         }
 
         public ActionResult Delete(string id)

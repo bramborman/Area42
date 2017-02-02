@@ -143,6 +143,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TridaController.cs" />
     <Compile Include="Controllers\ZakController.cs" />
     <Compile Include="Controllers\ZnamkaController.cs" />
@@ -161,6 +163,7 @@
     <None Include="Connected Services\SkolaWS\skola.wsdl" />
     <Content Include="Views\Znamka\List.cshtml" />
     <Content Include="Views\Znamka\Create.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

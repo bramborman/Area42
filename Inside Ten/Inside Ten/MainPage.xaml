@@ -31,7 +31,7 @@
             <VisualStateGroup x:Name="ContentVisibilityStates">
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <StateTrigger IsActive="{x:Bind InsiderInfo.IsSuccessfullyLoaded, Converter={StaticResource BoolToBoolInvertedConverter}, Mode=OneWay}"/>
+                        <StateTrigger IsActive="{x:Bind InsiderInfo.IsSuccessfullyLoaded, Converter={StaticResource BoolToBoolConverter}, ConverterParameter=Invert, Mode=OneWay}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Gr_Content.Visibility" Value="Collapsed"/>

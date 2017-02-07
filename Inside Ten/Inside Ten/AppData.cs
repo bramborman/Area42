@@ -53,8 +53,8 @@ namespace InsideTen
 #endif
 
             var loadObjectAsyncResult = await StorageFileHelper.LoadObjectAsync<AppData>(FILE_NAME, ApplicationData.Current.LocalFolder);
-            Current                  = loadObjectAsyncResult.Object;
-            Current.ShowLoadingError = !loadObjectAsyncResult.Success;
+            Current                   = loadObjectAsyncResult.Object;
+            Current.ShowLoadingError  = !loadObjectAsyncResult.Success;
 
             Current.PropertyChanged += async (sender, e) =>
             {

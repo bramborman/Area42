@@ -13,19 +13,18 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <ContentPresenter Content="{x:Bind Name}"
-                          Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-                          RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
-                          Style="{StaticResource PageTitle}"
-                          Grid.Row="0"
-                          />
+        <ui:PageHeader Content="{x:Bind Name}"
+                       Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                       RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
+                       Grid.Row="0"
+                       />
 
 
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Transitions="{StaticResource ContentTransitions}"
                       Grid.Row="1"
                       >
-            <StackPanel Style="{StaticResource Content}">
+            <StackPanel Style="{StaticResource ContentStackPanel}">
                 <ui:AboutApp AppStoreId="9nblggh42jgh"
                              AppUri="md-insideten:"
                              AppDeveloperMail="mariandolinsky@outlook.com"

@@ -61,16 +61,16 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel x:Name="SP_Header" Grid.Column="0">
-                <Border Height="{StaticResource PageTitleHeight}">
+                <Border Height="{StaticResource PageHeaderHeight}">
                     <TextBlock x:Name="TB_Title"
                                Text="INSIDE TEN"
                                VerticalAlignment="Center"
                                >
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
-                                <Setter Property="FontWeight" Value="{StaticResource PageTitleFontWeight}"/>
-                                <Setter Property="FontSize" Value="{StaticResource PageTitleFontSize}"/>
-                                <Setter Property="Padding" Value="{StaticResource PageTitlePadding}"/>
+                                <Setter Property="FontWeight" Value="{StaticResource PageHeaderFontWeight}"/>
+                                <Setter Property="FontSize" Value="{StaticResource PageHeaderFontSize}"/>
+                                <Setter Property="Padding" Value="{StaticResource PageHeaderPadding}"/>
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
@@ -90,7 +90,11 @@
                         Grid.Column="1"
                         >
                 <StackPanel.Resources>
-                    <Style TargetType="Button" BasedOn="{StaticResource BorderlessButton}"/>
+                    <Style TargetType="Button" BasedOn="{StaticResource TransparentButton}">
+                        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                        <Setter Property="Width" Value="48"/>
+                        <Setter Property="Height" Value="48"/>
+                    </Style>
                 </StackPanel.Resources>
 
                 <Button x:Uid="RefreshButton"
@@ -138,12 +142,12 @@
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Top"
                        />
-            <ui:ColoredPivot HeaderBackground="{StaticResource DarkOverlay}"
+            <ui:AdvancedPivot HeaderBackground="{StaticResource DarkOverlay}"
                              RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
                              SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
                              Transitions="{StaticResource ContentTransitions}"
                              >
-                <ui:ColoredPivot.Resources>
+                <ui:AdvancedPivot.Resources>
                     <DataTemplate x:Key="BuildInfoDataTemplate" x:DataType="local:BuildInfo">
                         <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}"
                                     MinWidth="250"
@@ -189,6 +193,7 @@
                         <Setter Property="SelectionMode" Value="None"/>
                         <Setter Property="IsItemClickEnabled" Value="False"/>
                         <Setter Property="ItemTemplate" Value="{StaticResource BuildInfoDataTemplate}"/>
+                        <!-- TODO: https://stackoverflow.com/questions/41545665/horizontal-center-items-inside-variablesizedwrapgrid -->
                         <Setter Property="ItemContainerStyle">
                             <Setter.Value>
                                 <Style TargetType="GridViewItem">
@@ -197,7 +202,7 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </ui:ColoredPivot.Resources>
+                </ui:AdvancedPivot.Resources>
 
                 <PivotItem x:Uid="PC">
                     <ScrollViewer>
@@ -229,7 +234,7 @@
                         </StackPanel>
                     </ScrollViewer>
                 </PivotItem>
-            </ui:ColoredPivot>
+            </ui:AdvancedPivot>
 
             <StackPanel Orientation="Horizontal"
                         RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"

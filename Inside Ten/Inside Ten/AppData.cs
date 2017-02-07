@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Threading.Tasks;
 using UWPHelper.Utilities;
 using Windows.Storage;
@@ -11,8 +12,9 @@ namespace InsideTen
         private const string FILE_NAME = "AppData.json";
 
         public static AppData Current { get; private set; }
-        public static bool ShowLoadingError { get; set; }
 
+        [JsonIgnore]
+        public bool ShowLoadingError { get; set; }
         public bool ShowAbout
         {
             get { return (bool)GetValue(nameof(ShowAbout)); }
@@ -51,12 +53,15 @@ namespace InsideTen
 #endif
 
             var loadObjectAsyncResult = await StorageFileHelper.LoadObjectAsync<AppData>(FILE_NAME, ApplicationData.Current.LocalFolder);
-            Current             = loadObjectAsyncResult.Object;
-            ShowLoadingError    = !loadObjectAsyncResult.Success;
+            Current                  = loadObjectAsyncResult.Object;
+            Current.ShowLoadingError = !loadObjectAsyncResult.Success;
 
             Current.PropertyChanged += async (sender, e) =>
             {
-                await Current.SaveAsync();
+                if (e.PropertyName != nameof(ShowAbout) && e.PropertyName != nameof(ShowMobile))
+                {
+                    await Current.SaveAsync();
+                }
             };
         }
     }

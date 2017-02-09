@@ -1,0 +1,90 @@
+﻿@model MVC_WebService.Models.TridaModel
+
+@{
+    ViewBag.Title = "Přidat třídu ajax";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="msg" style="display: none"></div>
+
+<table>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(m => m.Nazev)
+        </td>
+        <td>
+            <input type="text" name="@nameof(Model.Nazev)" value="@Model.Nazev" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(m => m.Tridni)
+        </td>
+        <td>
+            <input type="text" name="@nameof(Model.Tridni)" value="@Model.Tridni" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(m => m.ZmenenoKdy)
+        </td>
+        <td>
+            <input type="text" id="datepicker" name="@nameof(Model.ZmenenoKdy)" value="@Model.ZmenenoKdy" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(m => m.ZmenenoKdo)
+        </td>
+        <td>
+            <input type="text" name="@nameof(Model.ZmenenoKdo)" value="@Model.ZmenenoKdo" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(m => m.Rocnik)
+        </td>
+        <td>
+            <input type="number" name="@nameof(Model.Rocnik)" value="@Model.Rocnik" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" class="btn btn-primary" value="Přidat" />
+        </td>
+    </tr>
+</table>
+
+<div>
+    @Html.ActionLink("Zpět na seznam tříd", "List")
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[type='submit']").click(function () {
+            var url         = "@Url.Action("CreateAjax", "Trida")"
+            var nazev       = $("[name=@nameof(Model.Nazev)").val();
+            var tridni      = $("[name=@nameof(Model.Tridni)").val();
+            var zmenenoKdy  = $("[name=@nameof(Model.ZmenenoKdy)").val();
+            var zmenenoKdo  = $("[name=@nameof(Model.ZmenenoKdo)").val();
+            var rocnik      = $("[name=@nameof(Model.Rocnik)").val();
+            $.post(url,
+                {
+                    @nameof(Model.Nazev):       nazev,
+                    @nameof(Model.Tridni):      tridni,
+                    @nameof(Model.ZmenenoKdy):  zmenenoKdy,
+                    @nameof(Model.ZmenenoKdo):  zmenenoKdo,
+                    @nameof(Model.Rocnik):      rocnik
+                }, function (data) {
+                    debugger;
+                    if (data == "OK")
+                    {
+                        $(".msg").html("Uloženo");
+                        $(".msg").addClass("alert-info");
+                        $(".msg").show(1000);
+                    }
+                });
+        });
+    });
+</script>

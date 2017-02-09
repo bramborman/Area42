@@ -2,7 +2,6 @@
 using MVC_WebService.SkolaWS;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace MVC_WebService.Controllers
@@ -61,7 +60,7 @@ namespace MVC_WebService.Controllers
 
             return View(zakLocalModel);
         }
-
+        
         public ActionResult Delete(string id)
         {
             new SkolaSoapClient().ZaciSmazat(id);

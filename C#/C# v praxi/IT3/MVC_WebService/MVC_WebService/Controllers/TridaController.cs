@@ -37,8 +37,8 @@ namespace MVC_WebService.Controllers
         {
             TridaModel trida = new TridaModel
             {
-                ZmenenoKdo  = "( ͡° ͜ʖ ͡°)",
-                Ulozeno     = false
+                ZmenenoKdo = "( ͡° ͜ʖ ͡°)",
+                Ulozeno = false
             };
 
             return View(trida);
@@ -61,6 +61,72 @@ namespace MVC_WebService.Controllers
 
             trida.Ulozeno = true;
             return View(trida);
+        }
+
+        [HttpGet]
+        public ActionResult CreateForm()
+        {
+            TridaModel trida = new TridaModel
+            {
+                ZmenenoKdo = "( ͡° ͜ʖ ͡°)",
+                Ulozeno = false
+            };
+
+            return View(trida);
+        }
+
+        [HttpPost]
+        public ActionResult CreateForm(TridaModel trida)
+        {
+            SkolaTridy skolaTridy = new SkolaTridy
+            {
+                Id          = Guid.NewGuid(),
+                Nazev       = trida.Nazev,
+                Rocnik      = trida.Rocnik,
+                Tridni      = trida.Tridni,
+                ZmenenoKdy  = DateTime.Now,
+                ZmenenoKdo  = trida.ZmenenoKdo
+            };
+
+            new SkolaSoapClient().TridaCreate(skolaTridy);
+
+            string casNacteniUzivatele = Request["cas-nacteni"];
+
+            trida.Ulozeno = true;
+            return View(trida);
+        }
+
+        [HttpGet]
+        public ActionResult CreateAjax()
+        {
+            TridaModel trida = new TridaModel
+            {
+                ZmenenoKdo = "( ͡° ͜ʖ ͡°)",
+                Ulozeno = false
+            };
+
+            return View(trida);
+        }
+
+        [HttpPost]
+        public ActionResult CreateAjax(TridaModel trida)
+        {
+            SkolaTridy skolaTridy = new SkolaTridy
+            {
+                Id          = Guid.NewGuid(),
+                Nazev       = trida.Nazev,
+                Rocnik      = trida.Rocnik,
+                Tridni      = trida.Tridni,
+                ZmenenoKdy  = DateTime.Now,
+                ZmenenoKdo  = trida.ZmenenoKdo
+            };
+
+            new SkolaSoapClient().TridaCreate(skolaTridy);
+
+            string casNacteniUzivatele = Request["cas-nacteni"];
+
+            trida.Ulozeno = true;
+            return Content("OK");
         }
 
         public ActionResult Delete(string id)

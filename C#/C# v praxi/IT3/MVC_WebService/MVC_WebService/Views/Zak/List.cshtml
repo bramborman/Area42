@@ -40,7 +40,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Jmeno)
@@ -49,16 +50,37 @@
             @Html.DisplayFor(modelItem => item.Prijmeni)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Muz)
+            @{
+                if (item.Muz == true)
+                {
+                    <span>Muž</span>
+                }
+                else
+                {
+                    <span>Žena</span>
+                }
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RodneCislo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Studuje)
+            @{
+                if (item.Studuje)
+                {
+                    <span>Ano</span>
+                }
+                else
+                {
+                    <span>Ne</span>
+                }
+            }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Trida)
+            @{
+                string nazevTridy = new MVC_WebService.SkolaWS.SkolaSoapClient().TridaList().FirstOrDefault(t => t.Id == item.Trida)?.Nazev ?? "Neznámá";
+                <span>@nazevTridy</span>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ZmenenoKdy)

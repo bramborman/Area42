@@ -10,7 +10,7 @@ namespace MVC_WebService.Models
         public string Jmeno { get; set; }
         [DisplayName("PŘÍJMENÍ")]
         public string Prijmeni { get; set; }
-        [DisplayName("JE MUŽ")]
+        [DisplayName("POHLAVÍ")]
         public bool? Muz { get; set; }
         [DisplayName("RODNÉ ČÍSLO")]
         public string RodneCislo { get; set; }

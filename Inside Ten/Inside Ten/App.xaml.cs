@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using UWPHelper.Utilities;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -43,13 +44,11 @@ namespace InsideTen
                 }
 #endif
                 _lastAccentColor = value;
-
-                // Original taken from http://stackoverflow.com/a/6763332/6843321
-                float luma = (0.2126f * (_lastAccentColor.R / 255.0f)) + (0.7152f * (_lastAccentColor.G / 255.0f)) + (0.0722f * (_lastAccentColor.B / 255.0f));
+                    
+                float luma = _lastAccentColor.GetLuma();
                 IsLightOverlay = luma < 0.4869937f || luma == 0.541142f;
-                
+
                 ContrastingTheme = IsLightOverlay ? ElementTheme.Dark : ElementTheme.Light;
-                System.Diagnostics.Debug.WriteLine(luma);
             }
         }
         private bool IsLightOverlay { get; set; }
@@ -94,26 +93,6 @@ namespace InsideTen
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
-        private Color MixColors(Color foreground, Color? background)
-        {
-            // Original taken from http://stackoverflow.com/a/9955317/6843321
-#if DEBUG
-            if (foreground.A == 0xFF)
-            {
-                throw new Exception("You're not doing it right ;)");
-            }
-#endif
-
-            float alpha      = foreground.A / 255.0f;
-            float difference = 1.0f - alpha;
-
-            byte r = (byte)((foreground.R * alpha) + (background.Value.R * difference));
-            byte g = (byte)((foreground.G * alpha) + (background.Value.G * difference));
-            byte b = (byte)((foreground.B * alpha) + (background.Value.B * difference));
-
-            return Color.FromArgb(0xFF, r, g, b);
-        }
-        
         private void SetColors()
         {
             if (LastAccentColor != (Color)Resources["SystemAccentColor"])
@@ -135,15 +114,15 @@ namespace InsideTen
                     {
                         titleBar.ForegroundColor = Colors.White;
 
-                        titleBar.ButtonHoverBackgroundColor   = MixColors(lightOverlayColors[0], titleBar.ButtonBackgroundColor);
-                        titleBar.ButtonPressedBackgroundColor = MixColors(lightOverlayColors[1], titleBar.ButtonBackgroundColor);
+                        titleBar.ButtonHoverBackgroundColor   = titleBar.ButtonBackgroundColor.Value.Mix(lightOverlayColors[0]);
+                        titleBar.ButtonPressedBackgroundColor = titleBar.ButtonBackgroundColor.Value.Mix(lightOverlayColors[1]);
                     }
                     else
                     {
                         titleBar.ForegroundColor = Colors.Black;
 
-                        titleBar.ButtonHoverBackgroundColor   = MixColors(darkOverlayColors[0], titleBar.ButtonBackgroundColor);
-                        titleBar.ButtonPressedBackgroundColor = MixColors(darkOverlayColors[1], titleBar.ButtonBackgroundColor);
+                        titleBar.ButtonHoverBackgroundColor   = titleBar.ButtonBackgroundColor.Value.Mix(darkOverlayColors[0]);
+                        titleBar.ButtonPressedBackgroundColor = titleBar.ButtonBackgroundColor.Value.Mix(darkOverlayColors[1]);
                     }
 
                     // Don't change foreground colors when buttons are in different states

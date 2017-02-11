@@ -165,18 +165,15 @@ namespace InsideTen
 
     public sealed class BuildInfo : NotifyPropertyChangedBase
     {
+        private const string BUILD_DEFAULT_VALUE = null;
+
         private static readonly DelegateCommand _openMoreCommand = new DelegateCommand(async (sender, e) =>
         {
             await Launcher.LaunchUriAsync(new Uri((string)e));
         });
 
-        internal string DisplayName { get; }
-
-        public DelegateCommand OpenMoreCommand
-        {
-            get { return _openMoreCommand; }
-        }
-
+        [JsonIgnore]
+        public string DisplayName { get; }
         public string Build
         {
             get { return (string)GetValue(nameof(Build)); }
@@ -197,12 +194,17 @@ namespace InsideTen
             get { return (DateTime)GetValue(nameof(ReleaseDate)); }
             private set { SetValue(nameof(ReleaseDate), ref value); }
         }
+        [JsonIgnore]
+        public DelegateCommand OpenMoreCommand
+        {
+            get { return _openMoreCommand; }
+        }
 
         public BuildInfo(string displayName)
         {
             DisplayName = displayName.ToUpper();
 
-            RegisterProperty(nameof(Build), typeof(string), null);
+            RegisterProperty(nameof(Build), typeof(string), BUILD_DEFAULT_VALUE);
             RegisterProperty(nameof(Version), typeof(string), null);
             RegisterProperty(nameof(More), typeof(string), null);
             RegisterProperty(nameof(ReleaseDate), typeof(DateTime), new DateTime());
@@ -210,7 +212,8 @@ namespace InsideTen
 
         public bool AssignFromInsideTenApiBuildInfo(InsideTenApiBuildInfo insideTenApiBuildInfo)
         {
-            bool changed = Build != insideTenApiBuildInfo.build;
+            // Must compare with default value, otherwise the AppData.InsiderInfoLastUpdate property will be rewrited on app start
+            bool changed = Build != insideTenApiBuildInfo.build && Build != BUILD_DEFAULT_VALUE;
 
             Build   = insideTenApiBuildInfo.build;
             Version = insideTenApiBuildInfo.version;

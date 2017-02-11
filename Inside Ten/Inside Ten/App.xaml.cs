@@ -46,12 +46,16 @@ namespace InsideTen
                 _lastAccentColor = value;
                     
                 float luma = _lastAccentColor.GetLuma();
-                IsLightOverlay = luma < 0.4869937f || luma == 0.541142f;
-
-                ContrastingTheme = IsLightOverlay ? ElementTheme.Dark : ElementTheme.Light;
+                ContrastingTheme = luma < 0.4869937f || luma == 0.541142f ? ElementTheme.Dark : ElementTheme.Light;
             }
         }
-        private bool IsLightOverlay { get; set; }
+        private bool IsLightOverlay
+        {
+            get
+            {
+                return ContrastingTheme == ElementTheme.Dark;
+            }
+        }
 
         public ElementTheme CurrentTheme
         {

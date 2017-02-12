@@ -1,10 +1,12 @@
-﻿namespace InsideTen
+﻿using UWPHelper.Utilities;
+
+namespace InsideTen
 {
     public sealed partial class Settings : PageBase
     {
-        private App App
+        private AccentColorHelper AccentColorHelper
         {
-            get { return App.Current; }
+            get { return AccentColorHelper.Current; }
         }
 
         public Settings()

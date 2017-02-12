@@ -15,7 +15,7 @@
         
         <ui:PageHeader Content="{x:Bind Name}"
                        Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-                       RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
+                       RequestedTheme="{x:Bind AccentColorHelper.AccentContrastingTheme, Mode=OneWay}"
                        Grid.Row="0"
                        />
 

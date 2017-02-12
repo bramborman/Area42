@@ -52,7 +52,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-              RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
+              RequestedTheme="{x:Bind AccentColorHelper.AccentContrastingTheme, Mode=OneWay}"
               Grid.Row="0"
               >
             <Grid.ColumnDefinitions>
@@ -143,7 +143,7 @@
                        VerticalAlignment="Top"
                        />
             <ui:AdvancedPivot HeaderBackground="{StaticResource DarkOverlay}"
-                             RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
+                             RequestedTheme="{x:Bind AccentColorHelper.AccentContrastingTheme, Mode=OneWay}"
                              SelectedIndex="{x:Bind AppData.ShowMobile, Converter={StaticResource BoolToIntConverter}, Mode=TwoWay}"
                              Transitions="{StaticResource ContentTransitions}"
                              >
@@ -167,7 +167,7 @@
                             <Button x:Uid="BuildInfoMore"
                                     FontWeight="SemiBold"
                                     Background="{StaticResource DarkOverlay}"
-                                    IsEnabled="{x:Bind More, Converter={StaticResource StringIsNullOrWhiteSpaceInvertedConverter}, Mode=OneWay}"
+                                    IsEnabled="{x:Bind More, Converter={StaticResource StringIsNullOrWhiteSpaceConverter}, ConverterParameter=Invert, Mode=OneWay}"
                                     Padding="8"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
@@ -237,7 +237,7 @@
             </ui:AdvancedPivot>
 
             <StackPanel Orientation="Horizontal"
-                        RequestedTheme="{x:Bind App.ContrastingTheme, Mode=OneWay}"
+                        RequestedTheme="{x:Bind AccentColorHelper.AccentContrastingTheme, Mode=OneWay}"
                         Height="48"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"

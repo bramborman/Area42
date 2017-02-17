@@ -152,6 +152,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TridaController.cs" />
     <Compile Include="Controllers\ZakController.cs" />
@@ -159,8 +160,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PredmetLocalModel.cs" />
     <Compile Include="Models\TridaModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ZakLocalModel.cs" />
     <Compile Include="Models\ZnamkaLocalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -176,6 +179,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Trida\CreateForm.cshtml" />
     <Content Include="Views\Trida\CreateAjax.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

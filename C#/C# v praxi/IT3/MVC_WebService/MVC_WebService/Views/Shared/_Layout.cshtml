@@ -1,49 +1,71 @@
-﻿<!DOCTYPE html>
+﻿@using MVC_WebService.Models;
+
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title | @Constants.WEBSITE_NAME</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
-    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#datepicker").datepicker();
-        });
-    </script>
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink(@Constants.WEBSITE_NAME, Constants.DEFAULT_ACTION, Constants.DEFAULT_CONTROLLER, new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("TEST", "Index", "Test")</li>
-                    <li>@Html.ActionLink("TŘÍDY", "List", "Trida")</li>
-                    <li>@Html.ActionLink("ŽÁCI", "List", "Zak")</li>
-                </ul>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title | @Constants.WEBSITE_NAME</title>
+        <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <script src="~/Scripts/modernizr-2.8.3.js"></script>
+        <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink(@Constants.WEBSITE_NAME, Constants.DEFAULT_ACTION, Constants.DEFAULT_CONTROLLER, new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Test" ? "active" : "")">@Html.ActionLink("TEST", "Index", "Test")</li>
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Trida" ? "active" : "")">@Html.ActionLink("TŘÍDY", "List", "Trida")</li>
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Zak" ? "active" : "")">@Html.ActionLink("ŽÁCI", "List", "Zak")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @{
+                            UserModel user = Session[Constants.SESSION_USER] as UserModel;
+
+                            if (user == null)
+                            {
+                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Login" ? "active" : "")">@Html.ActionLink("PŘIHLÁSIT", "Login", "Login")</li>
+                            }
+                            else
+                            {
+                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Login" ? "active" : "")">@Html.ActionLink($"{user.Email} - ODHLÁSIT", "Logout", "Login", new { redirectController = ViewContext.RouteData.Values["Controller"].ToString(), redirectAction = ViewContext.RouteData.Values["Action"].ToString() }, null)</li>
+                            }
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year @Constants.WEBSITE_NAME</p>
-        </footer>
-    </div>
-</body>
+        <div class="container body-content">
+            @if (Session[Constants.SESSION_USER] == null && ViewContext.RouteData.Values["Controller"].ToString() != "Login")
+            {
+                Response.Redirect($"~/Login/?url={@ViewContext.RouteData.Values["Controller"].ToString()}/{@ViewContext.RouteData.Values["Action"].ToString()}");
+            }
+
+            @RenderBody()
+
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year @Constants.WEBSITE_NAME</p>
+            </footer>
+        </div>
+    </body>
 </html>

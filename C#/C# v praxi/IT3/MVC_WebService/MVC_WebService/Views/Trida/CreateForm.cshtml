@@ -9,7 +9,7 @@
 <form action="@Url.Action("CreateForm", "Trida")" method="post">
     <input type="hidden" name="cas-nacteni" value="@DateTime.Now.ToString()"/>
 
-    <table>
+    <table class="table">
         <tr>
             <td>
                 @Html.DisplayNameFor(m => m.Nazev)

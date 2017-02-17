@@ -16,3 +16,21 @@ textarea {
     max-width: 280px;
 }
 
+.navbar-inverse {
+    background-image: -webkit-linear-gradient(top, #222 0%, #111 100%);
+    background-image: -o-linear-gradient(top, #222 0%, #111 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#222), to(#111));
+    background-image: linear-gradient(to bottom, #222 0%, #111 100%);
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .active > a {
+    background-image: -webkit-linear-gradient(top, #2f2f2f 0%, #303030 100%);
+    background-image: -o-linear-gradient(top, #2f2f2f 0%, #303030 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#303030));
+    background-image: linear-gradient(to bottom, #2f2f2f 0%, #303030 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2f2f2f', endColorstr='#ff303030', GradientType=0);
+    background-repeat: repeat-x;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

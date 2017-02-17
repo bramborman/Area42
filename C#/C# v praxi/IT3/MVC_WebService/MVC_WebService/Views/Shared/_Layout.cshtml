@@ -42,7 +42,7 @@
 
                             if (user == null)
                             {
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Login" ? "active" : "")">@Html.ActionLink("PŘIHLÁSIT", "Login", "Login")</li>
+                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Login" ? "active" : "")">@Html.ActionLink("PŘIHLÁSIT", "Index", "Login")</li>
                             }
                             else
                             {

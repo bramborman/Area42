@@ -22,7 +22,7 @@ namespace MVC_WebService.Controllers
             {
                 Session.Add(Constants.SESSION_USER, new UserModel(loginModel.Email, DateTime.Now));
 
-                string[] url = loginModel.Url.Split('/');
+                string[] url = loginModel.Url?.Split('/') ?? new string[2];
 
                 if (url[0] == "Login" || string.IsNullOrWhiteSpace(url[0]))
                 {

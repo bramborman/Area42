@@ -3,28 +3,13 @@
     ViewBag.Title = "Test";
 }
 
-<h2 style="display: inline-block;">@ViewBag.Title</h2>
-
-<button id="zobraz-text" class="btn btn-primary">
-    Zobraz text
-</button>
-
-<button id="skryj-text" class="btn btn-danger">
-    Skryj text
-</button>
-
-<button id="prepni-text" class="btn btn-default">
-    Přepni text
-</button>
-
-@for (int i = 0; i < 5; i++)
-{
-    <div class="mizici-text">
-        Mizící text
-    </div>
-}
-
 <style type="text/css">
+    .buttonsLine button {
+        display: inline-block;
+        margin-left: 10px;
+        margin-top: -15px;
+    }
+
     .cerveny-text {
         color: red;
     }
@@ -32,10 +17,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".btn").css("display", "inline-block");
-        $(".btn").css("margin-left", "10px");
-        $(".btn").css("margin-top", "-15px");
-
         $(".mizici-text").css("cursor", "pointer");
 
         $(".mizici-text").click(function () {
@@ -64,3 +45,26 @@
         });
     });
 </script>
+
+<h2 style="display: inline-block;">@ViewBag.Title</h2>
+
+<span class="buttonsLine">
+    <button id="zobraz-text" class="btn btn-primary">
+        Zobraz text
+    </button>
+
+    <button id="skryj-text" class="btn btn-danger">
+        Skryj text
+    </button>
+
+    <button id="prepni-text" class="btn btn-default">
+        Přepni text
+    </button>
+</span>
+
+@for (int i = 0; i < 5; i++)
+{
+    <div class="mizici-text">
+        Mizící text
+    </div>
+}

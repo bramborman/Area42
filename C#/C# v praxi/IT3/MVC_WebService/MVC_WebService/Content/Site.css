@@ -15,16 +15,21 @@ select,
 textarea {
     max-width: 280px;
 }
-
 .navbar-inverse {
     background-image: -webkit-linear-gradient(top, #222 0%, #111 100%);
     background-image: -o-linear-gradient(top, #222 0%, #111 100%);
     background-image: -webkit-gradient(linear, left top, left bottom, from(#222), to(#111));
     background-image: linear-gradient(to bottom, #222 0%, #111 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222', endColorstr='#ff111111', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    background-repeat: repeat-x;
+    border-radius: 4px;
 }
 
 .navbar-inverse .navbar-nav > .open > a,
-.navbar-inverse .navbar-nav > .active > a {
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav a:hover,
+.navbar-inverse .navbar-nav a:focus {
     background-image: -webkit-linear-gradient(top, #2f2f2f 0%, #303030 100%);
     background-image: -o-linear-gradient(top, #2f2f2f 0%, #303030 100%);
     background-image: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#303030));

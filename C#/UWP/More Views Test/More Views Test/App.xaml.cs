@@ -29,15 +29,18 @@ namespace MoreViewsTest
                 await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     Frame frame = new Frame();
-                    frame.Navigate(typeof(MainPage));
                     Window.Current.Content = frame;
-                    
+
+                    frame.RequestedTheme = AppData.Current.Theme;
+
+                    frame.Navigate(typeof(MainPage));
                     Window.Current.Activate();
 
                     newViewId = ApplicationView.GetForCurrentView().Id;
                     BarsHelper.Current.InitializeForCurrentAdditionalView();
                 });
 
+                //TODO: Close another views when main view is closed since after that new view cannot be displayed
                 await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
                 return;
             }
@@ -51,10 +54,10 @@ namespace MoreViewsTest
 
                 Window.Current.Content = rootFrame;
             }
-
+            
             LaunchActivatedEventArgs launchArgs = args as LaunchActivatedEventArgs;
             rootFrame.RequestedTheme = AppData.Current.Theme;
-            BarsHelper.Current.InitializeForCurrentView(BarsHelperColorMode.Accent, () => AppData.Current.Theme, AppData.Current, nameof(AppData.Theme));
+            BarsHelper.Current.InitializeForCurrentView(BarsHelperColorMode.Themed, () => AppData.Current.Theme, AppData.Current, nameof(AppData.Theme));
 
             if (launchArgs?.PrelaunchActivated != true)
             {

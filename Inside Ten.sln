@@ -1,9 +1,37 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26127.0
+VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inside Ten", "Inside Ten\Inside Ten.csproj", "{9E42E6C6-4325-4B50-9E1E-AEE2EFAE63E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{99B86564-90F6-46C2-9B04-4F50DE3C29A9}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+		testingapi.json = testingapi.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{087F8F61-BB32-4F38-AA0E-FD06D6845157}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.0.1", "0.0.1", "{29902A28-6477-42EB-89BC-CFE4B11DEB98}"
+	ProjectSection(SolutionItems) = preProject
+		Screenshots\0.0.1\desktop1.PNG = Screenshots\0.0.1\desktop1.PNG
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.0.2", "0.0.2", "{AA40969C-C0EC-45ED-ADE6-6517E34B502F}"
+	ProjectSection(SolutionItems) = preProject
+		Screenshots\0.0.2\desktop1.PNG = Screenshots\0.0.2\desktop1.PNG
+		Screenshots\0.0.2\mobile1.png = Screenshots\0.0.2\mobile1.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{3B514E00-68E1-4349-843C-452397C33ADC}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\InsideTen_Logo.png = Assets\InsideTen_Logo.png
+		Assets\InsideTen_Logo.xcf = Assets\InsideTen_Logo.xcf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +64,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{087F8F61-BB32-4F38-AA0E-FD06D6845157} = {99B86564-90F6-46C2-9B04-4F50DE3C29A9}
+		{29902A28-6477-42EB-89BC-CFE4B11DEB98} = {087F8F61-BB32-4F38-AA0E-FD06D6845157}
+		{AA40969C-C0EC-45ED-ADE6-6517E34B502F} = {087F8F61-BB32-4F38-AA0E-FD06D6845157}
+		{3B514E00-68E1-4349-843C-452397C33ADC} = {99B86564-90F6-46C2-9B04-4F50DE3C29A9}
 	EndGlobalSection
 EndGlobal

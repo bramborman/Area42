@@ -3,6 +3,15 @@ using System.Linq;
 
 namespace StringCentering
 {
+    public static class Program
+    {
+        static void Main(string[] args)
+        {
+            "lol\nwaaat\ncojeeee".WriteCentered();
+            Console.ReadKey();
+        }
+    }
+
     public static class StringCentering
     {
         public static int GetLinesCount(this string str)

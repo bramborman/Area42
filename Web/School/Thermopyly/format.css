@@ -1,0 +1,58 @@
+/* CSS Document */
+
+body {
+  font-family: Arial;
+}
+
+h1 {
+  color: blue;
+  background: gray;
+  text-align: center;
+}
+
+h2 {
+  color: cyan;
+  text-decoration: underline;
+}
+
+div {
+  text-align: center;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+img {
+  border-style: none;
+  width: 150px;
+}
+
+table, tr, td, th {
+  border: 1px solid black;
+  border-collapse: collapse; 
+}
+
+th {
+  background-color: orange;
+}
+
+.sedyVecisky {
+  background-color: gray;
+  text-align: center;
+  color: black;
+}
+
+td {
+  color: green;
+}
+
+.roman {
+  list-style-type: upper-roman;
+}
+
+.floatLeft {
+  float: left;
+}
+
+.floatRight {
+  float: right;
+}

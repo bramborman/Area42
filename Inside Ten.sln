@@ -16,8 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{3B514E00-68E1-4349-843C-452397C33ADC}"
 	ProjectSection(SolutionItems) = preProject
-		Assets\InsideTen_Logo.png = Assets\InsideTen_Logo.png
-		Assets\InsideTen_Logo.xcf = Assets\InsideTen_Logo.xcf
+		Assets\InsideTen Icon.png = Assets\InsideTen Icon.png
+		Assets\InsideTen Icon.xcf = Assets\InsideTen Icon.xcf
 	EndProjectSection
 EndProject
 Global

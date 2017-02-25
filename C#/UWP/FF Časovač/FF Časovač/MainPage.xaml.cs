@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using UWPHelper.Utilities;
-using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace FF_Časovač
 {
@@ -35,21 +35,17 @@ namespace FF_Časovač
             switch (args.VirtualKey)
             {
                 case VirtualKey.F11:
-                    if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
-                    {
-                        args.Handled = true;
-                        ApplicationView applicationView = ApplicationView.GetForCurrentView();
+                    args.Handled = true;
+                    ApplicationView applicationView = ApplicationView.GetForCurrentView();
 
-                        if (applicationView.IsFullScreenMode)
-                        {
-                            applicationView.ExitFullScreenMode();
-                        }
-                        else
-                        {
-                            applicationView.TryEnterFullScreenMode();
-                        }
+                    if (applicationView.IsFullScreenMode)
+                    {
+                        applicationView.ExitFullScreenMode();
                     }
-                    
+                    else
+                    {
+                        applicationView.TryEnterFullScreenMode();
+                    }
 
                     break;
             }
@@ -68,7 +64,7 @@ namespace FF_Časovač
                 // Play peep
             }
 
-            if (time == gongTimeSpans[gongTimeSpans.Length - 2])
+            if (time <= gongTimeSpans[gongTimeSpans.Length - 2] && Sb_Blinking.GetCurrentState() == ClockState.Stopped)
             {
                 Sb_Blinking.Begin();
             }
@@ -85,8 +81,9 @@ namespace FF_Časovač
         private void Start(object sender, RoutedEventArgs e)
         {
             time = TP_Input.Time;
+            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
 
-            Gr_Initialization.Visibility = Visibility.Collapsed;
+            Bo_Initialization.Visibility = Visibility.Collapsed;
             timer.Start();
         }
     }

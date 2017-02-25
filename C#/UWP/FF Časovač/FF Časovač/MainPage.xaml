@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <Viewbox Margin="60">
-            <TextBlock Text="ZBÝVÁ:"
+            <TextBlock Text="ZBÝVÁ"
                        FontWeight="SemiBold"
                        />
         </Viewbox>
@@ -50,28 +50,44 @@
             </StackPanel>
         </Viewbox>
 
-        <Image Source="Assets/Logo.jpg"
+        <Image Source="Assets/FF Logo.jpg"
                HorizontalAlignment="Left"
                VerticalAlignment="Stretch"
                Grid.Row="2"
                />
 
-        <Grid x:Name="Gr_Initialization"
-              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-              RequestedTheme="Dark"
-              Grid.RowSpan="3"
-              >
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        >
-                <TimePicker x:Name="TP_Input" Time="0"/>
+        <Border x:Name="Bo_Initialization"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                RequestedTheme="Dark"
+                Grid.RowSpan="3"
+                >
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="{StaticResource PanelGapMargin}"
+                            >
+                    <TimePicker x:Name="TP_Input" Time="0"/>
                 
-                <Button Content="Start"
-                        Margin="10,0,0,0"
-                        Click="Start"
-                        />
+                    <Button Content="Spustit"
+                            Margin="10,0,0,0"
+                            Click="Start"
+                            />
+                </StackPanel>
+
+                <TextBlock TextWrapping="WrapWholeWords"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource DescriptionTextBlock}"
+                           >
+                    Po spuštění časovače se aplikace přepne do režimu celé obrazovky
+                    <LineBreak/>
+                    Pro manuální přepnutí režimu celé obrazovky použijte klávesu F11
+                    <LineBreak/>
+                    <LineBreak/>
+                    &#x00A9; 2017 Marian Dolinský
+                </TextBlock>
             </StackPanel>
-        </Grid>
+        </Border>
     </Grid>
 </Page>

@@ -2,7 +2,6 @@
 using UWPHelper.Utilities;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation.Metadata;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -28,12 +27,8 @@ namespace FF_Časovač
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Window.Current.Content = rootFrame;
-
-                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
-                {
-                    ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
-                    DisplayRequestHelper.IsActive = true;
-                }
+                DisplayRequestHelper.IsActive = true;
+                ApplicationView.GetForCurrentView().FullScreenSystemOverlayMode = FullScreenSystemOverlayMode.Minimal;
             }
 
             if (!e.PrelaunchActivated)

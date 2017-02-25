@@ -87,7 +87,7 @@ namespace InsideTen
 
                 Window.Current.Content = rootFrame;
                 AccentColorHelper.Current.IsActive = true;
-                BarsHelper.Current.Initialize(BarsHelperColorMode.Accent, () => ElementTheme.Default);
+                BarsHelper.Current.InitializeForCurrentView(BarsHelperColorMode.Accent, () => ElementTheme.Default);
 
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
                 {

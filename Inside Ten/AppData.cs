@@ -17,18 +17,18 @@ namespace InsideTen
         public bool ShowLoadingError { get; set; }
         public bool ShowAbout
         {
-            get { return (bool)GetValue(nameof(ShowAbout)); }
-            set { SetValue(nameof(ShowAbout), ref value); }
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
         }
         public bool ShowMobile
         {
-            get { return (bool)GetValue(nameof(ShowMobile)); }
-            set { SetValue(nameof(ShowMobile), ref value); }
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
         }
         public DateTime InsiderInfoLastUpdate
         {
-            get { return (DateTime)GetValue(nameof(InsiderInfoLastUpdate)); }
-            set { SetValue(nameof(InsiderInfoLastUpdate), ref value); }
+            get { return (DateTime)GetValue(); }
+            set { SetValue(value); }
         }
 
         public AppData()

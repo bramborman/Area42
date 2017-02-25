@@ -19,17 +19,16 @@ namespace InsideTen
         public static InsiderInfo Current { get; private set; }
         public static bool ShowLoadingError { get; set; }
         
-        internal bool IsSuccessfullyLoaded
+        public bool IsSuccessfullyLoaded
         {
-            get { return (bool)GetValue(nameof(IsSuccessfullyLoaded)); }
-            private set { SetValue(nameof(IsSuccessfullyLoaded), ref value); }
+            get { return (bool)GetValue(); }
+            private set { SetValue(value); }
         }
-        internal bool IsLoading
+        public bool IsLoading
         {
-            get { return (bool)GetValue(nameof(IsLoading)); }
-            private set { SetValue(nameof(IsLoading), ref value); }
+            get { return (bool)GetValue(); }
+            private set { SetValue(value); }
         }
-        
         public DeviceInfo PC { get; }
         public DeviceInfo Mobile { get; }
         public BuildInfo Internal { get; }
@@ -176,23 +175,23 @@ namespace InsideTen
         public string DisplayName { get; }
         public string Build
         {
-            get { return (string)GetValue(nameof(Build)); }
-            private set { SetValue(nameof(Build), ref value); }
+            get { return (string)GetValue(); }
+            private set { SetValue(value); }
         }
         public string Version
         {
-            get { return (string)GetValue(nameof(Version)); }
-            private set { SetValue(nameof(Version), ref value); }
+            get { return (string)GetValue(); }
+            private set { SetValue(value); }
         }
         public string More
         {
-            get { return (string)GetValue(nameof(More)); }
-            private set { SetValue(nameof(More), ref value); }
+            get { return (string)GetValue(); }
+            private set { SetValue(value); }
         }
         public DateTime ReleaseDate
         {
-            get { return (DateTime)GetValue(nameof(ReleaseDate)); }
-            private set { SetValue(nameof(ReleaseDate), ref value); }
+            get { return (DateTime)GetValue(); }
+            private set { SetValue(value); }
         }
         [JsonIgnore]
         public DelegateCommand OpenMoreCommand

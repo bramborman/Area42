@@ -24,7 +24,7 @@ namespace Shapes.Shapes
 
             do
             {
-                Console.Write($"Zadej velikost strany {Name} <{MinSize} - {MaxSize}>: ");
+                Console.Write($"Zadej velikost strany {Name} <{MinSize}-{MaxSize}>: ");
             } while (!int.TryParse(Console.ReadLine(), out size) || size < MinSize || size > MaxSize);
 
             Size = size;

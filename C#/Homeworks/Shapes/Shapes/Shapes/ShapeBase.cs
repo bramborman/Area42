@@ -32,9 +32,9 @@ namespace Shapes.Shapes
             Console.Clear();
             Console.CursorVisible = true;
 
-            foreach (Side side in Sides)
+            for (int i = 0; i < Sides.Count; i++)
             {
-                LoadSide(side);
+                LoadSide(ref i);
             }
 
             Console.CursorVisible = false;
@@ -48,9 +48,9 @@ namespace Shapes.Shapes
             Console.Clear();
         }
 
-        protected virtual void LoadSide(Side side)
+        protected virtual void LoadSide(ref int index)
         {
-            side?.Load();
+            Sides[index]?.Load();
         }
 
         protected abstract void Draw();

@@ -6,13 +6,15 @@ namespace Shapes.Shapes
     {
         private const string THIRD_SIDE_NAME = "CA";
 
-        public Triangle() : base(new Side("AB", 2, MaxWidth), new Side("BC", 2, MaxHeight), new Side(THIRD_SIDE_NAME, 2, MaxHeight))
+        public Triangle() : base(new Side("AB", 2, Math.Min((MaxHeight * 2) - 1, MaxWidth)), new Side("BC", 2, MaxHeight), new Side(THIRD_SIDE_NAME, 2, MaxHeight))
         {
 
         }
 
-        protected override void LoadSide(Side side)
+        protected override void LoadSide(ref int index)
         {
+            Side side = Sides[index];
+
             if (side.Name == THIRD_SIDE_NAME)
             {
                 int minSide = Math.Min(Sides[0].Size, Sides[1].Size);
@@ -20,9 +22,14 @@ namespace Shapes.Shapes
 
                 side.MinSize = Math.Max(side.MinSize, maxSide - minSide + 1);
                 side.MaxSize = Math.Min(side.MaxSize, Sides[0].Size + Sides[1].Size - 1);
+
+                if (side.MinSize > side.MaxSize)
+                {
+                    index--;
+                }
             }
 
-            base.LoadSide(side);
+            base.LoadSide(ref index);
         }
 
         protected override void Draw()

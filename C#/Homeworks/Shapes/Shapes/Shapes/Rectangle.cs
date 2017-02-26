@@ -6,7 +6,7 @@ namespace Shapes.Shapes
     {
         public bool IsSquare { get; }
 
-        public Rectangle(bool isSquare) : base(isSquare ? "Čtverec" : "Obdélník", new Side("a", 2, isSquare ? Math.Min(MaxWidth, MaxHeight) : MaxWidth), isSquare ? null : new Side("b", 2, MaxHeight))
+        public Rectangle(bool isSquare) : base(new Side("a", 2, isSquare ? Math.Min(MaxWidth, MaxHeight) : MaxWidth), isSquare ? null : new Side("b", 2, MaxHeight))
         {
             IsSquare = isSquare;
         }

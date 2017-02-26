@@ -23,12 +23,9 @@ namespace Shapes.Shapes
         }
 
         protected List<Side> Sides { get; }
-
-        public string Name { get; }
-
-        protected ShapeBase(string name, params Side[] sides)
+        
+        protected ShapeBase(params Side[] sides)
         {
-            Name  = name;
             Sides = new List<Side>(sides);
         }
 
@@ -38,20 +35,22 @@ namespace Shapes.Shapes
 
             foreach (Side side in Sides)
             {
-                side?.Load();
+                LoadSide(side);
             }
 
             Console.Clear();
             FontHelper.SetSmallFont();
-
-            // Console.SetCursorPosition((Console.WindowWidth - Name.Length) / 2, 3);
-            // Console.Write(Name.ToUpper());
-
+            
             Draw();
 
             Console.ReadKey();
             FontHelper.SetNormalFont();
             Console.Clear();
+        }
+
+        protected virtual void LoadSide(Side side)
+        {
+            side?.Load();
         }
 
         protected abstract void Draw();

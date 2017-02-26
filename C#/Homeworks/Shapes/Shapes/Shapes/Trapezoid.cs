@@ -4,7 +4,7 @@ namespace Shapes.Shapes
 {
     public sealed class Trapezoid : ShapeBase
     {
-        public Trapezoid() : base("Lichoběžník")
+        public Trapezoid() : base()
         {
 
         }

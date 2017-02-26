@@ -4,7 +4,7 @@ namespace Shapes.Shapes
 {
     public sealed class Line : ShapeBase
     {
-        public Line() : base("Čára", new Side("|AB|", 2, MaxWidth))
+        public Line() : base(new Side("|AB|", 2, MaxWidth))
         {
 
         }

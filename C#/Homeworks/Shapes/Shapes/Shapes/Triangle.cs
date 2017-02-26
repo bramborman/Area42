@@ -20,12 +20,18 @@ namespace Shapes.Shapes
                 int minSide = Math.Min(Sides[0].Size, Sides[1].Size);
                 int maxSide = Math.Max(Sides[0].Size, Sides[1].Size);
 
-                side.MinSize = Math.Max(side.MinSize, maxSide - minSide + 1);
-                side.MaxSize = Math.Min(side.MaxSize, Sides[0].Size + Sides[1].Size - 1);
-
-                if (side.MinSize > side.MaxSize)
+                int newMinSize = Math.Max(side.MinSize, maxSide - minSide + 1);
+                int newMaxSize = Math.Min(side.MaxSize, Sides[0].Size + Sides[1].Size - 1);
+                
+                if (newMinSize > newMaxSize)
                 {
                     index--;
+                }
+                else
+                {
+
+                    side.MinSize = newMinSize;
+                    side.MaxSize = newMaxSize;
                 }
             }
 

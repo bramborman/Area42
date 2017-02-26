@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using UWPHelper.UI;
 using UWPHelper.Utilities;
 using Windows.ApplicationModel;
 using Windows.Storage;
@@ -18,6 +19,7 @@ namespace FF_Časovač
         private readonly TimeSpan[] gongTimeSpans   = { TimeSpan.FromHours(1), TimeSpan.FromMinutes(15), TimeSpan.FromMinutes(3), TimeSpan.Zero };
         private readonly MediaElement gongSound     = new MediaElement { Volume = 1.0 };
         private readonly MediaElement beepSound     = new MediaElement { Volume = 0.2 };
+        private readonly SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
 
         private TimeSpan time;
 
@@ -102,11 +104,58 @@ namespace FF_Časovač
 
         private void Start(object sender, RoutedEventArgs e)
         {
-            time = TP_Input.Time;
-            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            SwitchInitializationUI();
+        }
 
-            Bo_Initialization.Visibility = Visibility.Collapsed;
-            timer.Start();
+        private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            e.Handled = true;
+            SwitchInitializationUI();
+        }
+
+        private async void SwitchInitializationUI()
+        {
+            if (Bo_Initialization.Visibility == Visibility.Visible)
+            {
+                time = TP_Input.Time;
+
+                ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+
+                systemNavigationManager.BackRequested += SystemNavigationManager_BackRequested;
+                systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
+                Bo_Initialization.Visibility = Visibility.Collapsed;
+                timer.Start();
+            }
+            else
+            {
+                AdvancedContentDialog dialog = new AdvancedContentDialog
+                {
+                    Title               = "Přejete si pokračovat?",
+                    Content             = "Budete-li pokračovat, odpočítávání bude přerušeno.",
+                    PrimaryButtonText   = "Ano",
+                    SecondaryButtonText = "Ne"
+                };
+
+                if (await dialog.ShowAsync() == ContentDialogResult.Primary)
+                {
+                    timer.Stop();
+
+                    if (time < TimeSpan.Zero)
+                    {
+                        time = TimeSpan.Zero;
+                    }
+
+                    TP_Input.Time = time;
+
+                    ApplicationView.GetForCurrentView().ExitFullScreenMode();
+
+                    systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+                    systemNavigationManager.BackRequested -= SystemNavigationManager_BackRequested;
+
+                    Bo_Initialization.Visibility = Visibility.Visible;
+                }
+            }
         }
     }
 }

@@ -30,12 +30,14 @@ namespace Shapes.Shapes
         public void LoadNDraw()
         {
             Console.Clear();
+            Console.CursorVisible = true;
 
             foreach (Side side in Sides)
             {
                 LoadSide(side);
             }
 
+            Console.CursorVisible = false;
             Console.Clear();
             FontHelper.SetSmallFont();
             

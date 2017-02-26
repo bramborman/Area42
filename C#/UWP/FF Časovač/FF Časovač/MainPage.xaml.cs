@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using UWPHelper.Utilities;
+using Windows.ApplicationModel;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
@@ -12,17 +14,31 @@ namespace FF_Časovač
 {
     public sealed partial class MainPage : Page
     {
-        private readonly ThreadPoolTimer timer = new ThreadPoolTimer(TimeSpan.FromSeconds(1));
-        private readonly TimeSpan[] gongTimeSpans = { TimeSpan.FromHours(1), TimeSpan.FromMinutes(15), TimeSpan.FromMinutes(3), TimeSpan.Zero };
+        private readonly ThreadPoolTimer timer      = new ThreadPoolTimer(TimeSpan.FromSeconds(1));
+        private readonly TimeSpan[] gongTimeSpans   = { TimeSpan.FromHours(1), TimeSpan.FromMinutes(15), TimeSpan.FromMinutes(3), TimeSpan.Zero };
+        private readonly MediaElement gongSound     = new MediaElement { Volume = 1.0 };
+        private readonly MediaElement beepSound     = new MediaElement { Volume = 0.2 };
 
         private TimeSpan time;
 
         public MainPage()
         {
+            InitializeSoundAsset(gongSound, "Gong.mp3");
+            InitializeSoundAsset(beepSound, "Beep.mp3");
+
             timer.Tick += Timer_Tick;
             KeyboardHelper.CoreKeyDown += KeyboardHelper_CoreKeyDown;
 
             InitializeComponent();
+        }
+
+        private async void InitializeSoundAsset(MediaElement mediaElement, string fileName)
+        {
+            mediaElement.AutoPlay = false;
+
+            StorageFolder folder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file     = await folder.GetFileAsync(fileName);
+            mediaElement.SetSource(await file.OpenAsync(FileAccessMode.Read), "");
         }
 
         private void KeyboardHelper_CoreKeyDown(CoreWindow sender, KeyEventArgs args)
@@ -57,20 +73,26 @@ namespace FF_Časovač
 
             if (gongTimeSpans.Any(t => time == t))
             {
-                // Play gong
+                gongSound.Play();
             }
-            else if (time >= TimeSpan.FromSeconds(3))
+            else if (time <= TimeSpan.FromSeconds(3))
             {
-                // Play peep
+                beepSound.Play();
             }
 
             if (time <= gongTimeSpans[gongTimeSpans.Length - 2] && Sb_Blinking.GetCurrentState() == ClockState.Stopped)
             {
                 Sb_Blinking.Begin();
             }
-            else if (time == TimeSpan.Zero)
+
+            if (time == TimeSpan.Zero)
             {
                 timer.Stop();
+            }
+            else if (time < TimeSpan.Zero)
+            {
+                timer.Stop();
+                return;
             }
 
             TB_Hours.Text   = time.Hours.ToString("D2");

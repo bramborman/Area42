@@ -69,7 +69,8 @@
                             >
                     <TimePicker x:Name="TP_Input" Time="0"/>
                 
-                    <Button Content="Spustit"
+                    <Button Content="SPUSTIT"
+                            FontWeight="SemiBold"
                             Margin="10,0,0,0"
                             Click="Start"
                             />

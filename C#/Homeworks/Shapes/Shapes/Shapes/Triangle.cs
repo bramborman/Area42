@@ -6,7 +6,7 @@ namespace Shapes.Shapes
     {
         private const string THIRD_SIDE_NAME = "CA";
 
-        public Triangle() : base(new Side("AB", 2, MaxWidth), new Side("BC", 2, MaxHeight), new Side(THIRD_SIDE_NAME, 2, 2))
+        public Triangle() : base(new Side("AB", 2, MaxWidth), new Side("BC", 2, MaxHeight), new Side(THIRD_SIDE_NAME, 2, MaxHeight))
         {
 
         }
@@ -18,8 +18,8 @@ namespace Shapes.Shapes
                 int minSide = Math.Min(Sides[0].Size, Sides[1].Size);
                 int maxSide = Math.Max(Sides[0].Size, Sides[1].Size);
 
-                side.MinSize = maxSide - minSide + 1;
-                side.MaxSize = Math.Min(Sides[0].Size + Sides[1].Size - 1, MaxWidth);
+                side.MinSize = Math.Max(side.MinSize, maxSide - minSide + 1);
+                side.MaxSize = Math.Min(side.MaxSize, Sides[0].Size + Sides[1].Size - 1);
             }
 
             base.LoadSide(side);

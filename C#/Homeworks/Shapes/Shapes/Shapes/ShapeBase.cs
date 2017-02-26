@@ -5,8 +5,6 @@ namespace Shapes.Shapes
 {
     public abstract class ShapeBase
     {
-        protected const char CHAR = '#';
-
         protected static int MaxWidth
         {
             get
@@ -54,5 +52,10 @@ namespace Shapes.Shapes
         }
 
         protected abstract void Draw();
+
+        protected string GetLineString(int length)
+        {
+            return new string('#', length);
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace Shapes.Shapes
 {
     public sealed class Line : ShapeBase
     {
-        public Line() : base(new Side("|AB|", 2, MaxWidth))
+        public Line() : base(new Side("AB", 2, MaxWidth))
         {
 
         }
@@ -15,7 +15,7 @@ namespace Shapes.Shapes
             int left = (Console.WindowWidth - size) / 2;
 
             Console.SetCursorPosition(left - 2, Console.WindowHeight / 2);
-            Console.WriteLine("A " + new string(CHAR, size) + " B");
+            Console.WriteLine("A " + GetLineString(size) + " B");
         }
     }
 }

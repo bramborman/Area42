@@ -4,23 +4,18 @@ namespace Shapes.Shapes
 {
     public sealed class Line : ShapeBase
     {
-        public Line() : base("Čára", new Side("|AB|", 2, Console.WindowWidth - 2))
+        public Line() : base("Čára", new Side("|AB|", 2, MaxWidth))
         {
 
         }
 
         protected override void Draw()
         {
-            int left = (Console.WindowWidth - Sides[0].Size) / 2;
+            int size = Sides[0].Size;
+            int left = (Console.WindowWidth - size) / 2;
 
-            Console.SetCursorPosition(left, Console.WindowHeight / 2);
-            Console.WriteLine(LINE_CROSS_VERTICAL_RIGHT + new string(LINE_HORIZONTAL, Sides[0].Size - 2) + LINE_CROSS_VERTICAL_LEFT);
-
-            Console.CursorLeft = left;
-            Console.Write('A');
-
-            Console.CursorLeft += Sides[0].Size - 2;
-            Console.Write('B');
+            Console.SetCursorPosition(left - 2, Console.WindowHeight / 2);
+            Console.WriteLine("A " + new string(CHAR, size) + " B");
         }
     }
 }

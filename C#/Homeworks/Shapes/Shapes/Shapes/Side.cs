@@ -7,7 +7,7 @@ namespace Shapes.Shapes
         public string Name { get; }
         public int MinSize { get; }
         public int MaxSize { get; }
-        public int Size { get; set; }
+        public int Size { get; private set; }
 
         public Side(string name, int minSize, int maxSize)
         {

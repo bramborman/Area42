@@ -10,6 +10,7 @@ namespace Shapes
     {
         public static void Main(string[] args)
         {
+            FontHelper.SetNormalFont();
             Console.CursorVisible = false;
 
             Console.InputEncoding  = Encoding.Unicode;
@@ -17,13 +18,13 @@ namespace Shapes
 
             Dictionary<string, Func<ShapeBase>> shapes = new Dictionary<string, Func<ShapeBase>>
             {
-                { "Čára",           () => new Line()        },
-                { "Kruh",           () => new Circle()      },
-                { "Trojúhelník",    () => new Triangle()    },
-                { "Čtverec",        () => new Square()      },
-                { "Obdélník",       () => new Rectangle()   },
-                { "Lichoběžník",    () => new Trapezoid()   },
-                { "Konec",          () => null              }
+                { "Čára",           () => new Line()            },
+                { "Kruh",           () => new Circle()          },
+                { "Trojúhelník",    () => new Triangle()        },
+                { "Čtverec",        () => new Rectangle(true)   },
+                { "Obdélník",       () => new Rectangle(false)  },
+                { "Lichoběžník",    () => new Trapezoid()       },
+                { "Konec",          () => null                  }
             };
 
             ShapeBase shape = null;

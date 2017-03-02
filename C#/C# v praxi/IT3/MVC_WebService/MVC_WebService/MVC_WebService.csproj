@@ -101,6 +101,9 @@
     <Content Include="Connected Services\SkolaWS\MVC_WebService.SkolaWS.ZnamkaModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\SkolaWS\MVC_WebService.SkolaWS.Soubory.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\SkolaWS\skola.disco" />
     <None Include="Connected Services\SkolaWS\configuration91.svcinfo" />
     <None Include="Connected Services\SkolaWS\configuration.svcinfo" />
@@ -152,6 +155,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TridaController.cs" />
@@ -180,6 +184,7 @@
     <Content Include="Views\Trida\CreateForm.cshtml" />
     <Content Include="Views\Trida\CreateAjax.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Image\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

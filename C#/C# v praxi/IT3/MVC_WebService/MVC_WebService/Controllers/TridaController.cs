@@ -134,5 +134,11 @@ namespace MVC_WebService.Controllers
             new SkolaSoapClient().TridaSmazat(id);
             return RedirectToAction("List");
         }
+
+        [HttpGet]
+        public ActionResult VratPocetTrid()
+        {
+            return Json(new Tuple<bool, int>(true, new SkolaSoapClient().TridaPocet()), JsonRequestBehavior.AllowGet);
+        }
     }
 }

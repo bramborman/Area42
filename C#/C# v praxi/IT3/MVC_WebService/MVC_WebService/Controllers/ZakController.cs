@@ -66,5 +66,11 @@ namespace MVC_WebService.Controllers
             new SkolaSoapClient().ZaciSmazat(id);
             return RedirectToAction("List");
         }
+
+        [HttpGet]
+        public ActionResult VratPocetZaku()
+        {
+            return Json(new Tuple<bool, int>(true, new SkolaSoapClient().ZaciPocet()), JsonRequestBehavior.AllowGet);
+        }
     }
 }

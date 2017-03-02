@@ -8,7 +8,12 @@
 
 <p>
     Celkový počet tříd: @ViewBag.PocetTrid
-    <br />
+    <br/>
+    Celkový počet tříd: <span class="pocetTrid">--</span>
+    <br/>
+    <input type="button" id="bt_pocetTrid" class="btn btn-primary" value="Získej počet tříd"/>
+    <br/>
+    <br/>
     @Html.ActionLink("Přidat třídu", "Create")
     |
     @Html.ActionLink("Přidat třídu custom", "CreateForm")
@@ -59,3 +64,22 @@
 }
 
 </table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bt_pocetTrid").click(function () {
+            var url = "@Url.Action("VratPocetTrid", "Trida")"
+
+            $.getJSON(url, null, function (data) {
+                if (data.Item1 === true)
+                {
+                    $(".pocetTrid").text(data.Item2);
+                }
+                else
+                {
+                    $(".pocetTrid").text("--");
+                }
+            });
+        });
+    });
+</script>

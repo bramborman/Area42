@@ -8,7 +8,12 @@
 
 <p>
     Celkový počet žáků: @ViewBag.PocetZaku
-    <br />
+    <br/>
+    Celkový počet žáků: <span class="pocetZaku">--</span>
+    <br/>
+    <input type="button" id="bt_pocetZaku" class="btn btn-primary" value="Získej počet žáků"/>
+    <br/>
+    <br/>
     @Html.ActionLink("Přidat žáka", "Create")
 </p>
 <table class="table">
@@ -96,3 +101,22 @@
 }
 
 </table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bt_pocetZaku").click(function () {
+            var url = "@Url.Action("VratPocetZaku", "Zak")"
+
+            $.getJSON(url, null, function (data) {
+                if (data.Item1 === true)
+                {
+                    $(".pocetZaku").text(data.Item2);
+                }
+                else
+                {
+                    $(".pocetZaku").text("--");
+                }
+            });
+        });
+    });
+</script>

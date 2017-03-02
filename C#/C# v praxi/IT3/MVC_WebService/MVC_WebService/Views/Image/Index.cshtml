@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Obrázky";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@for (int i = 170; i < 240; i++)
+{
+    string url = @Url.Action("GetImage", "Image") + $"/{i}";
+
+    <a href="@url" target="_blank">
+        <img src="@url" width="400" />
+    </a>
+}

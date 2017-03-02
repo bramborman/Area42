@@ -32,9 +32,14 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Test" ? "active" : "")">@Html.ActionLink("TEST", "Index", "Test")</li>
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Trida" ? "active" : "")">@Html.ActionLink("TŘÍDY", "List", "Trida")</li>
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Zak" ? "active" : "")">@Html.ActionLink("ŽÁCI", "List", "Zak")</li>
+                        @{ 
+                            string controllerName = ViewContext.RouteData.Values["Controller"].ToString();
+                        }
+
+                        <li class="@(controllerName == "Test" ? "active" : "")">@Html.ActionLink("TEST", "Index", "Test")</li>
+                        <li class="@(controllerName == "Trida" ? "active" : "")">@Html.ActionLink("TŘÍDY", "List", "Trida")</li>
+                        <li class="@(controllerName == "Zak" ? "active" : "")">@Html.ActionLink("ŽÁCI", "List", "Zak")</li>
+                        <li class="@(controllerName == "Image" ? "active" : "")">@Html.ActionLink("OBRÁZKY", "Index", "Image")</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         @{

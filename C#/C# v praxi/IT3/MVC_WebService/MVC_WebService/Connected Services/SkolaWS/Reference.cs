@@ -467,6 +467,98 @@ namespace MVC_WebService.SkolaWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Soubory", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class Soubory : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string popisField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] dataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nazevField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string popis {
+            get {
+                return this.popisField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.popisField, value) != true)) {
+                    this.popisField = value;
+                    this.RaisePropertyChanged("popis");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public byte[] data {
+            get {
+                return this.dataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.dataField, value) != true)) {
+                    this.dataField = value;
+                    this.RaisePropertyChanged("data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string nazev {
+            get {
+                return this.nazevField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nazevField, value) != true)) {
+                    this.nazevField = value;
+                    this.RaisePropertyChanged("nazev");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SkolaWS.SkolaSoap")]
     public interface SkolaSoap {
@@ -483,6 +575,9 @@ namespace MVC_WebService.SkolaWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TridaList", ReplyAction="*")]
         MVC_WebService.SkolaWS.TridaListResponse TridaList(MVC_WebService.SkolaWS.TridaListRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TridaPocet", ReplyAction="*")]
+        int TridaPocet();
+        
         // CODEGEN: Generating message contract since element name trida from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TridaCreate", ReplyAction="*")]
         MVC_WebService.SkolaWS.TridaCreateResponse TridaCreate(MVC_WebService.SkolaWS.TridaCreateRequest request);
@@ -494,6 +589,9 @@ namespace MVC_WebService.SkolaWS {
         // CODEGEN: Generating message contract since element name ZaciListResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZaciList", ReplyAction="*")]
         MVC_WebService.SkolaWS.ZaciListResponse ZaciList(MVC_WebService.SkolaWS.ZaciListRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZaciPocet", ReplyAction="*")]
+        int ZaciPocet();
         
         // CODEGEN: Generating message contract since element name item from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZaciCreate", ReplyAction="*")]
@@ -521,6 +619,14 @@ namespace MVC_WebService.SkolaWS {
         // CODEGEN: Generating message contract since element name Id from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZnamkaDelete", ReplyAction="*")]
         MVC_WebService.SkolaWS.ZnamkaDeleteResponse ZnamkaDelete(MVC_WebService.SkolaWS.ZnamkaDeleteRequest request);
+        
+        // CODEGEN: Generating message contract since element name popis from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SouborySave", ReplyAction="*")]
+        MVC_WebService.SkolaWS.SouborySaveResponse SouborySave(MVC_WebService.SkolaWS.SouborySaveRequest request);
+        
+        // CODEGEN: Generating message contract since element name SouborGetResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SouborGet", ReplyAction="*")]
+        MVC_WebService.SkolaWS.SouborGetResponse SouborGet(MVC_WebService.SkolaWS.SouborGetRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1262,6 +1368,143 @@ namespace MVC_WebService.SkolaWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SouborySaveRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SouborySave", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.SouborySaveRequestBody Body;
+        
+        public SouborySaveRequest() {
+        }
+        
+        public SouborySaveRequest(MVC_WebService.SkolaWS.SouborySaveRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SouborySaveRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string popis;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public byte[] data;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string nazev;
+        
+        public SouborySaveRequestBody() {
+        }
+        
+        public SouborySaveRequestBody(string popis, byte[] data, string nazev) {
+            this.popis = popis;
+            this.data = data;
+            this.nazev = nazev;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SouborySaveResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SouborySaveResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.SouborySaveResponseBody Body;
+        
+        public SouborySaveResponse() {
+        }
+        
+        public SouborySaveResponse(MVC_WebService.SkolaWS.SouborySaveResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SouborySaveResponseBody {
+        
+        public SouborySaveResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SouborGetRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SouborGet", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.SouborGetRequestBody Body;
+        
+        public SouborGetRequest() {
+        }
+        
+        public SouborGetRequest(MVC_WebService.SkolaWS.SouborGetRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SouborGetRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int id;
+        
+        public SouborGetRequestBody() {
+        }
+        
+        public SouborGetRequestBody(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SouborGetResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SouborGetResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.SouborGetResponseBody Body;
+        
+        public SouborGetResponse() {
+        }
+        
+        public SouborGetResponse(MVC_WebService.SkolaWS.SouborGetResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SouborGetResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public MVC_WebService.SkolaWS.Soubory SouborGetResult;
+        
+        public SouborGetResponseBody() {
+        }
+        
+        public SouborGetResponseBody(MVC_WebService.SkolaWS.Soubory SouborGetResult) {
+            this.SouborGetResult = SouborGetResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface SkolaSoapChannel : MVC_WebService.SkolaWS.SkolaSoap, System.ServiceModel.IClientChannel {
     }
@@ -1325,6 +1568,10 @@ namespace MVC_WebService.SkolaWS {
             return retVal.Body.TridaListResult;
         }
         
+        public int TridaPocet() {
+            return base.Channel.TridaPocet();
+        }
+        
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         MVC_WebService.SkolaWS.TridaCreateResponse MVC_WebService.SkolaWS.SkolaSoap.TridaCreate(MVC_WebService.SkolaWS.TridaCreateRequest request) {
             return base.Channel.TridaCreate(request);
@@ -1359,6 +1606,10 @@ namespace MVC_WebService.SkolaWS {
             inValue.Body = new MVC_WebService.SkolaWS.ZaciListRequestBody();
             MVC_WebService.SkolaWS.ZaciListResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).ZaciList(inValue);
             return retVal.Body.ZaciListResult;
+        }
+        
+        public int ZaciPocet() {
+            return base.Channel.ZaciPocet();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1436,6 +1687,33 @@ namespace MVC_WebService.SkolaWS {
             inValue.Body = new MVC_WebService.SkolaWS.ZnamkaDeleteRequestBody();
             inValue.Body.Id = Id;
             MVC_WebService.SkolaWS.ZnamkaDeleteResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).ZnamkaDelete(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.SouborySaveResponse MVC_WebService.SkolaWS.SkolaSoap.SouborySave(MVC_WebService.SkolaWS.SouborySaveRequest request) {
+            return base.Channel.SouborySave(request);
+        }
+        
+        public void SouborySave(string popis, byte[] data, string nazev) {
+            MVC_WebService.SkolaWS.SouborySaveRequest inValue = new MVC_WebService.SkolaWS.SouborySaveRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.SouborySaveRequestBody();
+            inValue.Body.popis = popis;
+            inValue.Body.data = data;
+            inValue.Body.nazev = nazev;
+            MVC_WebService.SkolaWS.SouborySaveResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).SouborySave(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.SouborGetResponse MVC_WebService.SkolaWS.SkolaSoap.SouborGet(MVC_WebService.SkolaWS.SouborGetRequest request) {
+            return base.Channel.SouborGet(request);
+        }
+        
+        public MVC_WebService.SkolaWS.Soubory SouborGet(int id) {
+            MVC_WebService.SkolaWS.SouborGetRequest inValue = new MVC_WebService.SkolaWS.SouborGetRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.SouborGetRequestBody();
+            inValue.Body.id = id;
+            MVC_WebService.SkolaWS.SouborGetResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).SouborGet(inValue);
+            return retVal.Body.SouborGetResult;
         }
     }
 }

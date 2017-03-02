@@ -48,6 +48,16 @@
           <s:element minOccurs="1" maxOccurs="1" name="Rocnik" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
+      <s:element name="TridaPocet">
+        <s:complexType />
+      </s:element>
+      <s:element name="TridaPocetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TridaPocetResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="TridaCreate">
         <s:complexType>
           <s:sequence>
@@ -96,6 +106,16 @@
           <s:element minOccurs="0" maxOccurs="1" name="ZmenenoKdo" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="ZaciPocet">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZaciPocetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ZaciPocetResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ZaciCreate">
         <s:complexType>
           <s:sequence>
@@ -197,6 +217,40 @@
       <s:element name="ZnamkaDeleteResponse">
         <s:complexType />
       </s:element>
+      <s:element name="SouborySave">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="popis" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="nazev" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SouborySaveResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SouborGet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SouborGetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SouborGetResult" type="tns:Soubory" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Soubory">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="popis" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="nazev" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="guid">
@@ -224,6 +278,12 @@
   <wsdl:message name="TridaListSoapOut">
     <wsdl:part name="parameters" element="tns:TridaListResponse" />
   </wsdl:message>
+  <wsdl:message name="TridaPocetSoapIn">
+    <wsdl:part name="parameters" element="tns:TridaPocet" />
+  </wsdl:message>
+  <wsdl:message name="TridaPocetSoapOut">
+    <wsdl:part name="parameters" element="tns:TridaPocetResponse" />
+  </wsdl:message>
   <wsdl:message name="TridaCreateSoapIn">
     <wsdl:part name="parameters" element="tns:TridaCreate" />
   </wsdl:message>
@@ -241,6 +301,12 @@
   </wsdl:message>
   <wsdl:message name="ZaciListSoapOut">
     <wsdl:part name="parameters" element="tns:ZaciListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZaciPocetSoapIn">
+    <wsdl:part name="parameters" element="tns:ZaciPocet" />
+  </wsdl:message>
+  <wsdl:message name="ZaciPocetSoapOut">
+    <wsdl:part name="parameters" element="tns:ZaciPocetResponse" />
   </wsdl:message>
   <wsdl:message name="ZaciCreateSoapIn">
     <wsdl:part name="parameters" element="tns:ZaciCreate" />
@@ -284,6 +350,18 @@
   <wsdl:message name="ZnamkaDeleteSoapOut">
     <wsdl:part name="parameters" element="tns:ZnamkaDeleteResponse" />
   </wsdl:message>
+  <wsdl:message name="SouborySaveSoapIn">
+    <wsdl:part name="parameters" element="tns:SouborySave" />
+  </wsdl:message>
+  <wsdl:message name="SouborySaveSoapOut">
+    <wsdl:part name="parameters" element="tns:SouborySaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="SouborGetSoapIn">
+    <wsdl:part name="parameters" element="tns:SouborGet" />
+  </wsdl:message>
+  <wsdl:message name="SouborGetSoapOut">
+    <wsdl:part name="parameters" element="tns:SouborGetResponse" />
+  </wsdl:message>
   <wsdl:portType name="SkolaSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -297,6 +375,10 @@
       <wsdl:input message="tns:TridaListSoapIn" />
       <wsdl:output message="tns:TridaListSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="TridaPocet">
+      <wsdl:input message="tns:TridaPocetSoapIn" />
+      <wsdl:output message="tns:TridaPocetSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="TridaCreate">
       <wsdl:input message="tns:TridaCreateSoapIn" />
       <wsdl:output message="tns:TridaCreateSoapOut" />
@@ -308,6 +390,10 @@
     <wsdl:operation name="ZaciList">
       <wsdl:input message="tns:ZaciListSoapIn" />
       <wsdl:output message="tns:ZaciListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZaciPocet">
+      <wsdl:input message="tns:ZaciPocetSoapIn" />
+      <wsdl:output message="tns:ZaciPocetSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ZaciCreate">
       <wsdl:input message="tns:ZaciCreateSoapIn" />
@@ -336,6 +422,14 @@
     <wsdl:operation name="ZnamkaDelete">
       <wsdl:input message="tns:ZnamkaDeleteSoapIn" />
       <wsdl:output message="tns:ZnamkaDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SouborySave">
+      <wsdl:input message="tns:SouborySaveSoapIn" />
+      <wsdl:output message="tns:SouborySaveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SouborGet">
+      <wsdl:input message="tns:SouborGetSoapIn" />
+      <wsdl:output message="tns:SouborGetSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SkolaSoap" type="tns:SkolaSoap">
@@ -367,6 +461,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="TridaPocet">
+      <soap:operation soapAction="http://tempuri.org/TridaPocet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="TridaCreate">
       <soap:operation soapAction="http://tempuri.org/TridaCreate" style="document" />
       <wsdl:input>
@@ -387,6 +490,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZaciList">
       <soap:operation soapAction="http://tempuri.org/ZaciList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZaciPocet">
+      <soap:operation soapAction="http://tempuri.org/ZaciPocet" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -457,6 +569,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SouborySave">
+      <soap:operation soapAction="http://tempuri.org/SouborySave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SouborGet">
+      <soap:operation soapAction="http://tempuri.org/SouborGet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="SkolaSoap12" type="tns:SkolaSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -487,6 +617,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="TridaPocet">
+      <soap12:operation soapAction="http://tempuri.org/TridaPocet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="TridaCreate">
       <soap12:operation soapAction="http://tempuri.org/TridaCreate" style="document" />
       <wsdl:input>
@@ -507,6 +646,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZaciList">
       <soap12:operation soapAction="http://tempuri.org/ZaciList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZaciPocet">
+      <soap12:operation soapAction="http://tempuri.org/ZaciPocet" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -570,6 +718,24 @@
     </wsdl:operation>
     <wsdl:operation name="ZnamkaDelete">
       <soap12:operation soapAction="http://tempuri.org/ZnamkaDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SouborySave">
+      <soap12:operation soapAction="http://tempuri.org/SouborySave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SouborGet">
+      <soap12:operation soapAction="http://tempuri.org/SouborGet" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

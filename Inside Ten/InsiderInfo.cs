@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using UWPHelper.Utilities;
-using Windows.ApplicationModel.Resources;
 using Windows.Networking.Connectivity;
 using Windows.Storage;
 using Windows.System;
@@ -38,13 +37,11 @@ namespace InsideTen
         {
             RegisterProperty(nameof(IsSuccessfullyLoaded), typeof(bool), false);
             RegisterProperty(nameof(IsLoading), typeof(bool), false);
-
-            ResourceLoader resourceLoader = ResourceLoader.GetForViewIndependentUse();
-
+            
             PC              = new DeviceInfo();
             Mobile          = new DeviceInfo();
-            Internal        = new BuildInfo(resourceLoader.GetString("InternalRing"));
-            InternalService = new BuildInfo(resourceLoader.GetString("InternalServiceRing"));
+            Internal        = new BuildInfo("Development branch");
+            InternalService = new BuildInfo("Current servicing branch");
         }
 
         public IEnumerator<BuildInfo> GetEnumerator()
@@ -142,11 +139,9 @@ namespace InsideTen
 
         public DeviceInfo()
         {
-            ResourceLoader resourceLoader = ResourceLoader.GetForViewIndependentUse();
-
-            Fast            = new BuildInfo(resourceLoader.GetString("FastRing"));
-            Slow            = new BuildInfo(resourceLoader.GetString("SlowRing"));
-            ReleasePreview  = new BuildInfo(resourceLoader.GetString("ReleasePreviewRing"));
+            Fast            = new BuildInfo("Fast");
+            Slow            = new BuildInfo("Slow");
+            ReleasePreview  = new BuildInfo("Release preview");
         }
 
         public IEnumerator<BuildInfo> GetEnumerator()

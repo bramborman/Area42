@@ -1,7 +1,6 @@
 ﻿using System;
 using UWPHelper.UI;
 using UWPHelper.Utilities;
-using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -35,9 +34,8 @@ namespace InsideTen
                 if (AppData.ShowLoadingError)
                 {
                     AppData.ShowLoadingError = false;
-                    ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
 
-                    if (await new LoadingErrorDialog(resourceLoader.GetString("LoadingErrorDialog/Settings"), resourceLoader.GetString("LoadingErrorDialog/ContinueWith")).ShowAsync() == ContentDialogResult.Primary)
+                    if (await new LoadingErrorDialog("settings", "with default settings").ShowAsync() == ContentDialogResult.Primary)
                     {
                         App.Current.Exit();
                     }

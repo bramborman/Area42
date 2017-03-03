@@ -77,9 +77,9 @@
                 </Border>
 
                 <TextBlock x:Name="TB_About"
-                           x:Uid="AboutInsideTen"
                            x:DeferLoadStrategy="Lazy"
                            Visibility="Collapsed"
+                           Text="Inside Ten lets you get the info about the latest builds that get released to the Windows Insider program. You can get info about Insider Fast, Slow, and more Insider rings here!"
                            TextWrapping="WrapWholeWords"
                            />
             </StackPanel>
@@ -97,18 +97,18 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button x:Uid="RefreshButton"
-                        Content="&#xE117;"
+                <Button Content="&#xE117;"
+                        ToolTipService.ToolTip="Refresh"
                         Click="RefreshAsync"
                         />
                 
-                <Button x:Uid="AboutInsideTenButton"
-                        Content="&#xE946;"
+                <Button Content="&#xE946;"
+                        ToolTipService.ToolTip="About Inside Ten"
                         Click="ToggleAbout"
                         />
 
-                <Button x:Uid="SettingsButton"
-                        Content="&#xE713;"
+                <Button Content="&#xE713;"
+                        ToolTipService.ToolTip="Settings"
                         Click="Settings"
                         />
             </StackPanel>
@@ -121,13 +121,16 @@
                     VerticalAlignment="Center"
                     Grid.Row="1"
                     >
-            <TextBlock x:Uid="NoContentUIText"
-                       TextAlignment="Center"
+            <TextBlock TextAlignment="Center"
                        Margin="{StaticResource TextBlockGapMargin}"
                        HorizontalAlignment="Center"
-                       />
+                       >
+                We were unable to connect to the internet and load some necessary data.
+                <LineBreak/>
+                Please check your internet connection and try again.
+            </TextBlock>
 
-            <Button x:Uid="NoContentUITryAgainButton"
+            <Button Content="TRY AGAIN"
                     FontWeight="SemiBold"
                     HorizontalAlignment="Center"
                     Click="RefreshAsync"
@@ -164,7 +167,7 @@
                                 <TextBlock Text="{x:Bind ReleaseDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:D}', Mode=OneWay}"/>
                             </StackPanel>
 
-                            <Button x:Uid="BuildInfoMore"
+                            <Button Content="MORE"
                                     FontWeight="SemiBold"
                                     Background="{StaticResource DarkOverlay}"
                                     IsEnabled="{x:Bind More, Converter={StaticResource StringIsNullOrWhiteSpaceConverter}, ConverterParameter=Invert, Mode=OneWay}"
@@ -204,30 +207,30 @@
                     </Style>
                 </ui:AdvancedPivot.Resources>
 
-                <PivotItem x:Uid="PC">
+                <PivotItem Header="PC">
                     <ScrollViewer>
                         <StackPanel>
-                            <TextBlock x:Uid="InsiderBuilds"
+                            <TextBlock Text="Windows Insider Builds"
                                        RequestedTheme="{x:Bind App.CurrentTheme, Mode=OneWay}"
                                        />
                             <GridView ItemsSource="{x:Bind InsiderInfo.PC}"/>
 
-                            <TextBlock x:Uid="InternalBuilds"
+                            <TextBlock Text="Internal Windows 10 Builds"
                                        RequestedTheme="{x:Bind App.CurrentTheme, Mode=OneWay}"
                                        />
                             <GridView ItemsSource="{x:Bind InsiderInfo}"/>
                         </StackPanel>
                     </ScrollViewer>
                 </PivotItem>
-                <PivotItem x:Uid="Mobile">
+                <PivotItem Header="MOBILE">
                     <ScrollViewer>
                         <StackPanel>
-                            <TextBlock x:Uid="InsiderBuilds"
+                            <TextBlock Text="Windows Insider Builds"
                                        RequestedTheme="{x:Bind App.CurrentTheme, Mode=OneWay}"
                                        />
                             <GridView ItemsSource="{x:Bind InsiderInfo.Mobile}"/>
 
-                            <TextBlock x:Uid="InternalBuilds"
+                            <TextBlock Text="Internal Windows 10 Builds"
                                        RequestedTheme="{x:Bind App.CurrentTheme, Mode=OneWay}"
                                        />
                             <GridView ItemsSource="{x:Bind InsiderInfo}"/>
@@ -245,12 +248,11 @@
                 <TextBlock x:Name="TB_LastUpdated"
                            x:DeferLoadStrategy="Lazy"
                            Visibility="Collapsed"
+                           Text="Last updated:"
                            Margin="{StaticResource WordSpaceRightMargin}"
                            VerticalAlignment="Center"
-                           >
-                    <Run x:Uid="LastUpdated"/>:
-                </TextBlock>
-                
+                           />
+
                 <TextBlock Text="{x:Bind AppData.InsiderInfoLastUpdate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:G}', Mode=OneWay}"
                            Margin="0,0,12,0"
                            VerticalAlignment="Center"

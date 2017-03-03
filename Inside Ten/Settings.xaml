@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <ui:PageHeader Content="{x:Bind Name}"
+        <ui:PageHeader Content="SETTINGS"
                        Background="{ThemeResource SystemControlBackgroundAccentBrush}"
                        RequestedTheme="{x:Bind AccentColorHelper.AccentContrastingTheme, Mode=OneWay}"
                        Grid.Row="0"

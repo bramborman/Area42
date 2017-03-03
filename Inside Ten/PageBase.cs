@@ -1,5 +1,4 @@
-﻿using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace InsideTen
@@ -9,7 +8,6 @@ namespace InsideTen
         public PageBase()
         {
             NavigationCacheMode = NavigationCacheMode.Required;
-            Name = ResourceLoader.GetForCurrentView().GetString($"{GetType().Name}Page/Name").ToUpper();
         }
     }
 }

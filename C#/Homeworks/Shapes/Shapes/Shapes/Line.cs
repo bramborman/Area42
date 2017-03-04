@@ -14,8 +14,8 @@ namespace Shapes.Shapes
             int size = Sides[0].Size;
             int left = (Console.WindowWidth - size) / 2;
 
-            Console.SetCursorPosition(left - 2, Console.WindowHeight / 2);
-            Console.WriteLine("A " + GetLineString(size) + " B");
+            Console.SetCursorPosition(left, Console.WindowHeight / 2);
+            Console.Write(GetLineString(size));
         }
     }
 }

@@ -99,7 +99,7 @@ namespace Shapes.Shapes
             }
         }
         
-        private void DrawRightTriangle(bool leftFacing, bool erase, int cursorLeft, int width, int height)
+        public static void DrawRightTriangle(bool leftFacing, bool erase, int cursorLeft, int width, int height)
         {
             double ratio = (double)width / height;
 

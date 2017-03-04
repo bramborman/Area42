@@ -18,12 +18,12 @@ namespace Shapes
 
             Dictionary<string, Func<ShapeBase>> shapes = new Dictionary<string, Func<ShapeBase>>
             {
-                { "Čára",           () => new Line()            },
+                { "Úsečka",         () => new Line()            },
                 //{ "Kruh",           () => new Circle()          },
                 { "Trojúhelník",    () => new Triangle()        },
                 { "Čtverec",        () => new Rectangle(true)   },
                 { "Obdélník",       () => new Rectangle(false)  },
-                //{ "Lichoběžník",    () => new Trapezoid()       },
+                { "Lichoběžník",    () => new Trapezoid()       },
                 { "Konec",          () => null                  }
             };
 

@@ -15,15 +15,9 @@ namespace Shapes.Shapes
         {
             int a       = Sides[0].Size;
             int b       = IsSquare ? a : Sides[1].Size;
-            int left    = (Console.WindowWidth - Sides[0].Size) / 2;
+            int left    = (Console.WindowWidth - a) / 2;
             string line = GetLineString(a);
-
-            Console.SetCursorPosition(left - 1, ((Console.WindowHeight - b) / 2) - 1);
-            Console.Write('D');
-
-            Console.CursorLeft += a;
-            Console.Write('C');
-
+            
             Console.CursorTop = (Console.WindowHeight - b) / 2;
 
             for (int i = 0; i < b; i++)
@@ -31,12 +25,6 @@ namespace Shapes.Shapes
                 Console.CursorLeft = left;
                 Console.WriteLine(line);
             }
-
-            Console.CursorLeft = left - 1;
-            Console.Write('A');
-
-            Console.CursorLeft += a;
-            Console.Write('B');
         }
     }
 }

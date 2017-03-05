@@ -4,10 +4,25 @@ namespace Shapes.Shapes
 {
     public sealed class Triangle : ShapeBase
     {
-        private const string THIRD_SIDE_NAME     = "CA";
+        private const string THIRD_SIDE_NAME     = "b";
         private const double RIGHT_ANGLE_RADIANS = Math.PI / 2;
 
-        public Triangle() : base(new Side("AB", 2, Math.Min((MaxHeight * 2) - 1, MaxWidth)), new Side("BC", 2, MaxHeight), new Side(THIRD_SIDE_NAME, 2, MaxHeight))
+#pragma warning disable IDE1006 // Naming Styles
+        public int a
+        {
+            get { return Sides[1].Size; }
+        }
+        public int b
+        {
+            get { return Sides[2].Size; }
+        }
+        public int c
+        {
+            get { return Sides[0].Size; }
+        }
+#pragma warning restore IDE1006 // Naming Styles
+
+        public Triangle() : base(new Side("c", 2, Math.Min((MaxHeight * 2) - 1, MaxWidth)), new Side("a", 2, MaxHeight), new Side(THIRD_SIDE_NAME, 2, MaxHeight))
         {
 
         }
@@ -42,10 +57,6 @@ namespace Shapes.Shapes
 
         protected override void Draw()
         {
-            int a = Sides[1].Size;
-            int b = Sides[2].Size;
-            int c = Sides[0].Size;
-            
             double cosAlpha = (Math.Pow(b, 2) + Math.Pow(c, 2) - Math.Pow(a, 2)) / (2*b*c);
             double alpha    = Math.Acos(cosAlpha);
             
@@ -99,7 +110,7 @@ namespace Shapes.Shapes
             }
         }
         
-        public static void DrawRightTriangle(bool leftFacing, bool erase, int cursorLeft, int width, int height)
+        private void DrawRightTriangle(bool leftFacing, bool erase, int cursorLeft, int width, int height)
         {
             double ratio = (double)width / height;
 

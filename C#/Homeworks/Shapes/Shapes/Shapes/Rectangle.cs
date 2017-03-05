@@ -4,6 +4,16 @@ namespace Shapes.Shapes
 {
     public sealed class Rectangle : ShapeBase
     {
+#pragma warning disable IDE1006 // Naming Styles
+        public int a
+        {
+            get { return Sides[0].Size; }
+        }
+        public int b
+        {
+            get { return IsSquare ? a : Sides[1].Size; }
+        }
+#pragma warning restore IDE1006 // Naming Styles
         public bool IsSquare { get; }
 
         public Rectangle(bool isSquare) : base(new Side("a", 2, isSquare ? Math.Min(MaxWidth, MaxHeight) : MaxWidth), isSquare ? null : new Side("b", 2, MaxHeight))
@@ -13,8 +23,6 @@ namespace Shapes.Shapes
 
         protected override void Draw()
         {
-            int a       = Sides[0].Size;
-            int b       = IsSquare ? a : Sides[1].Size;
             int left    = (Console.WindowWidth - a) / 2;
             string line = GetLineString(a);
             

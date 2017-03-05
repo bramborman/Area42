@@ -55,7 +55,7 @@ namespace Shapes.Shapes
 
         protected abstract void Draw();
 
-        protected static string GetLineString(int length)
+        protected string GetLineString(int length)
         {
             return new string('#', length);
         }

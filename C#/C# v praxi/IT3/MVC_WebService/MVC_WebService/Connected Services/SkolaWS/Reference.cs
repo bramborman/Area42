@@ -487,6 +487,9 @@ namespace MVC_WebService.SkolaWS {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nazevField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] dataMiniField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -545,6 +548,19 @@ namespace MVC_WebService.SkolaWS {
                 if ((object.ReferenceEquals(this.nazevField, value) != true)) {
                     this.nazevField = value;
                     this.RaisePropertyChanged("nazev");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public byte[] dataMini {
+            get {
+                return this.dataMiniField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.dataMiniField, value) != true)) {
+                    this.dataMiniField = value;
+                    this.RaisePropertyChanged("dataMini");
                 }
             }
         }
@@ -627,6 +643,14 @@ namespace MVC_WebService.SkolaWS {
         // CODEGEN: Generating message contract since element name SouborGetResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SouborGet", ReplyAction="*")]
         MVC_WebService.SkolaWS.SouborGetResponse SouborGet(MVC_WebService.SkolaWS.SouborGetRequest request);
+        
+        // CODEGEN: Generating message contract since element name SouborGetMiniaturaResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SouborGetMiniatura", ReplyAction="*")]
+        MVC_WebService.SkolaWS.SouborGetMiniaturaResponse SouborGetMiniatura(MVC_WebService.SkolaWS.SouborGetMiniaturaRequest request);
+        
+        // CODEGEN: Generating message contract since element name SouborGetListResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SouborGetList", ReplyAction="*")]
+        MVC_WebService.SkolaWS.SouborGetListResponse SouborGetList(MVC_WebService.SkolaWS.SouborGetListRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1505,6 +1529,135 @@ namespace MVC_WebService.SkolaWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SouborGetMiniaturaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SouborGetMiniatura", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.SouborGetMiniaturaRequestBody Body;
+        
+        public SouborGetMiniaturaRequest() {
+        }
+        
+        public SouborGetMiniaturaRequest(MVC_WebService.SkolaWS.SouborGetMiniaturaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SouborGetMiniaturaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int id;
+        
+        public SouborGetMiniaturaRequestBody() {
+        }
+        
+        public SouborGetMiniaturaRequestBody(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SouborGetMiniaturaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SouborGetMiniaturaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.SouborGetMiniaturaResponseBody Body;
+        
+        public SouborGetMiniaturaResponse() {
+        }
+        
+        public SouborGetMiniaturaResponse(MVC_WebService.SkolaWS.SouborGetMiniaturaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SouborGetMiniaturaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public byte[] SouborGetMiniaturaResult;
+        
+        public SouborGetMiniaturaResponseBody() {
+        }
+        
+        public SouborGetMiniaturaResponseBody(byte[] SouborGetMiniaturaResult) {
+            this.SouborGetMiniaturaResult = SouborGetMiniaturaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SouborGetListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SouborGetList", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.SouborGetListRequestBody Body;
+        
+        public SouborGetListRequest() {
+        }
+        
+        public SouborGetListRequest(MVC_WebService.SkolaWS.SouborGetListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SouborGetListRequestBody {
+        
+        public SouborGetListRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SouborGetListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SouborGetListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public MVC_WebService.SkolaWS.SouborGetListResponseBody Body;
+        
+        public SouborGetListResponse() {
+        }
+        
+        public SouborGetListResponse(MVC_WebService.SkolaWS.SouborGetListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SouborGetListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public MVC_WebService.SkolaWS.Soubory[] SouborGetListResult;
+        
+        public SouborGetListResponseBody() {
+        }
+        
+        public SouborGetListResponseBody(MVC_WebService.SkolaWS.Soubory[] SouborGetListResult) {
+            this.SouborGetListResult = SouborGetListResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface SkolaSoapChannel : MVC_WebService.SkolaWS.SkolaSoap, System.ServiceModel.IClientChannel {
     }
@@ -1714,6 +1867,31 @@ namespace MVC_WebService.SkolaWS {
             inValue.Body.id = id;
             MVC_WebService.SkolaWS.SouborGetResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).SouborGet(inValue);
             return retVal.Body.SouborGetResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.SouborGetMiniaturaResponse MVC_WebService.SkolaWS.SkolaSoap.SouborGetMiniatura(MVC_WebService.SkolaWS.SouborGetMiniaturaRequest request) {
+            return base.Channel.SouborGetMiniatura(request);
+        }
+        
+        public byte[] SouborGetMiniatura(int id) {
+            MVC_WebService.SkolaWS.SouborGetMiniaturaRequest inValue = new MVC_WebService.SkolaWS.SouborGetMiniaturaRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.SouborGetMiniaturaRequestBody();
+            inValue.Body.id = id;
+            MVC_WebService.SkolaWS.SouborGetMiniaturaResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).SouborGetMiniatura(inValue);
+            return retVal.Body.SouborGetMiniaturaResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MVC_WebService.SkolaWS.SouborGetListResponse MVC_WebService.SkolaWS.SkolaSoap.SouborGetList(MVC_WebService.SkolaWS.SouborGetListRequest request) {
+            return base.Channel.SouborGetList(request);
+        }
+        
+        public MVC_WebService.SkolaWS.Soubory[] SouborGetList() {
+            MVC_WebService.SkolaWS.SouborGetListRequest inValue = new MVC_WebService.SkolaWS.SouborGetListRequest();
+            inValue.Body = new MVC_WebService.SkolaWS.SouborGetListRequestBody();
+            MVC_WebService.SkolaWS.SouborGetListResponse retVal = ((MVC_WebService.SkolaWS.SkolaSoap)(this)).SouborGetList(inValue);
+            return retVal.Body.SouborGetListResult;
         }
     }
 }

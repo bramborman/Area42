@@ -249,6 +249,36 @@
           <s:element minOccurs="0" maxOccurs="1" name="popis" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="data" type="s:base64Binary" />
           <s:element minOccurs="0" maxOccurs="1" name="nazev" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dataMini" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SouborGetMiniatura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SouborGetMiniaturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SouborGetMiniaturaResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SouborGetList">
+        <s:complexType />
+      </s:element>
+      <s:element name="SouborGetListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SouborGetListResult" type="tns:ArrayOfSoubory" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSoubory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Soubory" nillable="true" type="tns:Soubory" />
         </s:sequence>
       </s:complexType>
     </s:schema>
@@ -362,6 +392,18 @@
   <wsdl:message name="SouborGetSoapOut">
     <wsdl:part name="parameters" element="tns:SouborGetResponse" />
   </wsdl:message>
+  <wsdl:message name="SouborGetMiniaturaSoapIn">
+    <wsdl:part name="parameters" element="tns:SouborGetMiniatura" />
+  </wsdl:message>
+  <wsdl:message name="SouborGetMiniaturaSoapOut">
+    <wsdl:part name="parameters" element="tns:SouborGetMiniaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="SouborGetListSoapIn">
+    <wsdl:part name="parameters" element="tns:SouborGetList" />
+  </wsdl:message>
+  <wsdl:message name="SouborGetListSoapOut">
+    <wsdl:part name="parameters" element="tns:SouborGetListResponse" />
+  </wsdl:message>
   <wsdl:portType name="SkolaSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -430,6 +472,14 @@
     <wsdl:operation name="SouborGet">
       <wsdl:input message="tns:SouborGetSoapIn" />
       <wsdl:output message="tns:SouborGetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SouborGetMiniatura">
+      <wsdl:input message="tns:SouborGetMiniaturaSoapIn" />
+      <wsdl:output message="tns:SouborGetMiniaturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SouborGetList">
+      <wsdl:input message="tns:SouborGetListSoapIn" />
+      <wsdl:output message="tns:SouborGetListSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SkolaSoap" type="tns:SkolaSoap">
@@ -587,6 +637,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SouborGetMiniatura">
+      <soap:operation soapAction="http://tempuri.org/SouborGetMiniatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SouborGetList">
+      <soap:operation soapAction="http://tempuri.org/SouborGetList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="SkolaSoap12" type="tns:SkolaSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -736,6 +804,24 @@
     </wsdl:operation>
     <wsdl:operation name="SouborGet">
       <soap12:operation soapAction="http://tempuri.org/SouborGet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SouborGetMiniatura">
+      <soap12:operation soapAction="http://tempuri.org/SouborGetMiniatura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SouborGetList">
+      <soap12:operation soapAction="http://tempuri.org/SouborGetList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

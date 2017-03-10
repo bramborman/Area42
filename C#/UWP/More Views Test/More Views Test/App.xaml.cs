@@ -13,15 +13,17 @@ namespace MoreViewsTest
 {
     public sealed partial class App : Application
     {
+        private int windowCount = 0;
+
         public App()
         {
             InitializeComponent();
             Suspending += OnSuspending;
         }
 
-        protected override async void OnActivated(IActivatedEventArgs args)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            if (args.PreviousExecutionState == ApplicationExecutionState.Running)
+            if (e.PreviousExecutionState == ApplicationExecutionState.Running)
             {
                 CoreApplicationView newView = CoreApplication.CreateNewView();
                 int newViewId = 0;
@@ -33,14 +35,13 @@ namespace MoreViewsTest
 
                     frame.RequestedTheme = AppData.Current.Theme;
 
-                    frame.Navigate(typeof(MainPage));
+                    frame.Navigate(typeof(MainPage), new MainPage.NavigationParameters(null, ++windowCount));
                     Window.Current.Activate();
 
                     newViewId = ApplicationView.GetForCurrentView().Id;
                     BarsHelper.Current.InitializeForCurrentAdditionalView();
                 });
-
-                //TODO: Close another views when main view is closed since after that new view cannot be displayed
+                
                 await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
                 return;
             }
@@ -55,26 +56,20 @@ namespace MoreViewsTest
                 Window.Current.Content = rootFrame;
             }
             
-            LaunchActivatedEventArgs launchArgs = args as LaunchActivatedEventArgs;
             rootFrame.RequestedTheme = AppData.Current.Theme;
             BarsHelper.Current.InitializeForCurrentView(BarsHelperColorMode.Themed, () => AppData.Current.Theme, AppData.Current, nameof(AppData.Theme));
 
-            if (launchArgs?.PrelaunchActivated != true)
+            if (!e.PrelaunchActivated)
             {
                 if (rootFrame.Content == null)
                 {
-                    rootFrame.Navigate(typeof(MainPage), launchArgs?.Arguments);
+                    rootFrame.Navigate(typeof(MainPage), new MainPage.NavigationParameters(e.Arguments, ++windowCount));
                 }
 
                 Window.Current.Activate();
             }
         }
-
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
-        {
-            OnActivated(e);
-        }
-
+        
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
@@ -82,7 +77,7 @@ namespace MoreViewsTest
         
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
+            SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
             deferral.Complete();
         }
     }

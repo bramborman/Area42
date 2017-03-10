@@ -11,6 +11,14 @@
                        HorizontalAlignment="Center"
                        Margin="{StaticResource TextBlockGapMargin}"
                        />-->
+            
+            <TextBlock HorizontalAlignment="Center"
+                       Margin="{StaticResource TextBlockGapMargin}"
+                       >
+                Current window number: <Run Text="{x:Bind CurrentWindowNumber}"/>
+                <LineBreak/>
+                Current view ID: <Run Text="{x:Bind CurrentViewId}"/>
+            </TextBlock>
 
             <Button Content="Change theme"
                     HorizontalAlignment="Center"

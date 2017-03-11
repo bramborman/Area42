@@ -42,7 +42,7 @@ namespace MoreViewsTest
                     BarsHelper.Current.InitializeForCurrentAdditionalView();
                 });
                 
-                await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
+                await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId, ViewSizePreference.Default, e.CurrentlyShownApplicationViewId, ViewSizePreference.Default);
                 return;
             }
 

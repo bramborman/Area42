@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using UWPHelper.Utilities;
@@ -14,6 +15,8 @@ namespace InsideTen
     public sealed class InsiderInfo : NotifyPropertyChangedBase, IEnumerable<BuildInfo>
     {
         private const string FILE_NAME = "InsideTenApi.json";
+
+        private static readonly StorageFolder folder = ApplicationData.Current.LocalCacheFolder;
 
         public static InsiderInfo Current { get; private set; }
         public static bool ShowLoadingError { get; set; }
@@ -66,7 +69,7 @@ namespace InsideTen
             bool internalChanged                = Internal.AssignFromInsideTenApiBuildInfo(insideTenApi.@internal);
             bool internalServiceChanged         = InternalService.AssignFromInsideTenApiBuildInfo(insideTenApi.internalservice);
 
-            DebugHelper.OperationInfo(nameof(InsiderInfo), "assigning", true);
+            TraceHelper.OperationInfo(nameof(InsiderInfo), "assigning", true);
             return pcFastChanged || pcSlowChanged || pcReleasePreviewChanged || mobileFastChanged || mobileSlowChanged || mobileReleasePreviewChanged || internalChanged || internalServiceChanged;
         }
         
@@ -87,18 +90,32 @@ namespace InsideTen
                 using (HttpClient httpClient = new HttpClient())
                 {
                     string insideTenApiJson = await httpClient.GetStringAsync("https://raw.githubusercontent.com/MehediH/InsideTen/gh-pages/api.json");
-                    DebugHelper.OperationInfo("Inside Ten api.json", "downloading", true);
+                    TraceHelper.OperationInfo("Inside Ten api.json", "downloading", true);
 
                     if (!string.IsNullOrWhiteSpace(insideTenApiJson))
                     {
-                        if (Current.AssignFromInsideTenApi(await Task.Run(() => JsonConvert.DeserializeObject<InsideTenApi>(insideTenApiJson))))
+                        bool assignFromInsideTenApiResult = Current.AssignFromInsideTenApi(await Task.Run(() => JsonConvert.DeserializeObject<InsideTenApi>(insideTenApiJson)));
+
+                        if (assignFromInsideTenApiResult || AppData.Current.InsiderInfoLastUpdate == null)
                         {
                             AppData.Current.InsiderInfoLastUpdate = DateTime.Now;
-                            System.Diagnostics.Debug.WriteLine($"{nameof(InsiderInfo)} data was updated at {AppData.Current.InsiderInfoLastUpdate:HH:mm:ss}");
+
+                            if (assignFromInsideTenApiResult)
+                            {
+                                Debug.WriteLine($"{nameof(InsiderInfo)}.{nameof(Current)} updated at {AppData.Current.InsiderInfoLastUpdate:HH:mm:ss}");
+                            }
                         }
 
                         Current.IsSuccessfullyLoaded = true;
-                        await FileIO.WriteTextAsync(await ApplicationData.Current.LocalFolder.CreateFileAsync(FILE_NAME, CreationCollisionOption.OpenIfExists), insideTenApiJson);
+
+                        try
+                        {
+                            await FileIO.WriteTextAsync(await folder.CreateFileAsync(FILE_NAME, CreationCollisionOption.OpenIfExists), insideTenApiJson);
+                        }
+                        catch
+                        {
+
+                        }
                     }
                 }
             }
@@ -106,8 +123,7 @@ namespace InsideTen
             {
                 try
                 {
-                    StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(FILE_NAME);
-
+                    StorageFile file = await folder.GetFileAsync(FILE_NAME);
                     string json = await FileIO.ReadTextAsync(file);
 
                     if (!string.IsNullOrWhiteSpace(json))
@@ -125,8 +141,7 @@ namespace InsideTen
                     ShowLoadingError = true;
                 }
             }
-
-
+            
             Current.IsLoading = false;
         }
     }

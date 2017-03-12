@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using UWPHelper.Utilities;
+using UWPHelper.UI;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -86,8 +86,9 @@ namespace InsideTen
                 };
 
                 Window.Current.Content = rootFrame;
-                AccentColorHelper.Current.IsActive = true;
-                BarsHelper.Current.InitializeForCurrentView(BarsHelperColorMode.Accent, () => ElementTheme.Default);
+                await BarsHelper.Current.SetTitleBarColorModeAsync(BarsHelperColorMode.Accent);
+                await BarsHelper.Current.SetStatusBarColorModeAsync(BarsHelperColorMode.Accent);
+                await BarsHelper.Current.InitializeForCurrentViewAsync();
 
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
                 {

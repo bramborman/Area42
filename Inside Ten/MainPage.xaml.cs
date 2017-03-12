@@ -1,6 +1,5 @@
 ﻿using System;
 using UWPHelper.UI;
-using UWPHelper.Utilities;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -11,10 +10,6 @@ namespace InsideTen
         private App App
         {
             get { return App.Current; }
-        }
-        private AccentColorHelper AccentColorHelper
-        {
-            get { return AccentColorHelper.Current; }
         }
         private AppData AppData
         {

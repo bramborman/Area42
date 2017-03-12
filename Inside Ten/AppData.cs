@@ -25,9 +25,10 @@ namespace InsideTen
             get { return (bool)GetValue(); }
             set { SetValue(value); }
         }
-        public DateTime InsiderInfoLastUpdate
+        //TODO: move somewhere else
+        public DateTime? InsiderInfoLastUpdate
         {
-            get { return (DateTime)GetValue(); }
+            get { return (DateTime?)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -35,7 +36,7 @@ namespace InsideTen
         {
             RegisterProperty(nameof(ShowAbout), typeof(bool), true);
             RegisterProperty(nameof(ShowMobile), typeof(bool), AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile");
-            RegisterProperty(nameof(InsiderInfoLastUpdate), typeof(DateTime), new DateTime());
+            RegisterProperty(nameof(InsiderInfoLastUpdate), typeof(DateTime?), null);
         }
 
         public Task SaveAsync()

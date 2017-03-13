@@ -17,7 +17,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Inside Ten_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>18178452B5DDE08731B54CB55D6448AA45867DAA</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>3D160721DBE8FF8C12761BB61DF6DDB93E9B59F6</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
@@ -118,7 +118,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\Icons\AppList.altform-unplated_targetsize-16.png" />
     <Content Include="Assets\Icons\AppList.altform-unplated_targetsize-24.png" />
     <Content Include="Assets\Icons\AppList.altform-unplated_targetsize-256.png" />
@@ -165,7 +164,8 @@
     <Content Include="Assets\Icons\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Icons\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\NinjaBottom.png" />
-    <Content Include="Assets\AppLogo.png" />
+    <Content Include="Assets\AboutAppIcon.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>

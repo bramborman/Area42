@@ -1,0 +1,38 @@
+﻿<local:PageBase x:Class="InsideTen.Settings"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:local="using:InsideTen"
+                xmlns:ui="using:UWPHelper.UI"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                mc:Ignorable="d"
+                >
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <ui:PageHeader Content="SETTINGS"
+                       Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                       RequestedTheme="{x:Bind AccentColorHelper.AccentContrastingTheme, Mode=OneWay}"
+                       Grid.Row="0"
+                       />
+
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Transitions="{StaticResource ContentTransitions}"
+                      Grid.Row="1"
+                      >
+            <StackPanel Style="{StaticResource ContentStackPanel}">
+                <ui:AboutApp AppStoreId="9nblggh42jgh"
+                             AppUri="md-insideten:"
+                             AppDeveloperMail="mariandolinsky@outlook.com"
+                             IsGitHubLinkEnabled="True"
+                             GitHubProjectName="InsideTenUWP"
+                             GitHubLinkUrl="https://github.com/bramborman/InsideTenUWP"
+                             />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</local:PageBase>

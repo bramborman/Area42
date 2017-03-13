@@ -1,0 +1,50 @@
+{
+    "pcwrp": {
+        "build": "14393.479",
+        "version": "Redstone 1",
+        "more": "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/",
+        "release_date": "30th November, 2016"
+    },
+    "pcwif": {
+        "build": "14971",
+        "version": "Redstone 2",
+        "more": "https://blogs.windows.com/windowsexperience/2016/11/17/announcing-windows-10-insider-preview-build-14971-for-pc/#07zJMYFdsds5Gemu.97",
+        "release_date": "17th November, 2016"
+    },
+    "pcwis": {
+        "build": "14965",
+        "version": "Redstone 1",
+        "more": "https://mspoweruser.com/windows-10-build-14965-for-pcs-released-to-insiders-in-the-slow-ring/",
+        "release_date": "15th November, 2016"
+    },
+    "mowrp": {
+        "build": "14393.479",
+        "version": "Redstone 1",
+        "more": "https://mspoweruser.com/build-14393-479-windows-10-rolling-insiders-pc-mobile/",
+        "release_date": "30th November, 2016"
+    },
+    "mowif": {
+        "build": "14965",
+        "version": "Redstone 2",
+        "more": "https://blogs.windows.com/windowsexperience/2016/11/09/announcing-windows-10-insider-preview-build-14965-for-mobile-and-pc/",
+        "release_date": "9th November, 2016"
+    },
+    "mowis": {
+        "build": "14965",
+        "version": "Redstone 1",
+        "more": "https://mspoweruser.com/windows-10-build-14965-for-pcs-released-to-insiders-in-the-slow-ring/",
+        "release_date": "16th November, 2016"
+    },
+    "internal":{
+        "build": "14983",
+        "version": "Redstone 2",
+        "more": "",
+        "release_date": "1st December, 2016"
+    },
+    "internalservice":{
+        "build": "14393.479",
+        "version": "Redstone 1",
+        "more": "",
+        "release_date": "28th November, 2016"
+    }
+}

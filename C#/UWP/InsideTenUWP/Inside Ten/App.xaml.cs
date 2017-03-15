@@ -86,6 +86,7 @@ namespace InsideTen
                 };
 
                 Window.Current.Content = rootFrame;
+
                 await BarsHelper.Current.SetTitleBarColorModeAsync(BarsHelperColorMode.Accent);
                 await BarsHelper.Current.SetStatusBarColorModeAsync(BarsHelperColorMode.Accent);
                 await BarsHelper.Current.InitializeForCurrentViewAsync();

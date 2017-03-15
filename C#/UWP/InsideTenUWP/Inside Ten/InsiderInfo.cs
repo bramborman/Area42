@@ -69,7 +69,7 @@ namespace InsideTen
             bool internalChanged                = Internal.AssignFromInsideTenApiBuildInfo(insideTenApi.@internal);
             bool internalServiceChanged         = InternalService.AssignFromInsideTenApiBuildInfo(insideTenApi.internalservice);
 
-            TraceHelper.OperationInfo(nameof(InsiderInfo), "assigning", true);
+            Debug.WriteLine(DebugHelper.GetOperationInfoString(nameof(InsiderInfo), "assigning", true));
             return pcFastChanged || pcSlowChanged || pcReleasePreviewChanged || mobileFastChanged || mobileSlowChanged || mobileReleasePreviewChanged || internalChanged || internalServiceChanged;
         }
         
@@ -90,7 +90,7 @@ namespace InsideTen
                 using (HttpClient httpClient = new HttpClient())
                 {
                     string insideTenApiJson = await httpClient.GetStringAsync("https://raw.githubusercontent.com/MehediH/InsideTen/gh-pages/api.json");
-                    TraceHelper.OperationInfo("Inside Ten api.json", "downloading", true);
+                    Debug.WriteLine(DebugHelper.GetOperationInfoString("Inside Ten api.json", "downloading", true));
 
                     if (!string.IsNullOrWhiteSpace(insideTenApiJson))
                     {

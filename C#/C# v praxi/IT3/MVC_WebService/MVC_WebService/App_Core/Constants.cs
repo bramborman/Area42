@@ -1,4 +1,4 @@
-﻿namespace MVC_WebService
+﻿namespace MVC_WebService.App_Core
 {
     public static class Constants
     {

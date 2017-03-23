@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Logy";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Cacheované obrázky</h3>
+@foreach (string cachedFileName in ViewBag.CachedFileNames)
+{
+    <span>@cachedFileName</span>
+    @:<br/>
+}
+
+<h3>Navigation log</h3>
+@Html.Raw(ViewBag.NavigationLog)

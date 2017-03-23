@@ -1,4 +1,5 @@
-﻿using MVC_WebService.Models;
+﻿using MVC_WebService.App_Core;
+using MVC_WebService.Models;
 using MVC_WebService.SkolaWS;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,13 @@ namespace MVC_WebService.Controllers
 
             if (miniature)
             {
-                data = new SkolaSoapClient().SouborGetMiniatura(id);
+                data = GalleryCache.ReadImage(id);
+
+                if (data == null)
+                {
+                    data = new SkolaSoapClient().SouborGetMiniatura(id);
+                    GalleryCache.SaveImage(id, data);
+                }
             }
             else
             {

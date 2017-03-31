@@ -30,14 +30,13 @@ namespace ConsoleApplication22
 
             do
             {
-                Console.Write("Zadej cislo 1 - 100: ");
-            } while (!int.TryParse(Console.ReadLine(), out count) || count < 1 || count > 100);
+                Console.Write("Zadej cislo 10 - 100: ");
+            } while (!int.TryParse(Console.ReadLine(), out count) || count < 10 || count > 100);
 
             Console.Clear();
             
-            int poniesCapacity = count + 1;
             Random random      = new Random();
-            Queue<Pony> ponies = new Queue<Pony>(poniesCapacity);
+            Queue<Pony> ponies = new Queue<Pony>(count);
 
             Console.CursorVisible = false;
             
@@ -52,7 +51,7 @@ namespace ConsoleApplication22
                 pony.Draw();
                 ponies.Enqueue(pony);
                 
-                if (ponies.Count == poniesCapacity - 1)
+                if (ponies.Count == count)
                 {
                     ponies.Dequeue().Clear();
                 }

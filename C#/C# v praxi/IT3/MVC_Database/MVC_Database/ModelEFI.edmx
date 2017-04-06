@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseSchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SkolaZaci">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Jmeno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prijmeni" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RodneCislo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="JeMuz" Type="bit" />
+          <Property Name="Trida" Type="nvarchar" MaxLength="50" />
+          <Property Name="Studuje" Type="bit" />
+          <Property Name="DatumZmeny" Type="datetime" Nullable="false" />
+          <Property Name="AutorZmeny" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DatabaseSchoolModelStoreContainer">
+          <EntitySet Name="SkolaZaci" EntityType="Self.SkolaZaci" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseSchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SkolaZaci">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Jmeno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prijmeni" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RodneCislo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JeMuz" Type="Boolean" />
+          <Property Name="Trida" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Studuje" Type="Boolean" />
+          <Property Name="DatumZmeny" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AutorZmeny" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DatabaseSchoolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SkolaZacis" EntityType="Self.SkolaZaci" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseSchoolModelStoreContainer" CdmEntityContainer="DatabaseSchoolEntities">
+          <EntitySetMapping Name="SkolaZacis">
+            <EntityTypeMapping TypeName="DatabaseSchoolModel.SkolaZaci">
+              <MappingFragment StoreEntitySet="SkolaZaci">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Jmeno" ColumnName="Jmeno" />
+                <ScalarProperty Name="Prijmeni" ColumnName="Prijmeni" />
+                <ScalarProperty Name="RodneCislo" ColumnName="RodneCislo" />
+                <ScalarProperty Name="JeMuz" ColumnName="JeMuz" />
+                <ScalarProperty Name="Trida" ColumnName="Trida" />
+                <ScalarProperty Name="Studuje" ColumnName="Studuje" />
+                <ScalarProperty Name="DatumZmeny" ColumnName="DatumZmeny" />
+                <ScalarProperty Name="AutorZmeny" ColumnName="AutorZmeny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

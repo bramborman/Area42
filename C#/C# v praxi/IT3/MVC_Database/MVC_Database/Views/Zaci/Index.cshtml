@@ -1,7 +1,74 @@
-﻿
+﻿@model IEnumerable<MVC_Database.Models.SkolaZaciModel>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Seznam žáků";
 }
 
 <h2>@ViewBag.Title</h2>
 
+<p>
+    @Html.ActionLink("Přidat žáka", "AddZak")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Jmeno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prijmeni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RodneCislo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JeMuz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Studuje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumZmeny)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutorZmeny)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jmeno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prijmeni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RodneCislo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JeMuz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Studuje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatumZmeny)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AutorZmeny)
+        </td>
+        <td>
+            @Html.ActionLink("Zapůjčené knihy", "KnihyZaka", "Knihovna", new { idZaka = item.Id }, null) |
+            @Html.ActionLink("Smazat", "DeleteZak", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

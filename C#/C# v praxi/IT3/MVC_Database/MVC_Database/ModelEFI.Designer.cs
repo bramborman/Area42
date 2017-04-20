@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\marian\Documents\GitHub\RandomCodes\C#\C# v praxi\IT3\MVC_Database\MVC_Database\ModelEFI.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\marian\Documents\GitHub\Area42\C#\C# v praxi\IT3\MVC_Database\MVC_Database\ModelEFI.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

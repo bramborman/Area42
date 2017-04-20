@@ -4,7 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseSchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatabaseSchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Knihovna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazev" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZapujcenoID" Type="int" />
+          <Property Name="Autor" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="SkolaZaci">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,11 +28,27 @@
           <Property Name="DatumZmeny" Type="datetime" Nullable="false" />
           <Property Name="AutorZmeny" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Kniha_Zaci">
+          <End Role="SkolaZaci" Type="Self.SkolaZaci" Multiplicity="0..1" />
+          <End Role="Knihovna" Type="Self.Knihovna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkolaZaci">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Knihovna">
+              <PropertyRef Name="ZapujcenoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DatabaseSchoolModelStoreContainer">
+          <EntitySet Name="Knihovna" EntityType="Self.Knihovna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SkolaZaci" EntityType="Self.SkolaZaci" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Kniha_Zaci" Association="Self.FK_Kniha_Zaci">
+            <End Role="SkolaZaci" EntitySet="SkolaZaci" />
+            <End Role="Knihovna" EntitySet="Knihovna" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseSchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -40,10 +65,38 @@
           <Property Name="Studuje" Type="Boolean" />
           <Property Name="DatumZmeny" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AutorZmeny" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Knihovna" Relationship="DatabaseSchoolModel.FK_Kniha_Zaci" FromRole="SkolaZaci" ToRole="Knihovna" />
         </EntityType>
         <EntityContainer Name="DatabaseSchoolEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SkolaZacis" EntityType="Self.SkolaZaci" />
+          <EntitySet Name="Knihovna" EntityType="DatabaseSchoolModel.Knihovna" />
+          <AssociationSet Name="FK_Kniha_Zaci" Association="DatabaseSchoolModel.FK_Kniha_Zaci">
+            <End Role="SkolaZaci" EntitySet="SkolaZacis" />
+            <End Role="Knihovna" EntitySet="Knihovna" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Knihovna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZapujcenoID" Type="Int32" />
+          <NavigationProperty Name="SkolaZaci" Relationship="DatabaseSchoolModel.FK_Kniha_Zaci" FromRole="Knihovna" ToRole="SkolaZaci" />
+          <Property Name="Autor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Kniha_Zaci">
+          <End Type="DatabaseSchoolModel.SkolaZaci" Role="SkolaZaci" Multiplicity="0..1" />
+          <End Type="DatabaseSchoolModel.Knihovna" Role="Knihovna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkolaZaci">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Knihovna">
+              <PropertyRef Name="ZapujcenoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -65,6 +118,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Knihovna">
+            <EntityTypeMapping TypeName="DatabaseSchoolModel.Knihovna">
+              <MappingFragment StoreEntitySet="Knihovna">
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="ZapujcenoID" ColumnName="ZapujcenoID" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -79,7 +142,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MVC_Database.Models.KnihovnaModel>
+
+@{
+    ViewBag.Title = "Knihy žáka";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazev)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZapujcenoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Autor)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazev)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZapujcenoID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Autor)
+        </td>
+    </tr>
+}
+
+</table>

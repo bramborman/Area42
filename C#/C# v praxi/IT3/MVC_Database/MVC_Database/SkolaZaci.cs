@@ -14,6 +14,12 @@ namespace MVC_Database
     
     public partial class SkolaZaci
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SkolaZaci()
+        {
+            this.Knihovna = new HashSet<Knihovna>();
+        }
+    
         public int Id { get; set; }
         public string Jmeno { get; set; }
         public string Prijmeni { get; set; }
@@ -23,5 +29,8 @@ namespace MVC_Database
         public Nullable<bool> Studuje { get; set; }
         public System.DateTime DatumZmeny { get; set; }
         public string AutorZmeny { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Knihovna> Knihovna { get; set; }
     }
 }

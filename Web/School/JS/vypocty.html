@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Výpoèty v JS</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <style type="text/css">
+      body {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        font-familty: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      $("document").ready(function () {
+        $("#vypis").hide();
+      });
+    </script>
+    
+    <h1>Výpoèty v JS</h1>
+    <h2>Metoda getElementById</h2>
+    
+    <div class="form-group">
+      <label for="cislo1">Èíslo 1:</label>
+      <input id="cislo1" value="17" class="form-control">
+    </div>
+    
+    <div class="form-group">
+      <label for="operator">Operátor:</label>
+      <input id="operator" value="+" class="form-control">
+    </div>
+    
+    <div class="form-group">
+      <label for="cislo2">Èíslo 2:</label>
+      <input id="cislo2" value="69" class="form-control">
+    </div>
+    
+    <button class="btn btn-primary" onclick="vysledek()">Výsledek</button>
+    
+    <p id="vypis"></p>
+    
+    <script type="text/javascript">
+      function vysledek() {
+        var a  = parseInt(document.getElementById("cislo1").value);
+        var b  = parseInt(document.getElementById("cislo2").value);
+        var op = document.getElementById("operator").value;
+        var v;
+        
+        switch (op) {
+          case "+": v = a + b; break;
+          case "-": v = a - b; break;
+          case "*": v = a * b; break;
+          case "/": v = a / b; break;
+        }
+        
+        var vypis = document.getElementById("vypis");
+        
+        if (v !== undefined && !isNaN(a) && !isNaN(b)) {
+          vypis.innerHTML = a + " " + op + " " + b + " = " + v;
+        }
+        else {
+          vypis.innerHTML = "N/A (špatný vstup)";
+        }
+        
+        $("#vypis").show(500);
+      }
+    </script>
+    
+    <h2>JavaScript sèítání</h2>
+    <p>
+      Na vstupu jsou zadána dvì èísla A = 3 a B = 5.
+      <br>
+      Proveï seètení tìchto dvou èísel a nech vypsat výsledek.
+    </p>
+    <span id="canceer2"></span>
+    
+    <script type="text/javascript">
+      //window.alert("Teï se provede výpoèet!");
+      document.getElementById("canceer2").innerHTML = "Výsledek sèítání 3 + 5 = " + (3 + 5);
+    </script>
+    
+    <h2>BMI</h2>
+    <p>
+      Vzorec pro výpoèet BMI: váha / (výška * výška)      
+    </p>
+         
+    <button class="btn btn-primary" onclick="bmi()">Vypoèítej BMI</button>
+    <p id="bmiVypis"></p>
+    
+    <script type="text/javascript">
+      function bmi() {
+        var vyska = prompt("Zadej svoji vysku v metrech:", "");
+        var vaha  = prompt("Zadej svoji vahu v kg:", "");
+        
+        document.getElementById("bmiVypis").innerHTML = "Tvoje BMI je: " + vaha / (vyska * vyska); 
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Geometrické tvary</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <style type="text/css">
+      body {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        font-familty: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+      
+      .paneLeft {
+        float: left;
+        width: 75%;
+      }
+      
+      .paneRight {
+        float: right;
+        width: 25%;
+        padding-left: 5%;
+      }
+      
+      .formulas {
+        padding-left: 10%;
+      }
+      
+      .clear {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      $("document").ready(function () {
+        $("[id$=error]").hide();
+      });
+    </script>
+    
+    <h1>Geometrické tvary</h1>
+    
+    <!-- ÈTVEREC -->
+    <h2>Ètverec</h2>
+    <div class="paneLeft">
+      <div class="form-group">
+        <label for="square-side-a">Strana a:</label>
+        <input id="square-side-a" value="5" class="form-control">
+      </div>
+      
+      <div id="square-error" class="alert alert-danger">Špatný vstup</div>       
+      
+      <div class="alert alert-info">
+        <button id="square-length" class="btn btn-primary" onclick="squareLength()">Obvod</button>
+        <button id="square-volume" class="btn btn-primary" onclick="squareVolume()">Obsah</button>
+      </div>
+    </div>
+    
+    <div class="paneRight">
+      <img src="http://geometrybyscream.wz.cz/ctverec-normal.jpg" width="100%"/>
+    
+      <p class="formulas">
+        o = 4 * a
+        <br>
+        S = a * a
+      </p>
+    </div>
+    
+    
+    <script type="text/javascript">
+      function squareLength() {
+        var a         = parseInt(document.getElementById("square-side-a").value);
+        var output    = "Obvod";
+        
+        if (!isNaN(a)) {
+          $("#square-error").hide(500);
+          output += ": " + 4 * a;
+        }
+        else {
+          $("#square-error").show(500);
+        }
+        
+        document.getElementById("square-length").innerHTML = output;      
+      }
+      
+      function squareVolume() {
+        var a         = parseInt(document.getElementById("square-side-a").value);
+        var output    = "Obsah";
+        
+        if (!isNaN(a)) {
+          $("#square-error").hide(500);
+          output += ": " + a * a;
+        }
+        else {
+          $("#square-error").show(500);
+        }
+        
+        document.getElementById("square-volume").innerHTML = output;      
+      }
+      
+      function squareLength(idPrefix, defaultButtonText, sideCount, a, b) {
+        var output = defaultButtonText;
+        
+        if (!isNaN(a)) {
+          $("#" + idPrefix + "-error").hide(500);
+          output += ": " + (2 * a) + (2 * b);
+        }
+        else {
+          $("#" + idPrefix + "-error").show(500);
+        }
+        
+        document.getElementById(idPrefix + "-length").innerHTML = output;      
+      }
+      
+      function getIntValue(idPrefix, sideName) {
+        return parseInt(document.getElementById(idPrefix + "-side-" + sideName).value); 
+      }
+    </script>
+    
+    <!-- KRYCHLE -->
+    <h2 class="clear">Krychle</h2>
+    <div class="paneLeft">
+      <div class="form-group">
+        <label for="cube-side-a">Strana a:</label>
+        <input id="cube-side-a" value="5" class="form-control">
+      </div>
+      
+      <div id="square-error" class="alert alert-danger">Špatný vstup</div>       
+      
+      <div class="alert alert-info">
+        <button id="cube-length" class="btn btn-primary" onclick="cubeLength()">Obvod</button>
+        <button id="cube-volume" class="btn btn-primary" onclick="cubeVolume()">Obsah</button>
+      </div>
+    </div>
+    
+    <div class="paneRight">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Necker_cube.svg/220px-Necker_cube.svg.png" width="100%"/>
+    
+      <p class="formulas">
+        o = 12 * a
+        <br>
+        S = a * a * a
+      </p>
+    </div>
+    
+    
+    <script type="text/javascript">
+      function cubeLength() {
+        var a         = parseInt(document.getElementById("square-side-a").value);
+        var output    = "Obvod";
+        
+        if (!isNaN(a)) {
+          $("#square-error").hide(500);
+          output += ": " + 4 * a;
+        }
+        else {
+          $("#square-error").show(500);
+        }
+        
+        document.getElementById("square-length").innerHTML = output;      
+      }
+      
+      function cubeVolume() {
+        var a         = parseInt(document.getElementById("square-side-a").value);
+        var output    = "Obsah";
+        
+        if (!isNaN(a)) {
+          $("#square-error").hide(500);
+          output += ": " + a * a;
+        }
+        else {
+          $("#square-error").show(500);
+        }
+        
+        document.getElementById("square-volume").innerHTML = output;      
+      }
+    </script>
+  </body>
+</html>

@@ -12,11 +12,9 @@
             @Html.DisplayNameFor(model => model.Nazev)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ZapujcenoID)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Autor)
         </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -25,12 +23,16 @@
             @Html.DisplayFor(modelItem => item.Nazev)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ZapujcenoID)
+            @Html.DisplayFor(modelItem => item.Autor)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Autor)
+            @Html.ActionLink("Vrátit", "VratitKnihuOdZaka", new { idKnihy = item.Id, idZaka = ViewBag.IdZaka })
         </td>
     </tr>
 }
 
 </table>
+
+<p>
+    @Html.ActionLink("Zpět", "Index", "Zaci", null, null)
+</p>

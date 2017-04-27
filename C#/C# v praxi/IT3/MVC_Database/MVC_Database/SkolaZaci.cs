@@ -18,6 +18,7 @@ namespace MVC_Database
         public SkolaZaci()
         {
             this.Knihovna = new HashSet<Knihovna>();
+            this.InfoOZapujceni = new HashSet<InfoOZapujceni>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace MVC_Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Knihovna> Knihovna { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InfoOZapujceni> InfoOZapujceni { get; set; }
     }
 }

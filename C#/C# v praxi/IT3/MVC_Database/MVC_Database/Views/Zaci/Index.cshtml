@@ -7,7 +7,8 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Přidat žáka", "AddZak")
+    @Html.ActionLink("Přidat žáka", "AddZak") |
+    @Html.ActionLink("Zapůjčené knihy", "Index", "InfoOZapujceni", null, null)
 </p>
 <table class="table">
     <tr>
@@ -65,6 +66,7 @@
             @Html.DisplayFor(modelItem => item.AutorZmeny)
         </td>
         <td>
+            @Html.ActionLink("Půjčit knihu", "PujcitKnihu", "Knihovna", new { idZaka = item.Id }, null) |
             @Html.ActionLink("Zapůjčené knihy", "KnihyZaka", "Knihovna", new { idZaka = item.Id }, null) |
             @Html.ActionLink("Smazat", "DeleteZak", new { id=item.Id })
         </td>

@@ -27,5 +27,6 @@ namespace MVC_Database
     
         public virtual DbSet<SkolaZaci> SkolaZacis { get; set; }
         public virtual DbSet<Knihovna> Knihovna { get; set; }
+        public virtual DbSet<InfoOZapujceni> InfoOZapujceni { get; set; }
     }
 }

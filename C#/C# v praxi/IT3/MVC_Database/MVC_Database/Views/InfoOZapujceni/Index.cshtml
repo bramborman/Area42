@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MVC_Database.Models.InfoOZapujceniModel>
+
+@{
+    ViewBag.Title = "Zapůjčené knihy";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Kniha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SkolaZaciID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumZapujceni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumVraceniString)
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kniha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkolaZaci.Jmeno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatumZapujceni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatumVraceniString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JePrekrocenaMaximalniVypujcniDobaVeDnech)
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @Html.ActionLink("Zpět", "Index", "Zaci", null, null)
+</p>

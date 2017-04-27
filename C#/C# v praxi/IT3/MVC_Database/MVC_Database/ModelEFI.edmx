@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DatabaseSchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="InfoOZapujceni">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KnihovnaID" Type="int" Nullable="false" />
+          <Property Name="SkolaZaciID" Type="int" Nullable="false" />
+          <Property Name="DatumZapujceni" Type="datetime" Nullable="false" />
+          <Property Name="DatumVraceni" Type="datetime" />
+        </EntityType>
         <EntityType Name="Knihovna">
           <Key>
             <PropertyRef Name="Id" />
@@ -28,6 +38,30 @@
           <Property Name="DatumZmeny" Type="datetime" Nullable="false" />
           <Property Name="AutorZmeny" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_InfoOZapujceni_Knihovna">
+          <End Role="Knihovna" Type="Self.Knihovna" Multiplicity="1" />
+          <End Role="InfoOZapujceni" Type="Self.InfoOZapujceni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Knihovna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoOZapujceni">
+              <PropertyRef Name="KnihovnaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoOZapujceni_SkolaZaci">
+          <End Role="SkolaZaci" Type="Self.SkolaZaci" Multiplicity="1" />
+          <End Role="InfoOZapujceni" Type="Self.InfoOZapujceni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkolaZaci">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoOZapujceni">
+              <PropertyRef Name="SkolaZaciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Kniha_Zaci">
           <End Role="SkolaZaci" Type="Self.SkolaZaci" Multiplicity="0..1" />
           <End Role="Knihovna" Type="Self.Knihovna" Multiplicity="*" />
@@ -41,8 +75,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DatabaseSchoolModelStoreContainer">
+          <EntitySet Name="InfoOZapujceni" EntityType="Self.InfoOZapujceni" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Knihovna" EntityType="Self.Knihovna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SkolaZaci" EntityType="Self.SkolaZaci" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_InfoOZapujceni_Knihovna" Association="Self.FK_InfoOZapujceni_Knihovna">
+            <End Role="Knihovna" EntitySet="Knihovna" />
+            <End Role="InfoOZapujceni" EntitySet="InfoOZapujceni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoOZapujceni_SkolaZaci" Association="Self.FK_InfoOZapujceni_SkolaZaci">
+            <End Role="SkolaZaci" EntitySet="SkolaZaci" />
+            <End Role="InfoOZapujceni" EntitySet="InfoOZapujceni" />
+          </AssociationSet>
           <AssociationSet Name="FK_Kniha_Zaci" Association="Self.FK_Kniha_Zaci">
             <End Role="SkolaZaci" EntitySet="SkolaZaci" />
             <End Role="Knihovna" EntitySet="Knihovna" />
@@ -66,6 +109,7 @@
           <Property Name="DatumZmeny" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AutorZmeny" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Knihovna" Relationship="DatabaseSchoolModel.FK_Kniha_Zaci" FromRole="SkolaZaci" ToRole="Knihovna" />
+          <NavigationProperty Name="InfoOZapujceni" Relationship="DatabaseSchoolModel.FK_InfoOZapujceni_SkolaZaci" FromRole="SkolaZaci" ToRole="InfoOZapujceni" />
         </EntityType>
         <EntityContainer Name="DatabaseSchoolEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SkolaZacis" EntityType="Self.SkolaZaci" />
@@ -73,6 +117,15 @@
           <AssociationSet Name="FK_Kniha_Zaci" Association="DatabaseSchoolModel.FK_Kniha_Zaci">
             <End Role="SkolaZaci" EntitySet="SkolaZacis" />
             <End Role="Knihovna" EntitySet="Knihovna" />
+          </AssociationSet>
+          <EntitySet Name="InfoOZapujceni" EntityType="DatabaseSchoolModel.InfoOZapujceni" />
+          <AssociationSet Name="FK_InfoOZapujceni_Knihovna" Association="DatabaseSchoolModel.FK_InfoOZapujceni_Knihovna">
+            <End Role="Knihovna" EntitySet="Knihovna" />
+            <End Role="InfoOZapujceni" EntitySet="InfoOZapujceni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoOZapujceni_SkolaZaci" Association="DatabaseSchoolModel.FK_InfoOZapujceni_SkolaZaci">
+            <End Role="SkolaZaci" EntitySet="SkolaZacis" />
+            <End Role="InfoOZapujceni" EntitySet="InfoOZapujceni" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Knihovna">
@@ -84,6 +137,7 @@
           <Property Name="ZapujcenoID" Type="Int32" />
           <NavigationProperty Name="SkolaZaci" Relationship="DatabaseSchoolModel.FK_Kniha_Zaci" FromRole="Knihovna" ToRole="SkolaZaci" />
           <Property Name="Autor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InfoOZapujceni" Relationship="DatabaseSchoolModel.FK_InfoOZapujceni_Knihovna" FromRole="Knihovna" ToRole="InfoOZapujceni" />
         </EntityType>
         <Association Name="FK_Kniha_Zaci">
           <End Type="DatabaseSchoolModel.SkolaZaci" Role="SkolaZaci" Multiplicity="0..1" />
@@ -94,6 +148,42 @@
             </Principal>
             <Dependent Role="Knihovna">
               <PropertyRef Name="ZapujcenoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InfoOZapujceni">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KnihovnaID" Type="Int32" Nullable="false" />
+          <Property Name="SkolaZaciID" Type="Int32" Nullable="false" />
+          <Property Name="DatumZapujceni" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatumVraceni" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Knihovna" Relationship="DatabaseSchoolModel.FK_InfoOZapujceni_Knihovna" FromRole="InfoOZapujceni" ToRole="Knihovna" />
+          <NavigationProperty Name="SkolaZaci" Relationship="DatabaseSchoolModel.FK_InfoOZapujceni_SkolaZaci" FromRole="InfoOZapujceni" ToRole="SkolaZaci" />
+        </EntityType>
+        <Association Name="FK_InfoOZapujceni_Knihovna">
+          <End Type="DatabaseSchoolModel.Knihovna" Role="Knihovna" Multiplicity="1" />
+          <End Type="DatabaseSchoolModel.InfoOZapujceni" Role="InfoOZapujceni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Knihovna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoOZapujceni">
+              <PropertyRef Name="KnihovnaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoOZapujceni_SkolaZaci">
+          <End Type="DatabaseSchoolModel.SkolaZaci" Role="SkolaZaci" Multiplicity="1" />
+          <End Type="DatabaseSchoolModel.InfoOZapujceni" Role="InfoOZapujceni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkolaZaci">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoOZapujceni">
+              <PropertyRef Name="SkolaZaciID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -124,6 +214,17 @@
                 <ScalarProperty Name="Autor" ColumnName="Autor" />
                 <ScalarProperty Name="ZapujcenoID" ColumnName="ZapujcenoID" />
                 <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoOZapujceni">
+            <EntityTypeMapping TypeName="DatabaseSchoolModel.InfoOZapujceni">
+              <MappingFragment StoreEntitySet="InfoOZapujceni">
+                <ScalarProperty Name="DatumVraceni" ColumnName="DatumVraceni" />
+                <ScalarProperty Name="DatumZapujceni" ColumnName="DatumZapujceni" />
+                <ScalarProperty Name="SkolaZaciID" ColumnName="SkolaZaciID" />
+                <ScalarProperty Name="KnihovnaID" ColumnName="KnihovnaID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

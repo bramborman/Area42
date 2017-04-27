@@ -126,13 +126,18 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCode\DB\InfoOZapujceniTableController.cs" />
     <Compile Include="AppCode\DB\KnihovnaTableController.cs" />
     <Compile Include="AppCode\DB\SkolaZaciTableController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\InfoOZapujceniController.cs" />
     <Compile Include="Controllers\KnihovnaController.cs" />
     <Compile Include="Controllers\ZaciController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="InfoOZapujceni.cs">
+      <DependentUpon>ModelEFI.tt</DependentUpon>
     </Compile>
     <Compile Include="Knihovna.cs">
       <DependentUpon>ModelEFI.tt</DependentUpon>
@@ -152,6 +157,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelEFI.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\InfoOZapujceniModel.cs" />
     <Compile Include="Models\KnihovnaModel.cs" />
     <Compile Include="Models\SkolaZaciModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +184,8 @@
     <Content Include="Views\Zaci\Index.cshtml" />
     <Content Include="Views\Zaci\AddZak.cshtml" />
     <Content Include="Views\Knihovna\KnihyZaka.cshtml" />
+    <Content Include="Views\Knihovna\PujcitKnihu.cshtml" />
+    <Content Include="Views\InfoOZapujceni\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

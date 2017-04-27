@@ -8,6 +8,9 @@
         <EntityTypeShape EntityType="DatabaseSchoolModel.SkolaZaci" Width="2" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseSchoolModel.Knihovna" Width="1.5" PointX="3.5" PointY="1.25" />
         <AssociationConnector Association="DatabaseSchoolModel.FK_Kniha_Zaci" />
+        <EntityTypeShape EntityType="DatabaseSchoolModel.InfoOZapujceni" Width="1.5" PointX="5.75" PointY="1.125" />
+        <AssociationConnector Association="DatabaseSchoolModel.FK_InfoOZapujceni_Knihovna" />
+        <AssociationConnector Association="DatabaseSchoolModel.FK_InfoOZapujceni_SkolaZaci" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

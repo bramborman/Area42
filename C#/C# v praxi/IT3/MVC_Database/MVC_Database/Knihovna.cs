@@ -14,11 +14,19 @@ namespace MVC_Database
     
     public partial class Knihovna
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Knihovna()
+        {
+            this.InfoOZapujceni = new HashSet<InfoOZapujceni>();
+        }
+    
         public int Id { get; set; }
         public string Nazev { get; set; }
         public Nullable<int> ZapujcenoID { get; set; }
         public string Autor { get; set; }
     
         public virtual SkolaZaci SkolaZaci { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InfoOZapujceni> InfoOZapujceni { get; set; }
     }
 }

@@ -12,9 +12,7 @@ namespace TicTacToe
 
         private void Play(object sender, RoutedEventArgs e)
         {
-            int gameBoardSize;
-
-            if (int.TryParse(TX_GameBoardSize.Text, out gameBoardSize) && gameBoardSize >= 3 && gameBoardSize <= 10)
+            if (int.TryParse(NTX_GameBoardSize.Text, out int gameBoardSize) && gameBoardSize >= 3 && gameBoardSize <= 10)
             {
                 Frame.Navigate(typeof(Game), gameBoardSize);
             }

@@ -15,16 +15,16 @@ namespace TicTacToe
 
         public static readonly DependencyProperty PlayerNumberProperty = DependencyProperty.Register(nameof(PlayerNumber), typeof(int), typeof(Game), null);
 
-        private readonly SolidColorBrush cellBorderBrush        = new SolidColorBrush(Colors.White);
         private readonly SolidColorBrush defaultCellBackground  = new SolidColorBrush(Colors.Transparent);
-        private readonly SolidColorBrush player1CellBrush       = new SolidColorBrush(Colors.Red);
-        private readonly SolidColorBrush player2CellBrush       = new SolidColorBrush(Colors.Blue);
+        private readonly SolidColorBrush player1CellBrush       = new SolidColorBrush(Color.FromArgb(0xff, 0xb3, 0x11, 0x11));
+        private readonly SolidColorBrush player2CellBrush       = new SolidColorBrush(Color.FromArgb(0xff, 0x11, 0x6b, 0xb3));
 
         private bool _player1;
         private int cellsToWin;
         private int gameBoardSize;
         private Button[,] cells;
         private DelegateCommand colorizeCell;
+        private SolidColorBrush cellBorderBrush;
 
         private bool Player1
         {
@@ -46,192 +46,194 @@ namespace TicTacToe
 
         public Game()
         {
-            Loaded += (loadedSender, loadedE) =>
+            Player1 = true;
+            InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            cellBorderBrush = (SolidColorBrush)Resources["BorderBrush"];
+
+            cells           = new Button[gameBoardSize, gameBoardSize];
+            cellsToWin      = Math.Max(gameBoardSize - 2, 3);
+
+            colorizeCell = new DelegateCommand(async (colorizeCellSender, colorizeCellE) =>
             {
-                cells = new Button[gameBoardSize, gameBoardSize];
-                cellsToWin = Math.Max(gameBoardSize - 2, 3);
+                SolidColorBrush currentPlayerCellBrush = Player1 ? player1CellBrush : player2CellBrush;
 
-                colorizeCell = new DelegateCommand(
-                    async (sender, e) =>
+                Button clickedCell      = (Button)colorizeCellE;
+                clickedCell.Background  = currentPlayerCellBrush;
+                clickedCell.IsEnabled   = false;
+
+                bool win = false;
+
+                for (int row = 0; row < gameBoardSize; row++)
+                {
+                    for (int column = 0; column < gameBoardSize; column++)
                     {
-                        SolidColorBrush currentPlayerCellBrush = Player1 ? player1CellBrush : player2CellBrush;
-
-                        Button clickedCell = (Button)e;
-                        clickedCell.Background = currentPlayerCellBrush;
-                        clickedCell.IsEnabled  = false;
-
-                        bool win = false;
-                        
-                        for (int row = 0; row < gameBoardSize; row++)
+                        if (cells[row, column].Background == currentPlayerCellBrush)
                         {
-                            for (int column = 0; column < gameBoardSize; column++)
+                            bool goRight = column + cellsToWin <= gameBoardSize;
+                            bool goDown  = row + cellsToWin <= gameBoardSize;
+
+                            if (goRight || goDown)
                             {
-                                if (cells[row, column].Background == currentPlayerCellBrush)
+                                bool goDownLeft     = goDown && column - (cellsToWin - 1) >= 0;
+                                bool goDownRight    = goDown && goRight;
+
+                                int rightCount      = 1;
+                                int downCount       = 1;
+                                int downLeftCount   = 1;
+                                int downRightCount  = 1;
+
+                                for (int i = 1; i < gameBoardSize; i++)
                                 {
-                                    if (row + cellsToWin <= gameBoardSize || column + cellsToWin <= gameBoardSize)
+                                    if (goRight)
                                     {
-                                        bool goHorizontal    = true;
-                                        bool goVertical      = true;
-                                        bool goLeftDiagonal  = true;
-                                        bool goRightDiagonal = true;
-
-                                        int horizontalCount    = 1;
-                                        int verticalCount      = 1;
-                                        int leftDiagonalCount  = 1;
-                                        int rightDiagonalCount = 1;
-
-                                        for (int i = 1; i < gameBoardSize; i++)
+                                        if (column + i < gameBoardSize && cells[row, column + i].Background == currentPlayerCellBrush)
                                         {
-                                            if (goHorizontal)
+                                            if (++rightCount == cellsToWin)
                                             {
-                                                if (row + i < gameBoardSize && cells[row + i, column].Background == currentPlayerCellBrush)
-                                                {
-                                                    if (++horizontalCount == cellsToWin)
-                                                    {
-                                                        win = true;
-                                                        break;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    horizontalCount = 0;
-                                                    goHorizontal = false;
-                                                }
-                                            }
-
-                                            if (goVertical)
-                                            {
-                                                if (column + i < gameBoardSize && cells[row, column + i].Background == currentPlayerCellBrush)
-                                                {
-                                                    if (++verticalCount == cellsToWin)
-                                                    {
-                                                        win = true;
-                                                        break;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    verticalCount = 0;
-                                                    goVertical = false;
-                                                }
-                                            }
-
-                                            if (goLeftDiagonal)
-                                            {
-                                                if (row + i < gameBoardSize && column - i > 0 && cells[row + i, column - i].Background == currentPlayerCellBrush)
-                                                {
-                                                    if (++leftDiagonalCount == cellsToWin)
-                                                    {
-                                                        win = true;
-                                                        break;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    leftDiagonalCount = 0;
-                                                    goLeftDiagonal = false;
-                                                }
-                                            }
-
-                                            if (goRightDiagonal)
-                                            {
-                                                if (row + i < gameBoardSize && column + i < gameBoardSize && cells[row + i, column + i].Background == currentPlayerCellBrush)
-                                                {
-                                                    if (++rightDiagonalCount == cellsToWin)
-                                                    {
-                                                        win = true;
-                                                        break;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    rightDiagonalCount = 0;
-                                                    goRightDiagonal = false;
-                                                }
-                                            }
-
-                                            if (!goHorizontal && !goVertical && !goLeftDiagonal && !goRightDiagonal)
-                                            {
+                                                win = true;
                                                 break;
                                             }
                                         }
+                                        else
+                                        {
+                                            rightCount = 0;
+                                            goRight = false;
+                                        }
+                                    }
+
+                                    if (goDown)
+                                    {
+                                        if (row + i < gameBoardSize && cells[row + i, column].Background == currentPlayerCellBrush)
+                                        {
+                                            if (++downCount == cellsToWin)
+                                            {
+                                                win = true;
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            downCount = 0;
+                                            goDown = false;
+                                        }
+                                    }
+
+                                    if (goDownLeft)
+                                    {
+                                        if (row + i < gameBoardSize && column - i >= 0 && cells[row + i, column - i].Background == currentPlayerCellBrush)
+                                        {
+                                            if (++downLeftCount == cellsToWin)
+                                            {
+                                                win = true;
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            downLeftCount = 0;
+                                            goDownLeft = false;
+                                        }
+                                    }
+
+                                    if (goDownRight)
+                                    {
+                                        if (row + i < gameBoardSize && column + i < gameBoardSize && cells[row + i, column + i].Background == currentPlayerCellBrush)
+                                        {
+                                            if (++downRightCount == cellsToWin)
+                                            {
+                                                win = true;
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            downRightCount = 0;
+                                            goDownRight = false;
+                                        }
+                                    }
+
+                                    if (!goRight && !goDown && !goDownLeft && !goDownRight)
+                                    {
+                                        break;
                                     }
                                 }
-
-                                if (win)
-                                {
-                                    break;
-                                }
-                            }
-
-                            if (win)
-                            {
-                                break;
                             }
                         }
 
                         if (win)
                         {
-                            ContentDialog winDialog = new ContentDialog
-                            {
-                                Title = $"Player {PlayerNumber} won!",
-                                SecondaryButtonText = "Back"
-                            };
-
-                            winDialog.SecondaryButtonClick += (winDialogSender, winDialogE) =>
-                            {
-                                Frame.GoBack();
-                            };
-
-                            foreach (Button cell in cells)
-                            {
-                                cell.IsEnabled = false;
-                            }
-
-                            await winDialog.ShowAsync();
+                            break;
                         }
+                    }
 
-                        Player1 = !Player1;
-                    });
-
-                for (int row = 0; row < gameBoardSize; row++)
-                {
-                    Gr_GameBoard.RowDefinitions.Add(new RowDefinition());
-
-                    for (int column = 0; column < gameBoardSize; column++)
+                    if (win)
                     {
-                        if (row == 0)
-                        {
-                            Gr_GameBoard.ColumnDefinitions.Add(new ColumnDefinition());
-                        }
-
-                        Button cell = new Button
-                        {
-                            Background          = defaultCellBackground,
-                            HorizontalAlignment = HorizontalAlignment.Stretch,
-                            VerticalAlignment   = VerticalAlignment.Stretch,
-                            BorderBrush         = cellBorderBrush,
-                            BorderThickness     = new Thickness(column  == 0                 ? CELL_BORDER_EDGE : CELL_BORDER,
-                                                                row     == 0                 ? CELL_BORDER_EDGE : CELL_BORDER,
-                                                                column  == gameBoardSize - 1 ? CELL_BORDER_EDGE : CELL_BORDER,
-                                                                row     == gameBoardSize - 1 ? CELL_BORDER_EDGE : CELL_BORDER),
-                            Style               = (Style)App.Current.Resources["Cell"],
-                            Command             = colorizeCell
-                        };
-
-                        cell.CommandParameter = cell;
-
-                        Gr_GameBoard.Children.Add(cell);
-                        Grid.SetRow(cell, row);
-                        Grid.SetColumn(cell, column);
-
-                        cells[row, column] = cell;
+                        break;
                     }
                 }
-            };
 
-            Player1 = true;
-            InitializeComponent();
+                if (win)
+                {
+                    ContentDialog winDialog = new ContentDialog
+                    {
+                        Title = $"Player {PlayerNumber} won!",
+                        SecondaryButtonText = "Back"
+                    };
+
+                    winDialog.SecondaryButtonClick += (winDialogSender, winDialogE) =>
+                    {
+                        Frame.GoBack();
+                    };
+
+                    foreach (Button cell in cells)
+                    {
+                        cell.IsEnabled = false;
+                    }
+
+                    await winDialog.ShowAsync();
+                }
+
+                Player1 = !Player1;
+            });
+
+            for (int row = 0; row < gameBoardSize; row++)
+            {
+                Gr_GameBoard.RowDefinitions.Add(new RowDefinition());
+
+                for (int column = 0; column < gameBoardSize; column++)
+                {
+                    if (row == 0)
+                    {
+                        Gr_GameBoard.ColumnDefinitions.Add(new ColumnDefinition());
+                    }
+
+                    Button cell = new Button
+                    {
+                        Background          = defaultCellBackground,
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        VerticalAlignment   = VerticalAlignment.Stretch,
+                        BorderBrush         = cellBorderBrush,
+                        BorderThickness     = new Thickness(column  == 0                 ? CELL_BORDER_EDGE : CELL_BORDER,
+                                                            row     == 0                 ? CELL_BORDER_EDGE : CELL_BORDER,
+                                                            column  == gameBoardSize - 1 ? CELL_BORDER_EDGE : CELL_BORDER,
+                                                            row     == gameBoardSize - 1 ? CELL_BORDER_EDGE : CELL_BORDER),
+                        Style               = (Style)Resources["Cell"],
+                        Command             = colorizeCell
+                    };
+
+                    cell.CommandParameter = cell;
+
+                    Gr_GameBoard.Children.Add(cell);
+                    Grid.SetRow(cell, row);
+                    Grid.SetColumn(cell, column);
+
+                    cells[row, column] = cell;
+                }
+            }
         }
 
         private void Game_BackRequested(object sender, BackRequestedEventArgs e)
@@ -244,20 +246,19 @@ namespace TicTacToe
         {
             base.OnNavigatedTo(e);
 
-            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            SystemNavigationManager systemNavigationManager     = SystemNavigationManager.GetForCurrentView();
             systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            systemNavigationManager.BackRequested += Game_BackRequested;
+            systemNavigationManager.BackRequested               += Game_BackRequested;
 
             gameBoardSize = (int)e.Parameter;
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-
-            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            SystemNavigationManager systemNavigationManager     = SystemNavigationManager.GetForCurrentView();
             systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-            systemNavigationManager.BackRequested -= Game_BackRequested;
-
+            systemNavigationManager.BackRequested               -= Game_BackRequested;
+            
             base.OnNavigatingFrom(e);
         }
     }

@@ -36,9 +36,7 @@ namespace Vibrator
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
-
-            ApplicationView applicationView = ApplicationView.GetForCurrentView();
-            applicationView.TryEnterFullScreenMode();
+            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
 
             if (!(Window.Current.Content is Border) && !e.PrelaunchActivated)
             {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="BivRia51622faftck091k8lXGn0=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="VpfF5MMbQKVmSYrm/OHQld7mbR0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="WS_SkolaSoap">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WS_SkolaSoap" contract="WS_Skola.WS_SkolaSoap" bindingType="basicHttpBinding" address="http://localhost/WS_Skola/HttpHandlers/WS_Skola.asmx" bindingConfiguration="WS_SkolaSoap">
+    <endpoint name="WS_SkolaSoap" contract="WS_Skola.WS_SkolaSoap" bindingType="basicHttpBinding" address="http://localhost:56466/HttpHandlers/WS_Skola.asmx" bindingConfiguration="WS_SkolaSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost/WS_Skola/HttpHandlers/WS_Skola.asmx</serializedValue>
+          <serializedValue>http://localhost:56466/HttpHandlers/WS_Skola.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

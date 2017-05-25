@@ -1,9 +1,6 @@
 ﻿using MVC_WebService.Models;
 using MVC_WebService.SkolaWS;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Services;
 
 namespace MVC_WebService.HttpHandlers
@@ -13,7 +10,7 @@ namespace MVC_WebService.HttpHandlers
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
-    public class WS_Skola : System.Web.Services.WebService
+    public class WS_Skola : WebService
     {
         [WebMethod]
         public string HelloWorld()

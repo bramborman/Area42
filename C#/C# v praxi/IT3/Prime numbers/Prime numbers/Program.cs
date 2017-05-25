@@ -1,5 +1,7 @@
 ﻿#define ERATOSTHENES
-//#define ERATOSTHENES_THREADING
+// Don't use this since it's not working properly
+// #define ERATOSTHENES_THREADING
+// And I don't think it's even possible using multithreading
 
 using System;
 using System.Diagnostics;
@@ -19,7 +21,9 @@ namespace Prime_numbers
 #if ERATOSTHENES && ERATOSTHENES_THREADING
             throw new Exception("Invalid flags defined.");
 #endif
+#pragma warning disable IDE0008 // Use explicit type
             var maxValue =
+#pragma warning restore IDE0008 // Use explicit type
 #if !ERATOSTHENES && !ERATOSTHENES_THREADING
                 (ulong)100000//ulong.MaxValue
 #else

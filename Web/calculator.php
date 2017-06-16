@@ -28,24 +28,29 @@
         <?php
             # why php
             # js better
-            $clearAll = isset($_GET['clearAll']) && $_GET['clearAll'] === "1";
-            $result = !$clearAll && isset($_GET['result']) ? $_GET['result'] : 0;
+            $clearAll = isset($_GET['clearAll']) && $_GET['clearAll'] == 1;
+            $state = !$clearAll && isset($_GET['state']) ? $_GET['state'] : 0;
+            $originalState = $state;
+
+            if ($state == 3)
+            {
+                $state = 2;
+            }
+
+            $operation = !$clearAll && isset($_GET['operation']) ? $_GET['operation'] : "";
 
             if (isset($_GET['input']) && !$clearAll)
             {
-                if (!is_numeric($_GET['x']) || $result == 1)
+                if ($state == 1)
                 {
                     $x = $_GET['input'];
-                    $result = 0;
                 }
                 else
                 {
-                    $result = 1;
-
                     $x = $_GET['x'];
                     $y = $_GET['input'];
-          
-                    switch ($_GET['operation'])
+                    
+                    switch ($operation)
                     {
                         case '+': $x += $y; break;
                         case '-': $x -= $y; break;
@@ -65,14 +70,25 @@
                     }
                 }
             }
+
+            if (!$clearAll && isset($_GET['nextOperation']))
+            {
+                $nextOperation = $_GET['nextOperation'];
+
+                if ($nextOperation != "")
+                {
+                    $operation = $nextOperation;
+                }
+            }
       
-            $inputValue = $result == 1 ? $x : "0";
+            $inputValue = $state == 2 ? $x : "0";
         ?>
 
         <form name="calc" method="get" style="width: 50%; height: 50%; position: absolute; top: 25%; left: 25%;">
             <input name="x" type="hidden" value="<?php echo isset($x) ? $x : "" ?>">
-            <input name="operation" type="hidden" value="<?php echo isset($_GET['operation']) ? $_GET['operation'] : "" ?>">
-            <input name="result" type="hidden" value="<?php echo $result ?>">
+            <input name="operation" type="hidden" value="<?php echo $operation ?>">
+            <input name="nextOperation" type="hidden">
+            <input name="state" type="hidden" value="<?php echo $state ?>">
             <input name="clearAll" type="hidden" value="0">
     
             <table cellspacing="0" cellpadding="0" style="width: 100%; height: 100%;">
@@ -164,7 +180,7 @@
                     return;
                 }
 
-                if (input.value == "0")
+                if (input.value == "0" || <?php echo $originalState ?> == 3)
                 {
                     input.value = number;
                 }
@@ -212,7 +228,18 @@
       
             function changeOperation(operation)
             {
-                document.calc.operation.value = operation;
+                var state = document.calc.state.value == 1 || <?php echo $originalState ?> == 3 ? 3 : 1;
+
+                if (state != 3)
+                {
+                    document.calc.operation.value = operation;
+                }
+                else
+                {
+                    document.calc.nextOperation.value = operation;
+                }
+
+                document.calc.state.value = state;
             }
 
             function comma()
@@ -237,7 +264,13 @@
 
             function getResult()
             {
-                return document.calc.operation.value != "";
+                if (document.calc.operation.value != "")
+                {
+                    document.calc.state.value = 2;
+                    return true;
+                }
+
+                return false;
             }
         </script>
     </body>

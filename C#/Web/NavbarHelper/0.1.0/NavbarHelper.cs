@@ -1,4 +1,3 @@
-using Sklad_lodi.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,6 @@ public static class NavbarHelper
         {
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             IEnumerable<MethodInfo> methodsInfo = types.SelectMany(t => t.GetMethods()).Where(m => m.GetCustomAttributes(typeof(NavbarItemAttribute)).Any());
-            UrlHelper urlHelper = new UrlHelper();
             Dictionary<int, LinkInfo> navbarItems = new Dictionary<int, LinkInfo>();
 
             foreach (MethodInfo methodInfo in methodsInfo)

@@ -23,7 +23,7 @@ namespace FileTimeAttributesCopier
             do
             {
                 Console.Write($"\nAre you sure?" +
-                    $"\nWe'll copy time attributes of all files from {sourceFolder} to {destinationFolder}? [Y/n]: ");
+                    $"\nWe'll copy time attributes of all files from '{Path.GetFileName(sourceFolder)}' to '{Path.GetFileName(destinationFolder)}'? [Y/n]: ");
                 confirmation = Console.ReadLine().ToLowerInvariant();
             } while (confirmation != "y" && confirmation != "n");
 
@@ -44,12 +44,12 @@ namespace FileTimeAttributesCopier
                         File.SetLastWriteTimeUtc(destinationFile, File.GetLastWriteTimeUtc(sourceFile));
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"Copying of file {fileName} completed.");
+                        Console.WriteLine($"Copying attributes of file {fileName} completed.");
                     }
                     catch (Exception exception)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Copying of file {fileName} failed. Error message: " + exception.Message);
+                        Console.WriteLine($"Copying attributes of file {fileName} failed.\n\tError message: " + exception.Message);
                     }
                 }
             }

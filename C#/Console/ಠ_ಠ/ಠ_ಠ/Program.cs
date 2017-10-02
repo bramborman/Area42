@@ -21,7 +21,7 @@ namespace ಠ_ಠ
             FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
             Title = $"{assemblyName.Name} v{v.Major}.{v.Minor}.{v.Build} {versionInfo.LegalCopyright}";
-
+            CursorVisible = false;
             BufferWidth = WindowWidth;
             BufferHeight = WindowHeight;
 
@@ -59,6 +59,9 @@ namespace ಠ_ಠ
                     WriteWithRandomColors(i);
                 }
             }
+
+            WriteLine("\nYou did it, I'm proud of yourself!");
+            ReadLine();
         }
 
         private static void WriteWithRandomColors(ulong value)

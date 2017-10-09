@@ -1,0 +1,22 @@
+; Can be run here https://schweigi.github.io/assembler-simulator/
+; 'A' will carry the length of the string in str
+
+    JMP start
+
+str:
+    DB "Hello world!"   ; String to measure
+    DB 0                ; String terminator
+       
+start:
+    MOV C, str          ; Point to the string
+    MOV A, 0
+    MOV B, 0
+    DEC C
+.loop:
+    INC A
+    INC C
+    CMP B, [C]          ; Check if end
+    JNZ .loop           ; jump if not
+	
+    DEC A
+    HLT                 ; Stop execution

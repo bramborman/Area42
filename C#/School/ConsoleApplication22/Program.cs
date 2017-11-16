@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace ConsoleApplication22
@@ -9,13 +8,13 @@ namespace ConsoleApplication22
         public int X { get; set; }
         public int Y { get; set; }
 
-        public void Draw()
+        public void Add()
         {
             Console.SetCursorPosition(X, Y);
             Console.Write('#');
         }
 
-        public void Clear()
+        public void Remove()
         {
             Console.SetCursorPosition(X, Y);
             Console.Write(' ');
@@ -28,32 +27,39 @@ namespace ConsoleApplication22
         {
             int count;
 
-            do
-            {
-                Console.Write("Zadej cislo 10 - 100: ");
-            } while (!int.TryParse(Console.ReadLine(), out count) || count < 10 || count > 100);
-
+            Console.Write("Zadej cislo 1 - 100: ");
+            while (!int.TryParse(Console.ReadLine(), out count) || count < 1 || count > 100) ;
             Console.Clear();
-            
-            Random random      = new Random();
-            Queue<Pony> ponies = new Queue<Pony>(count);
+
+            bool deleting = false;
+            int index = 0;
+            Pony[] ponies = new Pony[count + 1];
 
             Console.CursorVisible = false;
             
+            Random random = new Random();
+
             while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Escape)
             {
-                Pony pony = new Pony
-                {
-                    X = random.Next(0, Console.WindowWidth - 1),
-                    Y = random.Next(0, Console.WindowHeight - 1)
-                };
+                ponies[index].X = random.Next(0, Console.WindowWidth - 1);
+                ponies[index].Y = random.Next(0, Console.WindowHeight - 1);
 
-                pony.Draw();
-                ponies.Enqueue(pony);
+                ponies[index].Add();
                 
-                if (ponies.Count == count)
+                if (index == ponies.Length - 1)
                 {
-                    ponies.Dequeue().Clear();
+                    deleting = true;
+                }
+
+                if (deleting)
+                {
+                    int customIndex = index == ponies.Length - 1 ? 0 : index + 1;
+                    ponies[customIndex].Remove();
+                }
+
+                if (++index == ponies.Length)
+                {
+                    index = 0;
                 }
 
                 Thread.Sleep(10);

@@ -15,7 +15,7 @@ draw = ImageDraw.Draw(img)
 
 class Snow:
     """
-    Class drawing snowdrift and snowflakes
+    Class drawing a snowdrift and snowflakes
     """
 
     __random_initialized = False
@@ -38,7 +38,7 @@ class Snow:
     @property
     def outline(self):
         """
-        Gets the color used as a outline
+        Gets the color used as an outline
         """
         return self.__colors[1]
 
@@ -78,7 +78,7 @@ class Snow:
         Draws a snowdrift and snowflakes
 
         Keyword arguments:
-        snowflakes_count -- the count of snowflakes to be drawn (default 42)
+        snowflakes_count -- the number of snowflakes to draw (default 42)
         """
 
         for x in range(snowflakes_count):
@@ -124,13 +124,13 @@ class SnowBall:
     @property
     def outline(self):
         """
-        Gets the color used as a outline
+        Gets the color used as an outline
         """
         return self.__colors[1]
 
     def get_position(self):
         """
-        Gets the position as a dictionary with keys radius and center
+        Gets the position as a dictionary with keys: radius, center
         """
         return {"radius": self.radius, "center": self.center}
 
@@ -176,7 +176,7 @@ class SnowMan:
     @property
     def base_radius(self):
         """
-        Gets the max radius of the snowman
+        Gets the radius of the first snowball of the snowman
         """
         return self.__base_radius
 
@@ -197,7 +197,7 @@ class SnowMan:
     @property
     def outline(self):
         """
-        Gets the color used as a outline
+        Gets the color used as an outline
         """
         return self.__colors[1]
 
@@ -215,6 +215,12 @@ class SnowMan:
         """
         return self.__colors[3]
 
+    def get_snowball_colors(self):
+        """
+        Gets a list of colors used for snowballs
+        """
+        return self.__colors[:2]
+
     def add_ball(self):
         """
         Adds one snowball to the snowman
@@ -230,7 +236,7 @@ class SnowMan:
             radius -= self.__difference
 
         new_snowball = SnowBall((self.__x, bottom - radius),
-                                radius, self.__colors[:2])
+                                radius, self.get_snowball_colors())
         self.__balls.append(new_snowball)
 
     def add_balls(self, count):
@@ -285,12 +291,8 @@ class SnowMan:
         # And another random number with good looking result
         new_radius = radius // 3
 
-        draw.ellipse((x - radius - (2 * new_radius), y - new_radius,
-                     x - radius, y + new_radius),
-                     self.fill, self.outline)
-        draw.ellipse((x + radius, y - new_radius,
-                     x + radius + (2 * new_radius), y + new_radius),
-                     self.fill, self.outline)
+        SnowBall((x - radius - new_radius, y), new_radius, self.get_snowball_colors()).draw()
+        SnowBall((x + radius + new_radius, y), new_radius, self.get_snowball_colors()).draw()
 
     def __draw_hat(self):
         radius = self.__balls[-1].radius

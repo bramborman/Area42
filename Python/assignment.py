@@ -21,6 +21,7 @@ class Snow:
     __random_initialized = False
 
     def __init__(self, colors=("white", "black", (145, 187, 255))):
+        # We don't initialize random more than once
         if not self.__random_initialized:
             random.seed()
             self.__random_initialized = True
@@ -67,6 +68,7 @@ class Snow:
         img_right = img.size[0] - 1
         img_bottom = img.size[1] - 1
 
+        # It's placed slightly outside the image to look better
         draw.ellipse((-30, img_bottom - ellipse_height,
                      img_right + 30, img_bottom + ellipse_height),
                      self.fill, self.outline)
@@ -78,6 +80,7 @@ class Snow:
         Keyword arguments:
         snowflakes_count -- the count of snowflakes to be drawn (default 42)
         """
+
         for x in range(snowflakes_count):
             x = random.randint(0, img.size[0] - 1)
             y = random.randint(0, img.size[1] - 1)
@@ -124,6 +127,12 @@ class SnowBall:
         Gets the color used as a outline
         """
         return self.__colors[1]
+
+    def get_position(self):
+        """
+        Gets the position as a dictionary with keys radius and center
+        """
+        return {"radius": self.radius, "center": self.center}
 
     def draw(self):
         """
@@ -231,13 +240,16 @@ class SnowMan:
         Keyword arguments:
         count -- the count of snowballs to be added
         """
-        for x in range(count):
+
+        for i in range(count):
             self.add_ball()
 
     def __draw_eyes(self):
         radius = self.__balls[-1].radius
         x, y = self.__balls[-1].center
         offset = radius // 3
+        # Yeah, these numbers are completely random but the result looks good
+        # and is scaled with the snowball
         size = (radius // 10, radius // 5)
 
         x -= offset
@@ -256,6 +268,7 @@ class SnowMan:
     def __draw_nose(self):
         radius = self.__balls[-1].radius
         x, y = self.__balls[-1].center
+        # Another random numbers with great result
         offset = (radius // 2, radius // 4)
 
         draw.polygon((x, y,
@@ -264,9 +277,12 @@ class SnowMan:
                      self.nose_color, self.outline)
 
     def __draw_hands(self):
+        # If there's only one snowball
+        # we cannot add hands to the second last one
         index = -1 if len(self.__balls) == 1 else -2
         radius = self.__balls[index].radius
         x, y = self.__balls[index].center
+        # And another random number with good looking result
         new_radius = radius // 3
 
         draw.ellipse((x - radius - (2 * new_radius), y - new_radius,
@@ -279,9 +295,11 @@ class SnowMan:
     def __draw_hat(self):
         radius = self.__balls[-1].radius
         x, y = self.__balls[-1].center
+        # Aaand another good looking result made out of random numbers
         size = (radius - (radius // 10), radius // 2)
         size_bottom = (radius + (radius // 10), radius // 10)
 
+        # Hat is made from two different rectangles
         draw.rectangle((x - size[0], y - radius - size[1],
                        x + size[0], y - size[1]),
                        self.hat_color, self.outline)

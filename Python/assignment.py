@@ -291,8 +291,10 @@ class SnowMan:
         # And another random number with good looking result
         new_radius = radius // 3
 
-        SnowBall((x - radius - new_radius, y), new_radius, self.get_snowball_colors()).draw()
-        SnowBall((x + radius + new_radius, y), new_radius, self.get_snowball_colors()).draw()
+        SnowBall((x - radius - new_radius, y),
+                 new_radius, self.get_snowball_colors()).draw()
+        SnowBall((x + radius + new_radius, y),
+                 new_radius, self.get_snowball_colors()).draw()
 
     def __draw_hat(self):
         radius = self.__balls[-1].radius

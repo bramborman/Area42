@@ -6,7 +6,8 @@ class Matrix:
     def __init__(self, cells):
         for row in cells:
             if len(row) != len(cells[0]):
-                raise ValueError("Each row of a matrix must be of the same length.")
+                raise ValueError("Each row of a matrix must " +
+                                 "be of the same length.")
 
         self.__cells = cells
 
@@ -37,17 +38,19 @@ class Matrix:
         if size < 0:
             raise ValueError("Size must be greater than or equal to 0.")
 
-        return Matrix([[1 if i == j else 0 for j in range(size)] for i in range(size)])
+        return Matrix([[1 if i == j else 0 for j in range(size)]
+                      for i in range(size)])
 
     def __str__(self):
         # Comprehensions are really fast - way faster than
         # appending string to string over and over again
-        return "\n".join(" ".join(str(cell) for cell in row) for row in self.__cells)
+        return "\n".join(" ".join(str(cell) for cell in row)
+                         for row in self.__cells)
 
     def __validate_index_parameter(self, index):
         if len(index) != 2:
             raise ValueError("Invalid number of items in parameter index.")
-        
+
         if (index[0] < 0 or index[0] >= self.get_num_rows() or
            index[1] < 0 or index[1] >= self.get_num_cols()):
             raise ValueError("Value(s) out of range in parameter index.")
@@ -76,11 +79,13 @@ class Matrix:
         """
         Returns a new matrix that's a transposion to the current one
         """
-        return Matrix([[self[j, i] for j in range(self.get_num_rows())] for i in range(self.get_num_cols())])
+        return Matrix([[self[j, i] for j in range(self.get_num_rows())]
+                      for i in range(self.get_num_cols())])
 
     def is_square(self):
         """
-        Gets a boolean value specificating whether the matrix is a square matrix
+        Gets a boolean value specificating
+        whether the matrix is a square matrix
         """
         return self.get_num_rows() == self.get_num_cols()
 
@@ -88,7 +93,8 @@ class Matrix:
         """
         Gets a boolean value specificating whether the matrix is symmetric
         """
-        # If it's not square it's faster not to transpose this matrix and return immediately
+        # If it's not square it's faster not to transpose
+        # this matrix and return immediately
         return self.is_square() and self == self.transpose()
 
     def __eq__(self, other_matrix):
@@ -113,15 +119,21 @@ class Matrix:
 
     def __add__(self, other_matrix):
         self.__validate_same_size(other_matrix)
-        return Matrix([[self[i, j] + other_matrix[i, j] for j in range(self.get_num_cols())] for i in range(self.get_num_rows())])
+        return Matrix([[self[i, j] + other_matrix[i, j]
+                      for j in range(self.get_num_cols())]
+                      for i in range(self.get_num_rows())])
 
     def __sub__(self, other_matrix):
         self.__validate_same_size(other_matrix)
-        return Matrix([[self[i, j] - other_matrix[i, j] for j in range(self.get_num_cols())] for i in range(self.get_num_rows())])
+        return Matrix([[self[i, j] - other_matrix[i, j]
+                      for j in range(self.get_num_cols())]
+                      for i in range(self.get_num_rows())])
 
     def __mul__(self, other_matrix):
         if self.get_num_cols() != other_matrix.get_num_rows():
-            raise ValueError("Number of columns in the first matrix and number of rows in the second matrix must be the same.")
+            raise ValueError("Number of columns in the first matrix " +
+                             "and number of rows in the second matrix " +
+                             "must be the same.")
 
         cells = []
         for i in range(self.get_num_rows()):
@@ -136,4 +148,6 @@ class Matrix:
         return Matrix(cells)
 
     def __rmul__(self, constant):
-        return Matrix([[self[i, j] * constant for j in range(self.get_num_cols())] for i in range(self.get_num_rows())])
+        return Matrix([[self[i, j] * constant
+                      for j in range(self.get_num_cols())]
+                      for i in range(self.get_num_rows())])

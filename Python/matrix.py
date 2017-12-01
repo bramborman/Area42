@@ -24,7 +24,7 @@ class Matrix:
         if height < 0 or width < 0:
             raise ValueError("Size must be greater than or equal to 0.")
 
-        return Matrix([[0] * width] * height)
+        return Matrix([[0] * width for i in range(height)])
 
     @staticmethod
     def unit_matrix(size):

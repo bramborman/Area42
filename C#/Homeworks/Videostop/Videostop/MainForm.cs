@@ -10,6 +10,7 @@ namespace Videostop
 {
     public sealed partial class MainForm : Form
     {
+        private const int DELAY                 = 200;
         private const int POINTS_DEFAULT        =  0;
         private const int POINTS_MAX            =  3;
         private const int POINTS_MIN            = -3;
@@ -125,7 +126,7 @@ namespace Videostop
                 }
 
                 DrawDice(diceMargin, diceSize);
-                await Task.Delay(100);
+                await Task.Delay(DELAY);
             }
         }
 
@@ -143,7 +144,7 @@ namespace Videostop
         {
             if (number < 1 || number > 6)
             {
-                throw new ArgumentOutOfRangeException(nameof(number), "Only numbers in range 1-6 are supported.");
+                return;
             }
             
             graphics.FillRectangle(diceBrush, x, y, size, size);
@@ -193,12 +194,6 @@ namespace Videostop
             PointsLabel.Text = "Points: " + points;
         }
 
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            base.OnPaintBackground(e);
-            e.Graphics.DrawRectangle(new Pen(Color.Black, 3f), 1.5f, 1.5f, Width - 3f, Height - 3f);
-        }
-
         private void MinimizeButton_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
@@ -228,6 +223,16 @@ namespace Videostop
                 Location = new Point(point.X - startPoint.X,
                                      point.Y - startPoint.Y);
             }
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            Task.Run(async () =>
+            {
+                await Task.Delay(10);
+                DrawDice(diceMargin, diceSize);
+            });
         }
     }
 }

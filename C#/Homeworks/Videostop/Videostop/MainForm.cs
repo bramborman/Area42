@@ -30,6 +30,8 @@ namespace Videostop
         private readonly int diceMargin;
         private readonly string pointsLabelPlaceholder;
 
+        private bool isDragging;
+        private Point startPoint;
         private int points;
         
         public MainForm()
@@ -189,6 +191,43 @@ namespace Videostop
         private void UpdatePointsLabel()
         {
             PointsLabel.Text = "Points: " + points;
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            base.OnPaintBackground(e);
+            e.Graphics.DrawRectangle(new Pen(Color.Black, 3f), 1.5f, 1.5f, Width - 3f, Height - 3f);
+        }
+
+        private void MinimizeButton_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        
+        private void TitleLabel_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDragging = false;
+        }
+
+        private void TitleLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            startPoint = e.Location;
+            isDragging = true;
+        }
+
+        private void TitleLabel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDragging)
+            {
+                Point point = PointToScreen(new Point(e.X, e.Y));
+                Location = new Point(point.X - startPoint.X,
+                                     point.Y - startPoint.Y);
+            }
         }
     }
 }

@@ -1,8 +1,24 @@
 def try_get_item(list, index):
+    """
+    Returns an item from a list on the specified index.
+    If index is out or range, returns `None`.
+
+    Keyword arguments:
+    list -- the list
+    index -- the index of the item
+    """
     return list[index] if index < len(list) else None
 
 
 def union(A, B):
+    """
+    Returns a union of two lists.
+
+    Keyword arguments:
+    A -- the first list
+    B -- the second list
+    """
+
     ia = 0
     ib = 0
     output = []
@@ -12,16 +28,19 @@ def union(A, B):
         b = try_get_item(B, ib)
 
         if a is None or (b is not None and a > b):
+            # Don't add duplicates
             if len(output) == 0 or b != output[-1]:
                 output.append(b)
 
             ib += 1
         elif b is None or a < b:
+            # Don't add duplicates
             if len(output) == 0 or a != output[-1]:
                 output.append(a)
 
             ia += 1
         elif a == b:
+            # Don't add duplicates
             if len(output) == 0 or a != output[-1]:
                 output.append(a)
 
@@ -32,6 +51,14 @@ def union(A, B):
 
 
 def intersection(A, B):
+    """
+    Returns an intersection of two lists.
+
+    Keyword arguments:
+    A -- the first list
+    B -- the second list
+    """
+
     ia = 0
     ib = 0
     output = []
@@ -41,6 +68,7 @@ def intersection(A, B):
         b = B[ib]
 
         if a == b:
+            # Don't add duplicates
             if len(output) == 0 or a != output[-1]:
                 output.append(a)
 
@@ -55,6 +83,14 @@ def intersection(A, B):
 
 
 def relative_complement(A, B):
+    """
+    Returns a relative complement of two lists (B in A).
+
+    Keyword arguments:
+    A -- the first list
+    B -- the second list
+    """
+
     ia = 0
     ib = 0
     output = []
@@ -67,6 +103,7 @@ def relative_complement(A, B):
             ia += 1
             ib += 1
         elif b is None or a < b:
+            # Don't add duplicates
             if len(output) == 0 or a != output[-1]:
                 output.append(a)
 

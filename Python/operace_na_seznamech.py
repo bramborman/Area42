@@ -12,13 +12,19 @@ def union(A, B):
         b = try_get_item(B, ib)
 
         if a is None or (b is not None and a > b):
-            output.append(b)
+            if len(output) == 0 or b != output[-1]:
+                output.append(b)
+
             ib += 1
         elif b is None or a < b:
-            output.append(a)
+            if len(output) == 0 or a != output[-1]:
+                output.append(a)
+
             ia += 1
         elif a == b:
-            output.append(a)
+            if len(output) == 0 or a != output[-1]:
+                output.append(a)
+
             ia += 1
             ib += 1
 
@@ -31,11 +37,13 @@ def intersection(A, B):
     output = []
 
     while ia < len(A) and ib < len(B):
-        a = try_get_item(A, ia)
-        b = try_get_item(B, ib)
+        a = A[ia]
+        b = B[ib]
 
         if a == b:
-            output.append(a)
+            if len(output) == 0 or a != output[-1]:
+                output.append(a)
+
             ia += 1
             ib += 1
         elif a < b:
@@ -59,7 +67,9 @@ def relative_complement(A, B):
             ia += 1
             ib += 1
         elif b is None or a < b:
-            output.append(a)
+            if len(output) == 0 or a != output[-1]:
+                output.append(a)
+
             ia += 1
         else:  # if a > b:
             ib += 1
@@ -68,9 +78,46 @@ def relative_complement(A, B):
 
 
 # Tests
-# print(union([1, 2, 3], [1, 2, 4, 5]))
-# print(union([1, 2, 4, 5], [1, 2, 3]))
-# print(intersection([1, 2, 3], [1, 2, 4, 5]))
-# print(intersection([1, 2, 4, 5], [1, 2, 3]))
-# print(relative_complement([1, 2, 3], [1, 2, 4, 5]))
-# print(relative_complement([1, 2, 4, 5], [1, 2, 3]))
+"""
+l = [1, 2, 3]
+r = [1, 2, 4, 5]
+e = []
+
+print("union")
+print(union(l, l))
+print(union(l, r))
+print(union(l, e))
+print(union(r, l))
+print(union(r, r))
+print(union(r, e))
+print(union(e, l))
+print(union(e, r))
+print(union(e, e))
+
+print("intersection")
+print(intersection(l, l))
+print(intersection(l, r))
+print(intersection(l, e))
+print(intersection(r, l))
+print(intersection(r, r))
+print(intersection(r, e))
+print(intersection(e, l))
+print(intersection(e, r))
+print(intersection(e, e))
+
+print("relative_complement")
+print(relative_complement(l, l))
+print(relative_complement(l, r))
+print(relative_complement(l, e))
+print(relative_complement(r, l))
+print(relative_complement(r, r))
+print(relative_complement(r, e))
+print(relative_complement(e, l))
+print(relative_complement(e, r))
+print(relative_complement(e, e))
+
+print("duplicates")
+print(union([1, 2, 2, 3, 3], [1, 1, 2, 2, 3]))
+print(intersection([1, 1, 2, 2, 3, 3], [1, 1, 2, 2, 3, 3]))
+print(relative_complement([1, 1, 2, 2, 3, 3], []))
+"""

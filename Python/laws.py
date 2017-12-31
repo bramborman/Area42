@@ -15,7 +15,7 @@ def get_data():
     return data
 
 def save_data(data):
-    with open(FILE_OUTPUT, "a+", encoding="utf8") as output:
+    with open(FILE_OUTPUT, "w+", encoding="utf8") as output:
         for item in data:
             if item == NEW_LINE:
                 item = "\n"
@@ -31,15 +31,13 @@ list = get_data()
 start = datetime.now()
 print("Reading:", start - read_start)
 
-output = []
+output = [None] * len(list)
 counts = {}
 
 print("counting . . .")
 
 for item in list:
-    key = item[0]
-    counts[key] = 1 + counts.get(key, 0)
-    output.append(None)
+    counts[item[0]] = 1 + counts.get(item[0], 0)
 
 indexes = {}
 i = 0
@@ -59,8 +57,7 @@ while j != len(counts):
 print("sorting . . .")
 
 for item in list:
-    index = indexes[item[0]]
-    output[index] = item[1]
+    output[indexes[item[0]]] = item[1]
     indexes[item[0]] += 1
 
 end = datetime.now()

@@ -1,6 +1,7 @@
 def try_get_item(list, index):
     return list[index] if index < len(list) else None
 
+
 def union(A, B):
     ia = 0
     ib = 0
@@ -10,18 +11,19 @@ def union(A, B):
         a = try_get_item(A, ia)
         b = try_get_item(B, ib)
 
-        if a == None or (b != None and a > b):
+        if a is None or (b is not None and a > b):
             output.append(b)
             ib += 1
-        elif b == None or a < b:
+        elif b is None or a < b:
             output.append(a)
             ia += 1
         elif a == b:
             output.append(a)
             ia += 1
             ib += 1
-    
+
     return output
+
 
 def intersection(A, B):
     ia = 0
@@ -38,10 +40,11 @@ def intersection(A, B):
             ib += 1
         elif a < b:
             ia += 1
-        else: # if a > b:
+        else:  # if a > b:
             ib += 1
 
     return output
+
 
 def relative_complement(A, B):
     ia = 0
@@ -55,14 +58,16 @@ def relative_complement(A, B):
         if a == b:
             ia += 1
             ib += 1
-        elif b == None or a < b:
+        elif b is None or a < b:
             output.append(a)
             ia += 1
-        else: # if a > b:
+        else:  # if a > b:
             ib += 1
 
     return output
 
+
+# Tests
 # print(union([1, 2, 3], [1, 2, 4, 5]))
 # print(union([1, 2, 4, 5], [1, 2, 3]))
 # print(intersection([1, 2, 3], [1, 2, 4, 5]))

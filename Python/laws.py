@@ -15,18 +15,21 @@ def get_data():
     return data
 
 def save_data(data):
-    with open(FILE_OUTPUT, "a+") as output:
+    with open(FILE_OUTPUT, "a+", encoding="utf8") as output:
         for item in data:
             if item == NEW_LINE:
                 item = "\n"
+            else:
+                item += " "
 
-            output.append(item)
+            output.write(item)
 
 read_start = datetime.now()
+
 list = get_data()
+
 start = datetime.now()
-print(start - read_start)
-print(start)
+print("Reading:", start - read_start)
 
 output = []
 counts = {}
@@ -61,10 +64,13 @@ for item in list:
     indexes[item[0]] += 1
 
 end = datetime.now()
-print(end)
-print(end - start)
+print("Sorting:", end - start)
 
 save_data(output)
+
+write_end = datetime.now()
+print("Writing:", write_end - end)
+print("TOTAL:", write_end - read_start)
 
 # get count of each rank
 # create list of size of sum of counts of ranks

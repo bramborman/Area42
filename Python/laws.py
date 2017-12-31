@@ -43,6 +43,14 @@ def save_data(data):
 
 
 def sort(list):
+    """
+    Sorts a list of tuples containing
+    order and string.
+
+    Keyword arguments:
+    list -- the list of tuples
+    """
+
     output = [None] * len(list)
     counts = {}
 

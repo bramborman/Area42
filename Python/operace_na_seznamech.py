@@ -48,14 +48,14 @@ def relative_complement(A, B):
     ib = 0
     output = []
 
-    while ia < len(A) and ib < len(B):
+    while ia < len(A):
         a = try_get_item(A, ia)
         b = try_get_item(B, ib)
 
         if a == b:
             ia += 1
             ib += 1
-        elif a < b:
+        elif b == None or a < b:
             output.append(a)
             ia += 1
         else: # if a > b:
@@ -63,4 +63,4 @@ def relative_complement(A, B):
 
     return output
 
-print(relative_complement( [1, 2, 3], [1, 2, 4, 5]))
+print(relative_complement( [1, 2, 3, 7], [1, 2, 4, 5]))

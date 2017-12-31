@@ -4,7 +4,14 @@ NEW_LINE = "<new_line>"
 FILE_INPUT = "word_order.txt"
 FILE_OUTPUT = "law.txt"
 
+
 def get_data():
+    """
+    Reads the data from input file
+    and returns list of tuples containing
+    each line splitted by a space.
+    """
+
     data = []
 
     with open(FILE_INPUT, encoding="utf8") as input:
@@ -14,7 +21,17 @@ def get_data():
 
     return data
 
+
 def save_data(data):
+    """
+    Saves a list of strings to a file.
+    Before saving it converts "<new_line>"
+    to "\n".
+
+    Keyword arguments:
+    data -- the list of strings
+    """
+
     with open(FILE_OUTPUT, "w+", encoding="utf8") as output:
         for item in data:
             if item == NEW_LINE:
@@ -23,6 +40,7 @@ def save_data(data):
                 item += " "
 
             output.write(item)
+
 
 read_start = datetime.now()
 
@@ -51,7 +69,7 @@ while j != len(counts):
         indexes[i] = shift
         shift += counts[i]
         j += 1
-    
+
     i += 1
 
 print("sorting . . .")

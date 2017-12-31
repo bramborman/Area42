@@ -47,6 +47,11 @@ def sort(list):
     Sorts a list of tuples containing
     order and string.
 
+    How does it work?
+    1/ get count of each rank
+    2/ create dict containing starting index for each rank
+    3/ assign items to list
+
     Keyword arguments:
     list -- the list of tuples
     """
@@ -100,8 +105,3 @@ save_data(sorted)
 write_end = datetime.now()
 print("Writing:", write_end - end)
 print("TOTAL:", write_end - read_start)
-
-# get count of each rank
-# create list of size of sum of counts of ranks
-# create dict containing starting index for each rank
-# assign items to list

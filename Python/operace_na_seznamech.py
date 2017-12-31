@@ -10,7 +10,7 @@ def union(A, B):
         a = try_get_item(A, ia)
         b = try_get_item(B, ib)
 
-        if a == None or a > b:
+        if a == None or (b != None and a > b):
             output.append(b)
             ib += 1
         elif b == None or a < b:
@@ -63,4 +63,9 @@ def relative_complement(A, B):
 
     return output
 
-print(relative_complement( [1, 2, 3, 7], [1, 2, 4, 5]))
+# print(union([1, 2, 3], [1, 2, 4, 5]))
+# print(union([1, 2, 4, 5], [1, 2, 3]))
+# print(intersection([1, 2, 3], [1, 2, 4, 5]))
+# print(intersection([1, 2, 4, 5], [1, 2, 3]))
+# print(relative_complement([1, 2, 3], [1, 2, 4, 5]))
+# print(relative_complement([1, 2, 4, 5], [1, 2, 3]))

@@ -30,8 +30,18 @@ namespace Challenges
                     Console.Clear();
 
                     string challengeTypeName = "Challenge" + input;
-                    TypeInfo challenge = challenges.First(t => t.Name == challengeTypeName);
-                    ((IChallenge)Activator.CreateInstance(challenge.UnderlyingSystemType)).Run();
+                    Type challengeType = challenges.First(t => t.Name == challengeTypeName).UnderlyingSystemType;
+
+                    IChallenge challenge = (IChallenge)Activator.CreateInstance(challengeType);
+
+                    Console.Write(new string('=', Console.WindowWidth));
+                    Console.CursorLeft = (Console.WindowWidth - challengeType.Name.Length) / 2;
+                    Console.WriteLine(challengeType.Name.ToUpper());
+                    Console.WriteLine();
+                    Console.WriteLine(challenge.Description);
+                    Console.WriteLine(new string('=', Console.WindowWidth));
+
+                    challenge.Run();
                 }
                 else if (string.Equals(input, "exit", StringComparison.InvariantCultureIgnoreCase))
                 {

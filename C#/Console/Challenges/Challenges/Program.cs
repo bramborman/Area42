@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -10,6 +11,11 @@ namespace Challenges
     {
         public static void Main(string[] args)
         {
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
+            Console.Title = fvi.ProductName + ' ' + fvi.LegalCopyright;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+
             IEnumerable<string> challenges = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterface(nameof(IChallenge)) != null).Select(t => t.Name);
 
             while (true)

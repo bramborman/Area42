@@ -2,6 +2,18 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>Challenges</RootNamespace>
+    <Title>Challenges</Title>
+    <Product>Challenges</Product>
+    <AssemblyName>Challenges</AssemblyName>
+    <AssemblyTitle>Challenges</AssemblyTitle>
+    <Company>Marian Dolinský</Company>
+    <Authors>Marian Dolinský</Authors>
+    <Copyright>© 2017 Marian Dolinský</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="**\*.orig" />
+  </ItemGroup>
 </Project>

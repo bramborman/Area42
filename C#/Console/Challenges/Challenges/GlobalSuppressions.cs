@@ -5,4 +5,5 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0022:Use block body for methods")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0008:Use explicit type")]
 

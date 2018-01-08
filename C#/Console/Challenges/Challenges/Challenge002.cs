@@ -19,56 +19,13 @@ namespace Challenges
 
         public void Run()
         {
-            V1();
-            V2();
-
-            Console.ReadLine();
-        }
-
-        private void V1()
-        {
-            List<int[]> list = new List<int[]>()
-            {
-                new [] {1, 2, 3, 4, 5},
-                new [] {1, 2, 3, 4, 5},
-                new [] {1, 2, 3, 4, 5}
-            };
-
-            Console.WriteLine("V1:");
-            Console.WriteLine("INPUT: ");
-
-            foreach (int[] array in list)
-            {
-                foreach (int i in array)
-                {
-                    Console.Write(i + ", ");
-                }
-
-                Console.WriteLine();
-            }
-
-            float[] averages = A(list);
-
-            Console.WriteLine("OUTPUT: ");
-            foreach (float average in averages)
-            {
-                Console.Write(average + ", ");
-            }
-
-            Console.WriteLine();
-        }
-
-        private void V2()
-        {
             int[][] arrays = new int[][]
             {
                 new [] {1, 2, 3, 4, 5},
                 new [] {1, 2, 3, 4, 5},
                 new [] {1, 2, 3, 4, 5}
             };
-
-            Console.WriteLine();
-            Console.WriteLine("V2:");
+            
             Console.WriteLine("INPUT: ");
 
             foreach (int[] array in arrays)
@@ -81,17 +38,24 @@ namespace Challenges
                 Console.WriteLine();
             }
 
-            float[] averages = B(arrays);
+            double[] averages = G(arrays);
 
             Console.WriteLine("OUTPUT: ");
             foreach (float average in averages)
             {
                 Console.Write(average + ", ");
             }
+
+            Console.ReadLine();
         }
 
         float[]A(List<int[]>l)=>Enumerable.Range(0,l[0].Length).Select(i=>{float r=0;l.ForEach(a=>r+=a[i]/(float)l.Count);return r;}).ToArray();
         float[]B(int[][]l)=>Enumerable.Range(0,l[0].Length).Select(i=>l.Select(a=>a[i]).Sum()/(float)l.Length).ToArray();
+        float[]C(int[][]l)=>Enumerable.Range(0,l[0].Length).Select(i=>l.Select(a=>a[i]).Sum()*1f/l.Length).ToArray();
+        double[]D(int[][]l)=>Enumerable.Range(0,l[0].Length).Select(i=>l.Select(a=>a[i]).Average()).ToArray();
+        double[]E(int[][]l)=>l[0].Select((a,i)=>i).Select(i=>l.Select(a=>a[i]).Average()).ToArray();
+        double[]F(int[][]l)=>l[0].Select((_,i)=>l.Select(a=>a[i]).Average()).ToArray();
+        double[]G(int[][]l)=>l[0].Select((_,i)=>l.Average(a=>a[i])).ToArray();
         // Waiting for C# 7.3:
         //float[]C(int[][]l)=>(0..l[0].Length).Select(i=>l.Select(a=>a[i]).Sum()/(float)l.Length).ToArray();
     }

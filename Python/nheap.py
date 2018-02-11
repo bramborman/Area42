@@ -117,3 +117,91 @@ class NHeap(object):
         i -- index whose parent should be returned
         """
         return (i - 1) // self.__n
+
+
+def run_tests():
+    def print_children(nheap):
+        print("children: ", end=" ")
+
+        for child in nheap._hl:
+            print(child, end=", ")
+
+        print()
+
+    def print_max(nheap):
+        print("max: ", nheap.get_max())
+
+    def print_children_indexes(nheap, i):
+        print("children indexes: ", end=" ")
+
+        for x in nheap._children(i):
+            print(x, end=", ")
+
+        print()
+
+    def print_parent(nheap, i):
+        print("parent for ", i, ": ", nheap._parent(i))
+
+    try:
+        NHeap(-17)
+    except ValueError:
+        print("Successful crash")
+
+    try:
+        NHeap(0)
+    except ValueError:
+        print("Successful crash")
+
+    NHeap(1)  # no crash
+
+    print_children(NHeap(4))  # nothing
+    print_children(NHeap(4, []))  # nothing
+    print_children(NHeap(4, [0]))  # 0
+    print_children(NHeap(4, [0, 1]))  # 1, 0
+    print_children(NHeap(4, [0, 1, 2, 3, 4]))  # 4, 1, 2, 3, 0
+    print_children(NHeap(4, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+    # - 10, 8, 9, 3, 4, 5, 6, 7, 1, 0, 2
+
+    print_children_indexes(NHeap(4), 0)  # nothing
+    print_children_indexes(NHeap(4, []), 0)  # nothing
+    print_children_indexes(NHeap(4, [0]), 0)  # nothing
+    print_children_indexes(NHeap(4, [0, 1]), 0)  # 1
+    print_children_indexes(NHeap(4, [0, 1, 2, 3, 4]), 0)
+    # - 1, 2, 3, 4
+    print_children_indexes(NHeap(4, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 0)
+    # - 1, 2, 3, 4
+    print_children_indexes(NHeap(4, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 1)
+    # - 5, 6, 7, 8
+    print_children_indexes(NHeap(4, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 2)
+    # - 9, 10
+
+    print(NHeap(17).get_n())  # 17
+    print(NHeap(4, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).size())  # 11
+
+    print_max(NHeap(4))  # None
+    print_max(NHeap(4, []))  # None
+    print_max(NHeap(4, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))  # 10
+
+    print_parent(NHeap(4), 1)  # 0
+    print_parent(NHeap(4, []), 2)  # 0
+    print_parent(NHeap(4, [1, 2, 3]), 5)  # 1
+    print_parent(NHeap(4), 8)  # 1
+    print_parent(NHeap(4), 9)  # 2
+    print_parent(NHeap(4), 10)  # 2
+
+    nheap = NHeap(4, [0, 1, 2])
+    print(nheap.get_max())  # 2
+    print(nheap.extract_max())  # 2
+    print(nheap.extract_max())  # 1
+    nheap.insert(10)
+    print(nheap.extract_max())  # 10
+    print(nheap.extract_max())  # 0
+    print(nheap.extract_max())  # None
+    nheap.insert(10)
+    nheap.insert(17)
+    print(nheap.extract_max())  # 17
+    print(nheap.extract_max())  # 10
+    print(nheap.extract_max())  # None
+
+
+# run_tests()

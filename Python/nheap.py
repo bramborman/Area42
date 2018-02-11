@@ -2,6 +2,7 @@
 N-ary heap implementation.
 """
 
+
 class NHeap(object):
     """
     Class representing a maximum n-ary heap.
@@ -20,11 +21,11 @@ class NHeap(object):
             raise ValueError("Parameter 'n' must be greater than zero.")
 
         self.__n = n
-        self._hl = [] if hl == None else hl[:]
+        self._hl = [] if hl is None else hl[:]
 
         for i in range(round(self.size() / n) - 1, -1, -1):
             self.__heapify(i)
-    
+
     def get_n(self):
         """
         Get maximum number of children each (sub)tree can have. O(1).
@@ -43,7 +44,7 @@ class NHeap(object):
         """
         max = self.get_max()
 
-        if max != None:
+        if max is not None:
             last = self._hl.pop()
 
             if self.size() > 0:
@@ -59,9 +60,11 @@ class NHeap(object):
         self._hl.append(value)
         i = self.size() - 1
 
-        while i > 0 and self._hl[self.__parent(i)] < self._hl[i]:
-            self._hl[self.__parent(i)], self._hl[i] = self._hl[i], self._hl[self.__parent(i)]
-            i = self.__parent(i)
+        while i > 0 and self._hl[self._parent(i)] < self._hl[i]:
+            parent = self._parent(i)
+            self._hl[parent], self._hl[i] = self._hl[i], self._hl[parent]
+
+            i = parent
 
     def size(self):
         """
@@ -71,12 +74,12 @@ class NHeap(object):
 
     def __heapify(self, i):
         max = None
-        
-        for child in self.__children(i):
-            if max == None or self._hl[max] < self._hl[child]:
+
+        for child in self._children(i):
+            if max is None or self._hl[max] < self._hl[child]:
                 max = child
-        
-        if max == None:
+
+        if max is None:
             return
 
         if self._hl[i] < self._hl[max]:
@@ -92,12 +95,12 @@ class NHeap(object):
 
         if first_child >= self.size():
             return range(0, 0)
-        
+
         last_child = (self.__n * i) + self.__n
 
         while last_child >= self.size():
             last_child -= 1
-        
+
         return range(first_child, last_child + 1)
 
     def _parent(self, i):

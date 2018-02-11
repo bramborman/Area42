@@ -26,7 +26,7 @@ class NHeap(object):
         for i in range(self._parent(self.size() - 1), -1, -1):
             # No need to recursively call heapify
             # to check already sorted subtrees
-            self.__heapify(i, check_subtrees=False)
+            self.__heapify(i)
 
     def get_n(self):
         """
@@ -77,10 +77,10 @@ class NHeap(object):
         """
         return len(self._hl)
 
-    def __heapify(self, i, check_subtrees=True):
+    def __heapify(self, i):
         max = None
 
-         for child in self._children(i):
+        for child in self._children(i):
             if max is None or self._hl[max] < self._hl[child]:
                 max = child
 
@@ -90,9 +90,7 @@ class NHeap(object):
 
         if self._hl[i] < self._hl[max]:
             self._hl[i], self._hl[max] = self._hl[max], self._hl[i]
-
-            if check_subtrees:
-                self.__heapify(max)
+            self.__heapify(max)
 
     def _children(self, i):
         """

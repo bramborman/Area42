@@ -23,7 +23,7 @@ class NHeap(object):
         self.__n = n
         self._hl = [] if hl is None else hl[:]
 
-        for i in range(round(self.size() / self.__n) - 1, -1, -1):
+        for i in range(self._parent(self.size() - 1), -1, -1):
             self.__heapify(i)
 
     def get_n(self):

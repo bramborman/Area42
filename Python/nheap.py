@@ -49,7 +49,9 @@ class NHeap(object):
 
             if self.size() > 0:
                 self._hl[0] = last
-                self.__heapify(0)
+                # No need to recursively call heapify
+                # to check already sorted subtrees
+                self.__heapify(0, check_subtrees=False)
 
         return max
 
@@ -75,7 +77,7 @@ class NHeap(object):
         """
         return len(self._hl)
 
-    def __heapify(self, i):
+    def __heapify(self, i, check_subtrees=True):
         max = None
 
         for child in self._children(i):
@@ -88,11 +90,13 @@ class NHeap(object):
 
         if self._hl[i] < self._hl[max]:
             self._hl[i], self._hl[max] = self._hl[max], self._hl[i]
-            self.__heapify(max)
+
+            if check_subtrees:
+                self.__heapify(max)
 
     def _children(self, i):
         """
-        Get range of indexes of children of specified index. O(n).
+        Get range of indexes of children of specified index. O(1).
 
         Keyword arguments:
         i -- index whose children should be returned
@@ -104,8 +108,8 @@ class NHeap(object):
 
         last_child = (self.__n * i) + self.__n
 
-        while last_child >= self.size():
-            last_child -= 1
+        if last_child >= self.size():
+            last_child = self.size() - 1
 
         return range(first_child, last_child + 1)
 
@@ -120,6 +124,10 @@ class NHeap(object):
 
 
 def run_tests():
+    """
+    Run some tests on NHeap
+    """
+
     def print_children(nheap):
         print("children: ", end=" ")
 

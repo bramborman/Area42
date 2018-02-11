@@ -23,7 +23,7 @@ class NHeap(object):
         self.__n = n
         self._hl = [] if hl is None else hl[:]
 
-        for i in range(round(self.size() / n) - 1, -1, -1):
+        for i in range(round(self.size() / self.__n) - 1, -1, -1):
             self.__heapify(i)
 
     def get_n(self):
@@ -56,6 +56,9 @@ class NHeap(object):
     def insert(self, value):
         """
         Insert new item into heap. O(log n).
+
+        Keyword arguments:
+        value -- the value to insert
         """
         self._hl.append(value)
         i = self.size() - 1
@@ -79,6 +82,7 @@ class NHeap(object):
             if max is None or self._hl[max] < self._hl[child]:
                 max = child
 
+        # _children(i) returned blank range
         if max is None:
             return
 
@@ -88,8 +92,10 @@ class NHeap(object):
 
     def _children(self, i):
         """
-        Get range of indexes of children of specified index.
-        O(n) where n is maximum number of children each (sub)tree can have.
+        Get range of indexes of children of specified index. O(n).
+
+        Keyword arguments:
+        i -- index whose children should be returned
         """
         first_child = (self.__n * i) + 1
 
@@ -106,5 +112,8 @@ class NHeap(object):
     def _parent(self, i):
         """
         Get index of parent to the specified index. O(1).
+
+        Keyword arguments:
+        i -- index whose parent should be returned
         """
         return (i - 1) // self.__n

@@ -24,8 +24,6 @@ class NHeap(object):
         self._hl = [] if hl is None else hl[:]
 
         for i in range(self._parent(self.size() - 1), -1, -1):
-            # No need to recursively call heapify
-            # to check already sorted subtrees
             self.__heapify(i)
 
     def get_n(self):

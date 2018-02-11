@@ -37,9 +37,8 @@ class NHeap(object):
         self._hl.append(value)
         i = self.size() - 1
 
-        while i >= 0 and self._hl[self.__parent(i)] < self._hl[i]:
+        while i > 0 and self._hl[self.__parent(i)] < self._hl[i]:
             self._hl[self.__parent(i)], self._hl[i] = self._hl[i], self._hl[self.__parent(i)]
-            self.__heapify(i)
             i = self.__parent(i)
 
     def size(self):

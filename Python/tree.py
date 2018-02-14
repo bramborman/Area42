@@ -4,9 +4,15 @@ from sys import argv
 
 
 def tree(dirs):
-    # Hide this method to prevent breaking
-    # the intendation
+    dir_count = 0
+    file_count = 0
+
+    # Use nested method to prevent breaking
+    # the intendation and be able to have shared counters
     def __tree(dirs, intendation, print_full_name=False):
+        nonlocal dir_count
+        nonlocal file_count
+
         for j in range(len(dirs)):
             try:
                 dir = dirs[j]
@@ -20,8 +26,10 @@ def tree(dirs):
                     print("\n", intendation, left, "──", sep="", end=' ')
 
                     if isdir(join(dir, content[i])):
+                        dir_count += 1
                         __tree([join(dir, content[i])], intendation + ("│   " if i < len(content) - 1 else "    "))
                     else:
+                        file_count += 1
                         print(basename(content[i]), end="")
                 
             except FileNotFoundError:
@@ -35,6 +43,8 @@ def tree(dirs):
                 print()
     
     __tree(["."] if dirs is None or len(dirs) == 0 else dirs , "", True)
+    print("\n\n", dir_count, " directories, ", file_count, " files found", sep="")
+
 
 if __name__ == "__main__":
     tree(argv[1:])

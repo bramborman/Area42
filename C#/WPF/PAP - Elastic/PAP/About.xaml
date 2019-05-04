@@ -1,0 +1,147 @@
+﻿<pap:Page x:Class="PAP.About"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:pap="clr-namespace:PAP"
+          xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
+          xmlns:fluent="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+          mc:Ignorable="d"
+          RequestedSize="216,216"
+          >
+    <pap:Page.Resources>
+        <RoutedCommand x:Key="GoBack"/>
+
+        <Storyboard x:Key="TextBlockFocusedAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.ScaleX">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="{StaticResource ButtonMouseOverScale}"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.ScaleY">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="{StaticResource ButtonMouseOverScale}"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="TextBlockUnfocusedAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.ScaleX">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="1"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.ScaleY">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="1"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </pap:Page.Resources>
+    <pap:Page.CommandBindings>
+        <CommandBinding Command="{StaticResource GoBack}" Executed="GoBackAsync"/>
+    </pap:Page.CommandBindings>
+    <pap:Page.InputBindings>
+        <KeyBinding Key="Esc" Command="{StaticResource GoBack}"/>
+    </pap:Page.InputBindings>
+
+    <Grid x:Name="grid"
+          Width="216"
+          Height="216"
+          >
+        <Grid.Resources>
+            <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Arial Black"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+                <Setter Property="pap:FocusGroup.Name" Value="main"/>
+            </Style>
+
+            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}"/>
+        </Grid.Resources>
+
+        <TextBlock Text="PlainAirPlane"
+                   FontSize="25.5"
+                   LineHeight="54"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Top"
+                   />
+
+        <fluent:DropShadowPanel>
+            <Border Background="{StaticResource BackgroundBrush}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    >
+                <Button pap:FocusGroup.Name="main"
+                        Command="{StaticResource GoBack}"
+                        >
+                    <Path Style="{StaticResource DownArrowPath}"/>
+                </Button>
+            </Border>
+        </fluent:DropShadowPanel>
+
+        <StackPanel VerticalAlignment="Bottom"
+                    Margin="0,0,0,8"
+                    >
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}">
+                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="LineHeight" Value="27"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <TextBlock>
+                Made with <emoji:EmojiInline Text="❤"/>
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        >
+                <TextBlock Text="by " TextTrimming="None"/>
+
+                <TextBlock Focusable="True"
+                           RenderTransformOrigin="0.5,0.5"
+                           >
+                    <TextBlock.RenderTransform>
+                        <ScaleTransform/>
+                    </TextBlock.RenderTransform>
+                        
+                    <Hyperlink x:Name="hyperlink"
+                               NavigateUri="https://github.com/bramborman"
+                               >
+                        <Hyperlink.Style>
+                            <Style TargetType="Hyperlink">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="{Binding Foreground, ElementName=hyperlink, Mode=OneTime}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Hyperlink.Style>
+                        @bramborman
+                    </Hyperlink>
+
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <StopStoryboard BeginStoryboardName="TextBlockMouseLeaveAnimation"/>
+                            <BeginStoryboard Name="TextBlockMouseEnterAnimation"
+                                             Storyboard="{StaticResource TextBlockFocusedAnimation}"
+                                             />
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <StopStoryboard BeginStoryboardName="TextBlockMouseEnterAnimation"/>
+                            <BeginStoryboard Name="TextBlockMouseLeaveAnimation"
+                                             Storyboard="{StaticResource TextBlockUnfocusedAnimation}"
+                                             />
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</pap:Page>

@@ -1,0 +1,222 @@
+﻿<Application x:Class="PAP.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:fluent="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             >
+    <Application.Resources>
+        <system:Double x:Key="DropShadowPanelMarginSize">17.5</system:Double>
+        <Thickness x:Key="DropShadowPanelMargin">17.5</Thickness>
+
+        <Style TargetType="fluent:DropShadowPanel">
+            <Setter Property="Margin" Value="{StaticResource DropShadowPanelMargin}"/>
+        </Style>
+
+        <Color x:Key="BackgroundColor">#222222</Color>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
+        
+        <CubicEase x:Key="AnimationEasingFunction" EasingMode="EaseInOut"/>
+        <KeyTime x:Key="AnimationKeyTime">0:0:0.3</KeyTime>
+
+        <system:Double x:Key="ButtonMouseOverScale">1.3</system:Double>
+        
+        <Storyboard x:Key="ButtonFocusedAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter"
+                                           Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                           >
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="{StaticResource ButtonMouseOverScale}"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter"
+                                           Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                           >
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="{StaticResource ButtonMouseOverScale}"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ButtonUnfocusedAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter"
+                                           Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                           >
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="1"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter"
+                                           Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                           >
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="1"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ButtonIsDisabledState">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter"
+                                           Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                           >
+                <DiscreteDoubleKeyFrame KeyTime="0"
+                                      Value="{StaticResource ButtonMouseOverScale}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter"
+                                           Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                           >
+                <DiscreteDoubleKeyFrame KeyTime="0"
+                                      Value="{StaticResource ButtonMouseOverScale}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <SolidColorBrush x:Key="ButtonForegroundBrush" Color="White"/>
+        <system:Double x:Key="ButtonSize">72</system:Double>
+
+        <Style x:Key="IconPath" TargetType="Path">
+            <Setter Property="Fill" Value="{StaticResource ButtonForegroundBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Stretch" Value="UniformToFill"/>
+        </Style>
+
+        <Style x:Key="PlanePath" TargetType="Path" BasedOn="{StaticResource IconPath}">
+            <Setter Property="Data" Value="m 20.250003,41.871097 c 2.261721,-0.75 4.51465,-1.494141 6.758789,-2.232422 2.244141,-0.738281 4.491211,-1.494141 6.741211,-2.267578 v 9.017578 l -2.25,1.125 v 3.357422 c 0.75,-0.246094 1.5,-0.489258 2.25,-0.729492 0.75,-0.240235 1.5,-0.495118 2.25,-0.764649 0.75,0.269531 1.5,0.524414 2.25,0.764649 0.75,0.240234 1.5,0.483398 2.25,0.729492 v -3.357422 l -2.25,-1.125 v -9.017578 c 2.25,0.773437 4.49707,1.529297 6.741211,2.267578 2.244141,0.738281 4.49707,1.482422 6.758789,2.232422 v -3.357422 c -2.261719,-1.136719 -4.514648,-2.25586 -6.758789,-3.357422 -2.244141,-1.101563 -4.491211,-2.232422 -6.741211,-3.392578 v -9.263672 c 0,-0.316406 -0.05859,-0.609375 -0.175781,-0.878906 -0.117188,-0.269532 -0.278321,-0.506836 -0.483399,-0.711914 -0.205078,-0.205078 -0.442382,-0.366211 -0.711914,-0.483399 -0.269531,-0.117187 -0.5625,-0.175781 -0.878906,-0.175781 -0.316406,0 -0.609375,0.05859 -0.878906,0.175781 -0.269531,0.117188 -0.506836,0.278321 -0.711914,0.483399 -0.205078,0.205078 -0.366211,0.442382 -0.483399,0.711914 -0.117187,0.269531 -0.175781,0.5625 -0.175781,0.878906 v 9.263672 c -2.25,1.160156 -4.49707,2.291015 -6.741211,3.392578 -2.244139,1.101562 -4.497068,2.220703 -6.758789,3.357422 z m -2.25,3.128906 0,-7.875 13.5,-6.75 v -7.875 c 0,-0.609375 0.120117,-1.189453 0.360352,-1.740234 0.240234,-0.550782 0.5625,-1.028321 0.966796,-1.432618 0.404297,-0.404296 0.881836,-0.726562 1.432618,-0.966796 0.550781,-0.240235 1.130859,-0.360352 1.740234,-0.360352 0.621094,0 1.204102,0.120117 1.749023,0.360352 0.544922,0.240234 1.019532,0.5625 1.423829,0.966796 0.404296,0.404297 0.726562,0.881836 0.966796,1.432618 0.240235,0.550781 0.360352,1.130859 0.360352,1.740234 v 7.875 l 13.5,6.75 v 7.875 l -13.5,-4.5 v 4.5 l 2.25,1.125 v 7.875 l -6.75,-2.25 -6.75,2.25 v -7.875 l 2.25,-1.125 0,-4.5 z"/>
+            <Setter Property="Margin" Value="18"/>
+        </Style>
+
+        <Style x:Key="UpArrowPath" TargetType="Path" BasedOn="{StaticResource IconPath}">
+            <Setter Property="Data" Value="M36,25.400391 L53.947266,43.365234 L52.365234,44.947266 L36,28.599609 L19.634766,44.947266 L18.052734,43.365234 z"/>
+            <Setter Property="Margin" Value="18.053,25.153,18.053,27.301"/>
+        </Style>
+
+        <Style x:Key="DownArrowPath" TargetType="Path" BasedOn="{StaticResource IconPath}">
+            <Setter Property="Data" Value="M19.916016,26.208984 L36,42.292969 L52.083984,26.208984 L53.666016,27.791016 L36,45.457031 L18.333984,27.791016 z"/>
+            <Setter Property="Margin" Value="18.334,26.159,18.334,26.593"/>
+        </Style>
+
+        <Style x:Key="InfoSignPath" TargetType="Path" BasedOn="{StaticResource IconPath}">
+            <Setter Property="Data" Value="M33.75,31.5 L36,31.5 L36,42.75 L33.75,42.75 z M33.75,27 L36,27 L36,29.25 L33.75,29.25 z M34.875,20.25 C33.527344,20.25 32.232422,20.425781 30.990234,20.777344 C29.748047,21.128906 28.584961,21.621094 27.500977,22.253906 C26.416992,22.886721 25.429688,23.648439 24.539063,24.539063 C23.648438,25.429689 22.886719,26.416994 22.253906,27.500977 C21.621094,28.584963 21.128906,29.750978 20.777344,30.999023 C20.425781,32.24707 20.25,33.539063 20.25,34.875 C20.25,36.210938 20.425781,37.50293 20.777344,38.750977 C21.128906,39.999023 21.621094,41.165039 22.253906,42.249023 C22.886719,43.333008 23.648438,44.320313 24.539063,45.210938 C25.429688,46.101563 26.416992,46.863281 27.500977,47.496094 C28.584961,48.128906 29.748047,48.621094 30.990234,48.972656 C32.232422,49.324219 33.527344,49.5 34.875,49.5 C36.210938,49.5 37.50293,49.324219 38.750977,48.972656 C39.999023,48.621094 41.165039,48.128906 42.249023,47.496094 C43.333008,46.863281 44.320313,46.101563 45.210938,45.210938 C46.101563,44.320313 46.863281,43.333008 47.496094,42.249023 C48.128906,41.165039 48.621094,40.001953 48.972656,38.759766 C49.324219,37.517578 49.5,36.222656 49.5,34.875 C49.5,33.539063 49.324219,32.24707 48.972656,30.999023 C48.621094,29.750978 48.128906,28.584963 47.496094,27.500977 C46.863281,26.416994 46.101563,25.429689 45.210938,24.539063 C44.320313,23.648439 43.333008,22.886721 42.249023,22.253906 C41.165039,21.621094 39.999023,21.128906 38.750977,20.777344 C37.50293,20.425781 36.210938,20.25 34.875,20.25 z M34.875,18 C36.433594,18 37.930664,18.199219 39.366211,18.597656 C40.801758,18.996094 42.146484,19.561523 43.400391,20.293945 C44.654297,21.026367 45.793945,21.905273 46.819336,22.930664 C47.844727,23.956057 48.723633,25.095705 49.456055,26.349609 C50.188477,27.603518 50.753906,28.948244 51.152344,30.383789 C51.550781,31.819336 51.75,33.316406 51.75,34.875 C51.75,36.433594 51.550781,37.930664 51.152344,39.366211 C50.753906,40.801758 50.188477,42.146484 49.456055,43.400391 C48.723633,44.654297 47.844727,45.793945 46.819336,46.819336 C45.793945,47.844727 44.654297,48.723633 43.400391,49.456055 C42.146484,50.188477 40.801758,50.753906 39.366211,51.152344 C37.930664,51.550781 36.433594,51.75 34.875,51.75 C33.316406,51.75 31.819336,51.550781 30.383789,51.152344 C28.948242,50.753906 27.603516,50.188477 26.349609,49.456055 C25.095703,48.723633 23.956055,47.844727 22.930664,46.819336 C21.905273,45.793945 21.026367,44.654297 20.293945,43.400391 C19.561523,42.146484 18.996094,40.801758 18.597656,39.366211 C18.199219,37.930664 18,36.433594 18,34.875 C18,33.316406 18.199219,31.819336 18.597656,30.383789 C18.996094,28.948244 19.561523,27.603518 20.293945,26.349609 C21.026367,25.095705 21.905273,23.956057 22.930664,22.930664 C23.956055,21.905273 25.095703,21.026367 26.349609,20.293945 C27.603516,19.561523 28.948242,18.996094 30.383789,18.597656 C31.819336,18.199219 33.316406,18 34.875,18 z"/>
+            <Setter Property="Margin" Value="17.662,17.662,20.588,20.588"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="Width" Value="{StaticResource ButtonSize}"/>
+            <Setter Property="Height" Value="{StaticResource ButtonSize}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="True"
+                                >
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RenderTransformOrigin="0.5, 0.5"
+                                              >
+                                <ContentPresenter.RenderTransform>
+                                    <ScaleTransform/>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Trigger.EnterActions>
+                                    <StopStoryboard BeginStoryboardName="ButtonLostFocusAnimation"/>
+                                    <BeginStoryboard Name="ButtonGotFocusAnimation"
+                                                     Storyboard="{StaticResource ButtonFocusedAnimation}"
+                                                     />
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="ButtonGotFocusAnimation"/>
+                                    <BeginStoryboard Name="ButtonLostFocusAnimation"
+                                                     Storyboard="{StaticResource ButtonUnfocusedAnimation}"
+                                                     />
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <StopStoryboard BeginStoryboardName="ButtonMouseLeaveAnimation"/>
+                                    <BeginStoryboard Name="ButtonMouseEnterAnimation"
+                                                     Storyboard="{StaticResource ButtonFocusedAnimation}"
+                                                     />
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="ButtonMouseEnterAnimation"/>
+                                    <BeginStoryboard Name="ButtonMouseLeaveAnimation"
+                                                     Storyboard="{StaticResource ButtonUnfocusedAnimation}"
+                                                     />
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Trigger.EnterActions>
+                                    <StopStoryboard BeginStoryboardName="ButtonMouseEnterAnimation"/>
+                                    <StopStoryboard BeginStoryboardName="ButtonMouseLeaveAnimation"/>
+                                    <BeginStoryboard Storyboard="{StaticResource ButtonIsDisabledState}"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <system:Double x:Key="FocusGroupMouseOverBlurRadius">7.5</system:Double>
+
+        <Storyboard x:Key="FocusGroupBlurAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Effect.Radius">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="{StaticResource FocusGroupMouseOverBlurRadius}"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="FocusGroupBlurReverseAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Effect.Radius">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="0"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="OpacityShowingAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="1"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="OpacityHidingAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationKeyTime}"
+                                      Value="0"
+                                      EasingFunction="{StaticResource AnimationEasingFunction}"
+                                      />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Application.Resources>
+</Application>

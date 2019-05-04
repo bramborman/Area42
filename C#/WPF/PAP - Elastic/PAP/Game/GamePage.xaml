@@ -1,0 +1,21 @@
+﻿<pap:Page x:Class="PAP.Game.GamePage"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+          xmlns:pap="clr-namespace:PAP"
+          xmlns:game="clr-namespace:PAP.Game"
+          mc:Ignorable="d"
+          >
+    <Grid x:Name="grid">
+        <Rectangle Fill="{StaticResource BackgroundBrush}"
+                   Opacity="0.5"
+                   />
+
+        <Canvas>
+            <game:Plane x:Name="plane">
+                <Path Style="{StaticResource PlanePath}"/>
+            </game:Plane>
+        </Canvas>
+    </Grid>
+</pap:Page>

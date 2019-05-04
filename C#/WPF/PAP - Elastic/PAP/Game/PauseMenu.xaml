@@ -1,0 +1,16 @@
+﻿<pap:Page x:Class="PAP.Game.PauseMenu"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:pap="clr-namespace:PAP"
+              xmlns:fluent="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+              mc:Ignorable="d"
+              >
+    <Border Background="{StaticResource BackgroundBrush}">
+        <fluent:DropShadowPanel Child="{x:Static pap:Menu.Instance}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                />
+    </Border>
+</pap:Page>

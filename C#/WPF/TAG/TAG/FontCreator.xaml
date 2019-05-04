@@ -1,0 +1,58 @@
+﻿<Page x:Class="TAG.FontCreator"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TAG"
+      mc:Ignorable="d"
+      d:DesignWidth="300"
+      d:DesignHeight="300"
+      >
+    <Grid Background="{StaticResource DarkBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox x:Name="charSelector"
+                 ItemsSource="{x:Static local:FontCreator.chars}"
+                 SelectedIndex="0"
+                 Background="{StaticResource DarkBackgroundBrush}"
+                 Foreground="{StaticResource DarkForegroundBrush}"
+                 BorderBrush="{StaticResource DarkBorderBrush}"
+                 BorderThickness="{StaticResource BorderThickness}"
+                 />
+
+        <Viewbox Grid.Column="1">
+            <local:CharacterDesigner Background="{StaticResource DarkBorderBrush}"
+                                     CellBackground="{StaticResource DarkBackgroundBrush}"
+                                     CellForeground="{StaticResource DarkDarkerForegroundBrush}"
+                                     GenericCharCellBackground="{StaticResource DarkDarkerForegroundBrush}"
+                                     BrushChar="{Binding SelectedItem, ElementName=charSelector, Mode=OneWay}"
+                                     CharWidth="{Binding Value, ElementName=charWidthSlider, Mode=OneWay}"
+                                     CharHeight="{Binding Value, ElementName=charHeightSlider, Mode=OneWay}"
+                                     />
+        </Viewbox>
+
+        <local:ExtendedSlider x:Name="charWidthSlider"
+                              Value="3"
+                              Minimum="1"
+                              Maximum="20"
+                              Layout="HorizontalRight"
+                              Grid.Row="1"
+                              Grid.Column="1"
+                              />
+        <local:ExtendedSlider x:Name="charHeightSlider"
+                              Value="5"
+                              Minimum="1"
+                              Maximum="20"
+                              Layout="VerticalBottom"
+                              Grid.Column="2"
+                              />
+    </Grid>
+</Page>

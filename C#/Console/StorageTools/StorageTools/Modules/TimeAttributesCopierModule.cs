@@ -1,33 +1,26 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 
-namespace FileTimeAttributesCopier
+namespace StorageTools.Modules
 {
-    public static class Program
+    public sealed class TimeAttributesCopierModule : AModule
     {
-        public static void Main(string[] args)
-        {
-            AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetName();
-            Version v = assemblyName.Version;
-            Console.Title = $"{assemblyName.Name} v{v.Major}.{v.Minor}.{v.Build}";
+        public override string Name { get; } = "Time attributes copier";
+        public override string Description { get; } = "Time attributes copier";
 
-            Console.ForegroundColor = ConsoleColor.White;
- 
+        protected override void RunCore()
+        {
             string sourceFolder = GetFolder("Enter source folder path");
             string destinationFolder = GetFolder("Enter destination folder path");
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
             string confirmation;
 
             do
             {
                 Console.Write($"\nAre you sure?" +
-                    $"\nWe'll copy time attributes of all files from '{Path.GetFileName(sourceFolder)}' to '{Path.GetFileName(destinationFolder)}'? [Y/n]: ");
+                              $"\nWe'll copy time attributes of all files from '{Path.GetFileName(sourceFolder)}' to '{Path.GetFileName(destinationFolder)}'? [Y/n]: ");
                 confirmation = Console.ReadLine().ToLowerInvariant();
             } while (confirmation != "y" && confirmation != "n");
-
-            Console.ForegroundColor = ConsoleColor.White;
 
             if (confirmation == "y")
             {
@@ -54,22 +47,19 @@ namespace FileTimeAttributesCopier
                 }
             }
 
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("\nPress any key to exit . . .");
-            Console.ReadKey(true);
-        }
 
-        private static string GetFolder(string message)
-        {
-            string folderPath;
-
-            do
+            string GetFolder(string message)
             {
-                Console.Write(message + ": ");
-                folderPath = Console.ReadLine().Replace("\"", "");
-            } while (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath));
+                string folderPath;
 
-            return folderPath;
+                do
+                {
+                    Console.Write(message + ": ");
+                    folderPath = Console.ReadLine().Replace("\"", "");
+                } while (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath));
+
+                return folderPath;
+            }
         }
     }
 }

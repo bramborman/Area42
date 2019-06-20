@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Description>Some simple tools I created when needed them or was bored</Description>
+    <Company>Marian Dolinský</Company>
+    <Authors>Marian Dolinský</Authors>
+    <Copyright>© 2019 Marian Dolinský</Copyright>
+  </PropertyGroup>
+</Project>

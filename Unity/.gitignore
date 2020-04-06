@@ -2,6 +2,11 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+
+# Don't ignore any file - override all rules from
+# the root gitignore so we start clean in this one
+!*
+
 /*/[Ll]ibrary/
 /*/[Tt]emp/
 /*/[Oo]bj/
@@ -60,4 +65,3 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-
